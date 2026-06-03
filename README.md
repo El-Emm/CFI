@@ -2,7 +2,13 @@
 
 A world-class, modern nonprofit website for **Charity Faith International** — a US-registered humanitarian and faith-based organization founded by **Evangelist Ebele Philips**.
 
-## Live Preview
+## Live site (GitHub Pages)
+
+**https://el-emm.github.io/CFI/**
+
+Deploys automatically on every push to `main` via [GitHub Actions](.github/workflows/deploy-pages.yml).
+
+## Local preview
 
 Open `index.html` in a browser, or serve locally:
 
@@ -11,6 +17,8 @@ cd CFI
 python3 -m http.server 8080
 # Visit http://localhost:8080
 ```
+
+> Local paths match production when served from the repo root. The live site is hosted at `/CFI/` on GitHub Pages; all page links use relative URLs so they work in both environments.
 
 ## Site Structure
 
