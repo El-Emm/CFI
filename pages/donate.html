@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Donate to Charity Faith International. Support healthcare, education, food relief, widow empowerment, shelter, and general humanitarian impact.">
+  <title>Donate | Charity Faith International</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="icon" href="../assets/images/cfi-logo.png" type="image/png">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"DonateAction","agent":{"@type":"NGO","name":"Charity Faith International"},"object":{"@type":"MonetaryGrant","name":"Humanitarian Donation"}}
+  </script>
+</head>
+<body>
+  <a href="#main" class="cfi-skip-link">Skip to main content</a>
+  <header class="cfi-header" role="banner">
+    <div class="cfi-container cfi-header__inner">
+      <a href="../index.html" class="cfi-logo" aria-label="Charity Faith International — Home">
+        <img src="../assets/images/cfi-logo.png" alt="Charity Faith International logo" class="cfi-logo__img" width="120" height="56">
+        <span class="cfi-logo__text">Charity Faith<br>International</span>
+      </a>
+      <nav class="cfi-nav" aria-label="Primary navigation">
+        <a href="../index.html" class="cfi-nav__link">Home</a>
+        <a href="../index.html#mission" class="cfi-nav__link">Mission</a>
+        <a href="../index.html#programs" class="cfi-nav__link">Programs</a>
+        <a href="../index.html#impact" class="cfi-nav__link">Impact</a>
+        <a href="gallery.html" class="cfi-nav__link">Media</a>
+        <a href="founder.html" class="cfi-nav__link">Founder</a>
+        <a href="blog.html" class="cfi-nav__link">News</a>
+        <a href="contact.html" class="cfi-nav__link">Contact</a>
+      </nav>
+      <div class="cfi-header__actions">
+        <a href="donate.html" class="cfi-btn cfi-btn--primary cfi-header__donate">Donate Now</a>
+        <button type="button" class="cfi-menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+  <nav id="mobile-nav" class="cfi-mobile-nav" hidden aria-label="Mobile navigation">
+    <a href="../index.html" class="cfi-mobile-nav__link">Home</a>
+    <a href="donate.html" class="cfi-mobile-nav__link">Donate</a>
+    <a href="contact.html" class="cfi-mobile-nav__link">Contact</a>
+    <a href="donate.html" class="cfi-btn cfi-btn--primary" style="margin-top:1.5rem;width:100%">Donate Now</a>
+  </nav>
+
+  <main id="main">
+    <header class="cfi-page-hero">
+      <div class="cfi-container">
+        <img src="../assets/images/cfi-logo.png" alt="" width="100" height="60" style="margin:0 auto 1.5rem">
+        <h1>Give Hope Today</h1>
+        <p>Your tax-deductible gift (where applicable) funds life-changing programs for vulnerable families worldwide. Secure payment integration ready for PayPal, Stripe, Donorbox, or GiveWP.</p>
+      </div>
+    </header>
+
+    <section class="cfi-section">
+      <div class="cfi-container">
+        <div class="cfi-donate-grid">
+          <div>
+            <h2>Choose Your Fund</h2>
+            <p class="cfi-mb-0" style="margin-bottom:1.5rem">Direct your gift to the cause closest to your heart.</p>
+
+            <form class="cfi-donate-form" action="#" method="post" data-wp-integration="givewp|donorbox|stripe|paypal">
+              <fieldset class="cfi-fund-cards" style="border:none;padding:0;margin:0 0 2rem">
+                <legend class="cfi-visually-hidden">Select donation fund</legend>
+                <label class="cfi-fund-card is-selected">
+                  <input type="radio" name="fund" value="general" checked>
+                  <h3>General Impact Fund</h3>
+                  <p>Where needed most across all CFI programs.</p>
+                </label>
+                <label class="cfi-fund-card">
+                  <input type="radio" name="fund" value="healthcare">
+                  <h3>Healthcare Fund</h3>
+                  <p>Hospital bills and urgent medical assistance.</p>
+                </label>
+                <label class="cfi-fund-card">
+                  <input type="radio" name="fund" value="education">
+                  <h3>Education Fund</h3>
+                  <p>School fees and learning access for children.</p>
+                </label>
+                <label class="cfi-fund-card">
+                  <input type="radio" name="fund" value="food">
+                  <h3>Food Relief Fund</h3>
+                  <p>Meals and food support for families in crisis.</p>
+                </label>
+                <label class="cfi-fund-card">
+                  <input type="radio" name="fund" value="widow">
+                  <h3>Widow Empowerment Fund</h3>
+                  <p>Livelihoods, skills, and financial support for widows.</p>
+                </label>
+                <label class="cfi-fund-card">
+                  <input type="radio" name="fund" value="shelter">
+                  <h3>Shelter Fund</h3>
+                  <p>Safe housing builds and home improvements.</p>
+                </label>
+              </fieldset>
+
+              <h3>Select Amount (USD)</h3>
+              <div class="cfi-amount-grid" role="group" aria-label="Donation amount">
+                <button type="button" class="cfi-amount-btn" data-amount="25">$25</button>
+                <button type="button" class="cfi-amount-btn is-selected" data-amount="50">$50</button>
+                <button type="button" class="cfi-amount-btn" data-amount="100">$100</button>
+                <button type="button" class="cfi-amount-btn" data-amount="250">$250</button>
+                <button type="button" class="cfi-amount-btn" data-amount="500">$500</button>
+                <button type="button" class="cfi-amount-btn" data-amount="1000">$1,000</button>
+              </div>
+
+              <div class="cfi-form__group">
+                <label for="donate-custom">Custom Amount</label>
+                <input type="number" id="donate-custom" name="amount" min="1" step="1" placeholder="Enter amount" value="50">
+              </div>
+
+              <div class="cfi-form__group">
+                <label for="donate-name">Full Name</label>
+                <input type="text" id="donate-name" name="name" required autocomplete="name">
+              </div>
+              <div class="cfi-form__group">
+                <label for="donate-email">Email</label>
+                <input type="email" id="donate-email" name="email" required autocomplete="email">
+              </div>
+              <div class="cfi-form__group">
+                <label>
+                  <input type="checkbox" name="monthly"> Make this a monthly gift
+                </label>
+              </div>
+
+              <button type="submit" class="cfi-btn cfi-btn--primary" style="width:100%">Proceed to Secure Giving</button>
+              <p style="font-size:0.875rem;margin-top:1rem;color:var(--cfi-grey)">Payment gateway placeholder — connect PayPal, Stripe, Donorbox, or GiveWP in WordPress.</p>
+            </form>
+
+            <div class="cfi-donate-notice" hidden tabindex="-1" role="status" style="margin-top:2rem;padding:1.25rem;background:var(--cfi-green);color:white;border-radius:var(--cfi-radius)">
+              Thank you for your generous heart! In production, this button will redirect to your secure payment processor.
+            </div>
+          </div>
+
+          <aside class="cfi-donate-sidebar">
+            <img src="../assets/images/cfi-logo.png" alt="Charity Faith International" class="cfi-logo__img" style="display:block;margin:0 auto">
+            <h3 style="text-align:center;margin:1rem 0">Why Give to CFI?</h3>
+            <ul style="padding-left:1.25rem;font-size:0.9375rem">
+              <li>US-registered nonprofit with transparent impact</li>
+              <li>Faith-driven, practically focused humanitarian work</li>
+              <li>Programs spanning healthcare, education, food, widows &amp; shelter</li>
+              <li>Founded by Evangelist Ebele Philips</li>
+            </ul>
+            <img src="https://images.unsplash.com/photo-1469571486292-7eb187192631?w=400&q=80" alt="Children benefiting from humanitarian support" width="400" height="260" loading="lazy" style="border-radius:var(--cfi-radius);margin-top:1.5rem;width:100%">
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="cfi-footer" role="contentinfo">
+    <div class="cfi-container">
+      <div class="cfi-footer__bottom" style="border:none;padding:0">
+        <span>&copy; <span id="cfi-year"></span> Charity Faith International</span>
+        <a href="../index.html">Return Home</a>
+      </div>
+    </div>
+  </footer>
+  <script>document.getElementById('cfi-year').textContent = new Date().getFullYear();</script>
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>
