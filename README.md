@@ -6,7 +6,7 @@ A world-class, modern nonprofit website for **Charity Faith International** — 
 
 **https://el-emm.github.io/CFI/**
 
-Deploys automatically on every push to `main` via [GitHub Actions](.github/workflows/deploy-pages.yml).
+Deploys automatically on every push to `main` via [GitHub Actions](.github/workflows/deploy-pages.yml). First-time setup: enable **Settings → Pages → Build and deployment → GitHub Actions** (already configured for this repo).
 
 ## Local preview
 
