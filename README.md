@@ -1,6 +1,6 @@
-# Charity Faith International (CFI)
+# CharityFaith International (CFI)
 
-A world-class, modern nonprofit website for **Charity Faith International** — a US-registered humanitarian and faith-based organization founded by **Evangelist Ebele Philips**.
+A world-class, modern nonprofit website for **CharityFaith International** — a US-registered humanitarian and faith-based organization founded by **Evangelist Ebele Philips**.
 
 ## Live site (GitHub Pages)
 
@@ -62,11 +62,33 @@ This static site is structured for easy conversion to a WordPress theme:
 - **Yoast SEO** or **Rank Math** — SEO
 - **ACF** — impact counters, map stories, founder bio
 
+## Media library
+
+Raw client uploads live in `CFI/` (gitignored). Optimized web assets are generated into `assets/media/`:
+
+```bash
+python3 scripts/optimize-media.py
+```
+
+This produces:
+- `assets/media/featured/` — hero slides and page highlights
+- `assets/media/gallery/{country}/` — thumbs (480px) and full (1400px) JPEGs
+- `assets/media/videos/` — selected field videos (1–18 MB source files)
+- `assets/data/gallery.json` — manifest for the dynamic gallery
+
+Re-run after adding photos to `CFI/`. Country and program tags in the manifest can be hand-edited until WordPress migration.
+
+## Contact
+
+- **Email:** info@charityfaithinternational.org
+- **Phone:** +1 (330) 999-9170 · +1 (216) 355-9320
+- **Address:** 2727 Overlook Dr, Twinsburg, OH 44087, United States
+
 ## Assets
 
 - Logo: `assets/images/cfi-logo.png`
 - Scripts: `assets/js/main.js` (hero, counters, map, gallery, forms)
-- Placeholder photography uses Unsplash — replace with official CFI media library
+- Field photography and video from the client's `CFI/` media library (optimized via `scripts/optimize-media.py`)
 
 ## SEO
 

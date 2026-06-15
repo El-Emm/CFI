@@ -112,47 +112,25 @@
     stats.forEach((s) => observer.observe(s));
   }
 
-  /* Global impact map */
-  const mapStories = {
-    nigeria: {
-      country: 'Nigeria',
-      text: 'CFI has conducted multiple crusades, food distributions, and widow empowerment initiatives across Nigerian communities, bringing practical aid and faith-based hope to thousands of families.',
-    },
-    ghana: {
-      country: 'Ghana',
-      text: 'Education support and school supplies programs have helped children access quality learning. Healthcare assistance has supported families facing urgent medical needs.',
-    },
-    kenya: {
-      country: 'Kenya',
-      text: 'Community development and shelter projects are creating safer environments for vulnerable families while faith outreach strengthens local churches and communities.',
-    },
-    usa: {
-      country: 'United States',
-      text: 'As a US-registered nonprofit, CFI coordinates global partnerships, donor engagement, and church collaborations that fuel humanitarian work worldwide.',
-    },
-    uk: {
-      country: 'United Kingdom',
-      text: 'Partners and supporters in the UK help expand CFI\'s reach through fundraising, advocacy, and cross-cultural ministry partnerships.',
-    },
-    india: {
-      country: 'India',
-      text: 'Food relief and community outreach programs have served families in hardship, combining practical compassion with Christian witness.',
-    },
-  };
-
+  /* Global impact map — countries from site-data.js */
   function initMap() {
     const storyEl = $('.cfi-map-story__content');
     const markers = $$('.cfi-map-marker[data-country]');
-    if (!storyEl || !markers.length) return;
+    const site = window.CFI_SITE;
+    if (!storyEl || !markers.length || !site) return;
+
+    const isSubpage = window.location.pathname.includes('/pages/');
+    const galleryBase = isSubpage ? 'gallery.html' : 'pages/gallery.html';
 
     function showStory(key) {
-      const data = mapStories[key];
-      if (!data) return;
+      const country = site.countries.find((c) => c.id === key);
+      const text = site.mapStories[key];
+      if (!country || !text) return;
       markers.forEach((m) => m.classList.toggle('is-active', m.dataset.country === key));
       storyEl.innerHTML = `
-        <h3 class="cfi-map-story__country">${data.country}</h3>
-        <p>${data.text}</p>
-        <a href="pages/gallery.html" class="cfi-btn cfi-btn--primary" style="margin-top:1rem">View Impact Photos</a>
+        <h3 class="cfi-map-story__country">${country.label}</h3>
+        <p>${text}</p>
+        <a href="${galleryBase}?country=${key}" class="cfi-btn cfi-btn--primary" style="margin-top:1rem">View ${country.label} Gallery</a>
       `;
     }
 
@@ -169,27 +147,11 @@
     showStory('nigeria');
   }
 
-  /* Gallery filters + lightbox */
-  function initGallery() {
-    const filters = $$('.cfi-filter-btn');
-    const items = $$('.cfi-gallery-item');
+  /* Lightbox — shared with dynamic gallery */
+  function initLightbox() {
     const lightbox = $('.cfi-lightbox');
     const lightboxContent = $('.cfi-lightbox__content');
     const closeBtn = $('.cfi-lightbox__close');
-
-    if (filters.length && items.length) {
-      filters.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const cat = btn.dataset.filter;
-          filters.forEach((b) => b.classList.toggle('is-active', b === btn));
-          items.forEach((item) => {
-            const match = cat === 'all' || item.dataset.category === cat;
-            item.style.display = match ? '' : 'none';
-          });
-        });
-      });
-    }
-
     if (!lightbox || !lightboxContent) return;
 
     function openLightbox(el) {
@@ -198,7 +160,7 @@
       const alt = el.dataset.alt || '';
 
       if (type === 'video') {
-        lightboxContent.innerHTML = `<iframe src="${src}" title="${alt}" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>`;
+        lightboxContent.innerHTML = `<video src="${src}" controls playsinline preload="metadata" title="${alt}"></video>`;
       } else {
         lightboxContent.innerHTML = `<img src="${src}" alt="${alt}">`;
       }
@@ -210,24 +172,33 @@
     }
 
     function closeLightbox() {
+      const video = $('video', lightboxContent);
+      if (video) video.pause();
       lightbox.classList.remove('is-open');
       lightbox.setAttribute('aria-hidden', 'true');
       lightboxContent.innerHTML = '';
       document.body.style.overflow = '';
     }
 
-    items.forEach((item) => {
+    $$('.cfi-gallery-item').forEach((item) => {
+      if (item.dataset.lightboxBound) return;
+      item.dataset.lightboxBound = 'true';
       item.addEventListener('click', () => openLightbox(item));
     });
 
-    closeBtn?.addEventListener('click', closeLightbox);
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) closeLightbox();
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
-    });
+    if (!closeBtn?.dataset.lightboxBound) {
+      closeBtn.dataset.lightboxBound = 'true';
+      closeBtn.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
+      });
+    }
   }
+
+  window.CFI_initLightbox = initLightbox;
 
   /* Donation fund + amount selection */
   function initDonate() {
@@ -282,7 +253,7 @@
     initHero();
     initCounters();
     initMap();
-    initGallery();
+    initLightbox();
     initDonate();
     initContact();
   });

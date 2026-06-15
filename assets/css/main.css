@@ -229,9 +229,10 @@ p { margin: 0 0 1rem; }
   font-weight: 700;
   color: var(--cfi-black);
   line-height: 1.2;
+  white-space: nowrap;
   display: none;
 }
-@media (min-width: 480px) {
+@media (min-width: 520px) {
   .cfi-logo__text { display: block; }
 }
 
@@ -1011,8 +1012,99 @@ p { margin: 0 0 1rem; }
 
 .cfi-gallery-item__label {
   color: var(--cfi-white);
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   font-weight: 600;
+  display: block;
+}
+
+.cfi-gallery-filters--row {
+  margin-bottom: 0.75rem;
+}
+
+.cfi-gallery-filters__label {
+  display: block;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--cfi-grey);
+  margin-bottom: 0.5rem;
+}
+
+.cfi-countries-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+@media (min-width: 600px) {
+  .cfi-countries-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 900px) {
+  .cfi-countries-grid { grid-template-columns: repeat(5, 1fr); }
+}
+
+.cfi-country-card {
+  padding: 1rem;
+  border: 2px solid rgba(17, 17, 17, 0.08);
+  border-radius: var(--cfi-radius);
+  background: var(--cfi-white);
+  cursor: pointer;
+  text-align: center;
+  transition: border-color var(--cfi-transition), background var(--cfi-transition), transform var(--cfi-transition);
+}
+
+.cfi-country-card:hover,
+.cfi-country-card.is-active {
+  border-color: var(--cfi-orange);
+  background: var(--cfi-orange-soft);
+  transform: translateY(-2px);
+}
+
+.cfi-country-card__name {
+  display: block;
+  font-family: var(--cfi-font-serif);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--cfi-black);
+  margin-bottom: 0.25rem;
+}
+
+.cfi-country-card__count {
+  font-size: 0.75rem;
+  color: var(--cfi-grey);
+}
+
+.cfi-gallery-empty {
+  text-align: center;
+  padding: 3rem;
+  color: var(--cfi-grey);
+  grid-column: 1 / -1;
+}
+
+.cfi-map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+  font-size: 0.8125rem;
+  color: var(--cfi-grey);
+}
+
+.cfi-contact-map {
+  border: none;
+  width: 100%;
+  height: 280px;
+  border-radius: var(--cfi-radius);
+}
+
+.cfi-lightbox__content video {
+  max-width: 90vw;
+  max-height: 85vh;
+  border-radius: var(--cfi-radius);
+  background: #000;
 }
 
 .cfi-gallery-item--video::after {

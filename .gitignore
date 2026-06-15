@@ -6,3 +6,6 @@ Thumbs.db
 node_modules/
 .vscode/
 .idea/
+
+# Raw client uploads — optimized copies live in assets/media/
+CFI/

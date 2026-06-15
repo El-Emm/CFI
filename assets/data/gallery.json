@@ -1,0 +1,959 @@
+{
+  "countries": [
+    {
+      "id": "zimbabwe",
+      "label": "Zimbabwe"
+    },
+    {
+      "id": "namibia",
+      "label": "Namibia"
+    },
+    {
+      "id": "lesotho",
+      "label": "Lesotho"
+    },
+    {
+      "id": "south-africa",
+      "label": "South Africa"
+    },
+    {
+      "id": "nigeria",
+      "label": "Nigeria"
+    },
+    {
+      "id": "philippines",
+      "label": "The Philippines"
+    },
+    {
+      "id": "niger",
+      "label": "Niger Republic"
+    },
+    {
+      "id": "botswana",
+      "label": "Botswana"
+    },
+    {
+      "id": "malawi",
+      "label": "Malawi"
+    }
+  ],
+  "categories": [
+    "outreach",
+    "crusades",
+    "food",
+    "education",
+    "healthcare",
+    "widow",
+    "shelter"
+  ],
+  "featured": {
+    "hero": [
+      "assets/media/featured/hero-1.jpg",
+      "assets/media/featured/hero-2.jpg",
+      "assets/media/featured/hero-3.jpg",
+      "assets/media/featured/hero-4.jpg"
+    ],
+    "mission": "assets/media/featured/mission.jpg",
+    "story-featured": "assets/media/featured/story-featured.jpg",
+    "founder": "assets/media/featured/founder.jpg",
+    "stories": [
+      "assets/media/featured/story-1.jpg",
+      "assets/media/featured/story-2.jpg",
+      "assets/media/featured/story-3.jpg",
+      "assets/media/featured/story-4.jpg"
+    ]
+  },
+  "gallery": [
+    {
+      "id": "cfi-20260603-wa0220",
+      "country": "zimbabwe",
+      "countryLabel": "Zimbabwe",
+      "category": "outreach",
+      "type": "image",
+      "thumb": "assets/media/gallery/zimbabwe/thumb/cfi-20260603-wa0220.jpg",
+      "src": "assets/media/gallery/zimbabwe/full/cfi-20260603-wa0220.jpg",
+      "alt": "CharityFaith International Zimbabwe \u2014 outreach",
+      "source": "IMG-20260603-WA0220.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0221",
+      "country": "zimbabwe",
+      "countryLabel": "Zimbabwe",
+      "category": "crusades",
+      "type": "image",
+      "thumb": "assets/media/gallery/zimbabwe/thumb/cfi-20260603-wa0221.jpg",
+      "src": "assets/media/gallery/zimbabwe/full/cfi-20260603-wa0221.jpg",
+      "alt": "CharityFaith International Zimbabwe \u2014 crusades",
+      "source": "IMG-20260603-WA0221.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0040",
+      "country": "zimbabwe",
+      "countryLabel": "Zimbabwe",
+      "category": "food",
+      "type": "image",
+      "thumb": "assets/media/gallery/zimbabwe/thumb/cfi-20260603-wa0040.jpg",
+      "src": "assets/media/gallery/zimbabwe/full/cfi-20260603-wa0040.jpg",
+      "alt": "CharityFaith International Zimbabwe \u2014 food",
+      "source": "IMG-20260603-WA0040.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0231",
+      "country": "zimbabwe",
+      "countryLabel": "Zimbabwe",
+      "category": "education",
+      "type": "image",
+      "thumb": "assets/media/gallery/zimbabwe/thumb/cfi-20260603-wa0231.jpg",
+      "src": "assets/media/gallery/zimbabwe/full/cfi-20260603-wa0231.jpg",
+      "alt": "CharityFaith International Zimbabwe \u2014 education",
+      "source": "IMG-20260603-WA0231.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0038",
+      "country": "zimbabwe",
+      "countryLabel": "Zimbabwe",
+      "category": "healthcare",
+      "type": "image",
+      "thumb": "assets/media/gallery/zimbabwe/thumb/cfi-20260603-wa0038.jpg",
+      "src": "assets/media/gallery/zimbabwe/full/cfi-20260603-wa0038.jpg",
+      "alt": "CharityFaith International Zimbabwe \u2014 healthcare",
+      "source": "IMG-20260603-WA0038.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0232",
+      "country": "zimbabwe",
+      "countryLabel": "Zimbabwe",
+      "category": "widow",
+      "type": "image",
+      "thumb": "assets/media/gallery/zimbabwe/thumb/cfi-20260603-wa0232.jpg",
+      "src": "assets/media/gallery/zimbabwe/full/cfi-20260603-wa0232.jpg",
+      "alt": "CharityFaith International Zimbabwe \u2014 widow",
+      "source": "IMG-20260603-WA0232.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0233",
+      "country": "zimbabwe",
+      "countryLabel": "Zimbabwe",
+      "category": "shelter",
+      "type": "image",
+      "thumb": "assets/media/gallery/zimbabwe/thumb/cfi-20260603-wa0233.jpg",
+      "src": "assets/media/gallery/zimbabwe/full/cfi-20260603-wa0233.jpg",
+      "alt": "CharityFaith International Zimbabwe \u2014 shelter",
+      "source": "IMG-20260603-WA0233.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0235",
+      "country": "zimbabwe",
+      "countryLabel": "Zimbabwe",
+      "category": "outreach",
+      "type": "image",
+      "thumb": "assets/media/gallery/zimbabwe/thumb/cfi-20260603-wa0235.jpg",
+      "src": "assets/media/gallery/zimbabwe/full/cfi-20260603-wa0235.jpg",
+      "alt": "CharityFaith International Zimbabwe \u2014 outreach",
+      "source": "IMG-20260603-WA0235.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0234",
+      "country": "namibia",
+      "countryLabel": "Namibia",
+      "category": "crusades",
+      "type": "image",
+      "thumb": "assets/media/gallery/namibia/thumb/cfi-20260603-wa0234.jpg",
+      "src": "assets/media/gallery/namibia/full/cfi-20260603-wa0234.jpg",
+      "alt": "CharityFaith International Namibia \u2014 crusades",
+      "source": "IMG-20260603-WA0234.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0030",
+      "country": "namibia",
+      "countryLabel": "Namibia",
+      "category": "food",
+      "type": "image",
+      "thumb": "assets/media/gallery/namibia/thumb/cfi-20260603-wa0030.jpg",
+      "src": "assets/media/gallery/namibia/full/cfi-20260603-wa0030.jpg",
+      "alt": "CharityFaith International Namibia \u2014 food",
+      "source": "IMG-20260603-WA0030.jpg"
+    },
+    {
+      "id": "cfi-20260606-wa0018",
+      "country": "namibia",
+      "countryLabel": "Namibia",
+      "category": "education",
+      "type": "image",
+      "thumb": "assets/media/gallery/namibia/thumb/cfi-20260606-wa0018.jpg",
+      "src": "assets/media/gallery/namibia/full/cfi-20260606-wa0018.jpg",
+      "alt": "CharityFaith International Namibia \u2014 education",
+      "source": "IMG-20260606-WA0018.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0237",
+      "country": "namibia",
+      "countryLabel": "Namibia",
+      "category": "healthcare",
+      "type": "image",
+      "thumb": "assets/media/gallery/namibia/thumb/cfi-20260603-wa0237.jpg",
+      "src": "assets/media/gallery/namibia/full/cfi-20260603-wa0237.jpg",
+      "alt": "CharityFaith International Namibia \u2014 healthcare",
+      "source": "IMG-20260603-WA0237.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0177",
+      "country": "namibia",
+      "countryLabel": "Namibia",
+      "category": "widow",
+      "type": "image",
+      "thumb": "assets/media/gallery/namibia/thumb/cfi-20260603-wa0177.jpg",
+      "src": "assets/media/gallery/namibia/full/cfi-20260603-wa0177.jpg",
+      "alt": "CharityFaith International Namibia \u2014 widow",
+      "source": "IMG-20260603-WA0177.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0007",
+      "country": "namibia",
+      "countryLabel": "Namibia",
+      "category": "shelter",
+      "type": "image",
+      "thumb": "assets/media/gallery/namibia/thumb/cfi-20260603-wa0007.jpg",
+      "src": "assets/media/gallery/namibia/full/cfi-20260603-wa0007.jpg",
+      "alt": "CharityFaith International Namibia \u2014 shelter",
+      "source": "IMG-20260603-WA0007.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0123",
+      "country": "namibia",
+      "countryLabel": "Namibia",
+      "category": "outreach",
+      "type": "image",
+      "thumb": "assets/media/gallery/namibia/thumb/cfi-20260603-wa0123.jpg",
+      "src": "assets/media/gallery/namibia/full/cfi-20260603-wa0123.jpg",
+      "alt": "CharityFaith International Namibia \u2014 outreach",
+      "source": "IMG-20260603-WA0123.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0108",
+      "country": "namibia",
+      "countryLabel": "Namibia",
+      "category": "crusades",
+      "type": "image",
+      "thumb": "assets/media/gallery/namibia/thumb/cfi-20260603-wa0108.jpg",
+      "src": "assets/media/gallery/namibia/full/cfi-20260603-wa0108.jpg",
+      "alt": "CharityFaith International Namibia \u2014 crusades",
+      "source": "IMG-20260603-WA0108.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0164",
+      "country": "lesotho",
+      "countryLabel": "Lesotho",
+      "category": "food",
+      "type": "image",
+      "thumb": "assets/media/gallery/lesotho/thumb/cfi-20260603-wa0164.jpg",
+      "src": "assets/media/gallery/lesotho/full/cfi-20260603-wa0164.jpg",
+      "alt": "CharityFaith International Lesotho \u2014 food",
+      "source": "IMG-20260603-WA0164.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0098",
+      "country": "lesotho",
+      "countryLabel": "Lesotho",
+      "category": "education",
+      "type": "image",
+      "thumb": "assets/media/gallery/lesotho/thumb/cfi-20260603-wa0098.jpg",
+      "src": "assets/media/gallery/lesotho/full/cfi-20260603-wa0098.jpg",
+      "alt": "CharityFaith International Lesotho \u2014 education",
+      "source": "IMG-20260603-WA0098.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0037",
+      "country": "lesotho",
+      "countryLabel": "Lesotho",
+      "category": "healthcare",
+      "type": "image",
+      "thumb": "assets/media/gallery/lesotho/thumb/cfi-20260603-wa0037.jpg",
+      "src": "assets/media/gallery/lesotho/full/cfi-20260603-wa0037.jpg",
+      "alt": "CharityFaith International Lesotho \u2014 healthcare",
+      "source": "IMG-20260603-WA0037.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0166",
+      "country": "lesotho",
+      "countryLabel": "Lesotho",
+      "category": "widow",
+      "type": "image",
+      "thumb": "assets/media/gallery/lesotho/thumb/cfi-20260603-wa0166.jpg",
+      "src": "assets/media/gallery/lesotho/full/cfi-20260603-wa0166.jpg",
+      "alt": "CharityFaith International Lesotho \u2014 widow",
+      "source": "IMG-20260603-WA0166.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0224",
+      "country": "lesotho",
+      "countryLabel": "Lesotho",
+      "category": "shelter",
+      "type": "image",
+      "thumb": "assets/media/gallery/lesotho/thumb/cfi-20260603-wa0224.jpg",
+      "src": "assets/media/gallery/lesotho/full/cfi-20260603-wa0224.jpg",
+      "alt": "CharityFaith International Lesotho \u2014 shelter",
+      "source": "IMG-20260603-WA0224.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0227",
+      "country": "lesotho",
+      "countryLabel": "Lesotho",
+      "category": "outreach",
+      "type": "image",
+      "thumb": "assets/media/gallery/lesotho/thumb/cfi-20260603-wa0227.jpg",
+      "src": "assets/media/gallery/lesotho/full/cfi-20260603-wa0227.jpg",
+      "alt": "CharityFaith International Lesotho \u2014 outreach",
+      "source": "IMG-20260603-WA0227.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0223",
+      "country": "lesotho",
+      "countryLabel": "Lesotho",
+      "category": "crusades",
+      "type": "image",
+      "thumb": "assets/media/gallery/lesotho/thumb/cfi-20260603-wa0223.jpg",
+      "src": "assets/media/gallery/lesotho/full/cfi-20260603-wa0223.jpg",
+      "alt": "CharityFaith International Lesotho \u2014 crusades",
+      "source": "IMG-20260603-WA0223.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0104",
+      "country": "lesotho",
+      "countryLabel": "Lesotho",
+      "category": "food",
+      "type": "image",
+      "thumb": "assets/media/gallery/lesotho/thumb/cfi-20260603-wa0104.jpg",
+      "src": "assets/media/gallery/lesotho/full/cfi-20260603-wa0104.jpg",
+      "alt": "CharityFaith International Lesotho \u2014 food",
+      "source": "IMG-20260603-WA0104.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0032",
+      "country": "south-africa",
+      "countryLabel": "South Africa",
+      "category": "education",
+      "type": "image",
+      "thumb": "assets/media/gallery/south-africa/thumb/cfi-20260603-wa0032.jpg",
+      "src": "assets/media/gallery/south-africa/full/cfi-20260603-wa0032.jpg",
+      "alt": "CharityFaith International South Africa \u2014 education",
+      "source": "IMG-20260603-WA0032.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0151",
+      "country": "south-africa",
+      "countryLabel": "South Africa",
+      "category": "healthcare",
+      "type": "image",
+      "thumb": "assets/media/gallery/south-africa/thumb/cfi-20260603-wa0151.jpg",
+      "src": "assets/media/gallery/south-africa/full/cfi-20260603-wa0151.jpg",
+      "alt": "CharityFaith International South Africa \u2014 healthcare",
+      "source": "IMG-20260603-WA0151.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0065",
+      "country": "south-africa",
+      "countryLabel": "South Africa",
+      "category": "widow",
+      "type": "image",
+      "thumb": "assets/media/gallery/south-africa/thumb/cfi-20260603-wa0065.jpg",
+      "src": "assets/media/gallery/south-africa/full/cfi-20260603-wa0065.jpg",
+      "alt": "CharityFaith International South Africa \u2014 widow",
+      "source": "IMG-20260603-WA0065.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0105",
+      "country": "south-africa",
+      "countryLabel": "South Africa",
+      "category": "shelter",
+      "type": "image",
+      "thumb": "assets/media/gallery/south-africa/thumb/cfi-20260603-wa0105.jpg",
+      "src": "assets/media/gallery/south-africa/full/cfi-20260603-wa0105.jpg",
+      "alt": "CharityFaith International South Africa \u2014 shelter",
+      "source": "IMG-20260603-WA0105.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0069",
+      "country": "south-africa",
+      "countryLabel": "South Africa",
+      "category": "outreach",
+      "type": "image",
+      "thumb": "assets/media/gallery/south-africa/thumb/cfi-20260603-wa0069.jpg",
+      "src": "assets/media/gallery/south-africa/full/cfi-20260603-wa0069.jpg",
+      "alt": "CharityFaith International South Africa \u2014 outreach",
+      "source": "IMG-20260603-WA0069.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0091",
+      "country": "south-africa",
+      "countryLabel": "South Africa",
+      "category": "crusades",
+      "type": "image",
+      "thumb": "assets/media/gallery/south-africa/thumb/cfi-20260603-wa0091.jpg",
+      "src": "assets/media/gallery/south-africa/full/cfi-20260603-wa0091.jpg",
+      "alt": "CharityFaith International South Africa \u2014 crusades",
+      "source": "IMG-20260603-WA0091.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0117",
+      "country": "south-africa",
+      "countryLabel": "South Africa",
+      "category": "food",
+      "type": "image",
+      "thumb": "assets/media/gallery/south-africa/thumb/cfi-20260603-wa0117.jpg",
+      "src": "assets/media/gallery/south-africa/full/cfi-20260603-wa0117.jpg",
+      "alt": "CharityFaith International South Africa \u2014 food",
+      "source": "IMG-20260603-WA0117.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0026",
+      "country": "south-africa",
+      "countryLabel": "South Africa",
+      "category": "education",
+      "type": "image",
+      "thumb": "assets/media/gallery/south-africa/thumb/cfi-20260603-wa0026.jpg",
+      "src": "assets/media/gallery/south-africa/full/cfi-20260603-wa0026.jpg",
+      "alt": "CharityFaith International South Africa \u2014 education",
+      "source": "IMG-20260603-WA0026.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0015",
+      "country": "nigeria",
+      "countryLabel": "Nigeria",
+      "category": "healthcare",
+      "type": "image",
+      "thumb": "assets/media/gallery/nigeria/thumb/cfi-20260603-wa0015.jpg",
+      "src": "assets/media/gallery/nigeria/full/cfi-20260603-wa0015.jpg",
+      "alt": "CharityFaith International Nigeria \u2014 healthcare",
+      "source": "IMG-20260603-WA0015.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0088",
+      "country": "nigeria",
+      "countryLabel": "Nigeria",
+      "category": "widow",
+      "type": "image",
+      "thumb": "assets/media/gallery/nigeria/thumb/cfi-20260603-wa0088.jpg",
+      "src": "assets/media/gallery/nigeria/full/cfi-20260603-wa0088.jpg",
+      "alt": "CharityFaith International Nigeria \u2014 widow",
+      "source": "IMG-20260603-WA0088.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0084",
+      "country": "nigeria",
+      "countryLabel": "Nigeria",
+      "category": "shelter",
+      "type": "image",
+      "thumb": "assets/media/gallery/nigeria/thumb/cfi-20260603-wa0084.jpg",
+      "src": "assets/media/gallery/nigeria/full/cfi-20260603-wa0084.jpg",
+      "alt": "CharityFaith International Nigeria \u2014 shelter",
+      "source": "IMG-20260603-WA0084.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0071",
+      "country": "nigeria",
+      "countryLabel": "Nigeria",
+      "category": "outreach",
+      "type": "image",
+      "thumb": "assets/media/gallery/nigeria/thumb/cfi-20260603-wa0071.jpg",
+      "src": "assets/media/gallery/nigeria/full/cfi-20260603-wa0071.jpg",
+      "alt": "CharityFaith International Nigeria \u2014 outreach",
+      "source": "IMG-20260603-WA0071.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0073",
+      "country": "nigeria",
+      "countryLabel": "Nigeria",
+      "category": "crusades",
+      "type": "image",
+      "thumb": "assets/media/gallery/nigeria/thumb/cfi-20260603-wa0073.jpg",
+      "src": "assets/media/gallery/nigeria/full/cfi-20260603-wa0073.jpg",
+      "alt": "CharityFaith International Nigeria \u2014 crusades",
+      "source": "IMG-20260603-WA0073.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0118",
+      "country": "nigeria",
+      "countryLabel": "Nigeria",
+      "category": "food",
+      "type": "image",
+      "thumb": "assets/media/gallery/nigeria/thumb/cfi-20260603-wa0118.jpg",
+      "src": "assets/media/gallery/nigeria/full/cfi-20260603-wa0118.jpg",
+      "alt": "CharityFaith International Nigeria \u2014 food",
+      "source": "IMG-20260603-WA0118.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0072",
+      "country": "nigeria",
+      "countryLabel": "Nigeria",
+      "category": "education",
+      "type": "image",
+      "thumb": "assets/media/gallery/nigeria/thumb/cfi-20260603-wa0072.jpg",
+      "src": "assets/media/gallery/nigeria/full/cfi-20260603-wa0072.jpg",
+      "alt": "CharityFaith International Nigeria \u2014 education",
+      "source": "IMG-20260603-WA0072.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0103",
+      "country": "nigeria",
+      "countryLabel": "Nigeria",
+      "category": "healthcare",
+      "type": "image",
+      "thumb": "assets/media/gallery/nigeria/thumb/cfi-20260603-wa0103.jpg",
+      "src": "assets/media/gallery/nigeria/full/cfi-20260603-wa0103.jpg",
+      "alt": "CharityFaith International Nigeria \u2014 healthcare",
+      "source": "IMG-20260603-WA0103.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0089",
+      "country": "philippines",
+      "countryLabel": "The Philippines",
+      "category": "widow",
+      "type": "image",
+      "thumb": "assets/media/gallery/philippines/thumb/cfi-20260603-wa0089.jpg",
+      "src": "assets/media/gallery/philippines/full/cfi-20260603-wa0089.jpg",
+      "alt": "CharityFaith International The Philippines \u2014 widow",
+      "source": "IMG-20260603-WA0089.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0076",
+      "country": "philippines",
+      "countryLabel": "The Philippines",
+      "category": "shelter",
+      "type": "image",
+      "thumb": "assets/media/gallery/philippines/thumb/cfi-20260603-wa0076.jpg",
+      "src": "assets/media/gallery/philippines/full/cfi-20260603-wa0076.jpg",
+      "alt": "CharityFaith International The Philippines \u2014 shelter",
+      "source": "IMG-20260603-WA0076.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0110",
+      "country": "philippines",
+      "countryLabel": "The Philippines",
+      "category": "outreach",
+      "type": "image",
+      "thumb": "assets/media/gallery/philippines/thumb/cfi-20260603-wa0110.jpg",
+      "src": "assets/media/gallery/philippines/full/cfi-20260603-wa0110.jpg",
+      "alt": "CharityFaith International The Philippines \u2014 outreach",
+      "source": "IMG-20260603-WA0110.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0027",
+      "country": "philippines",
+      "countryLabel": "The Philippines",
+      "category": "crusades",
+      "type": "image",
+      "thumb": "assets/media/gallery/philippines/thumb/cfi-20260603-wa0027.jpg",
+      "src": "assets/media/gallery/philippines/full/cfi-20260603-wa0027.jpg",
+      "alt": "CharityFaith International The Philippines \u2014 crusades",
+      "source": "IMG-20260603-WA0027.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0074",
+      "country": "philippines",
+      "countryLabel": "The Philippines",
+      "category": "food",
+      "type": "image",
+      "thumb": "assets/media/gallery/philippines/thumb/cfi-20260603-wa0074.jpg",
+      "src": "assets/media/gallery/philippines/full/cfi-20260603-wa0074.jpg",
+      "alt": "CharityFaith International The Philippines \u2014 food",
+      "source": "IMG-20260603-WA0074.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0043",
+      "country": "philippines",
+      "countryLabel": "The Philippines",
+      "category": "education",
+      "type": "image",
+      "thumb": "assets/media/gallery/philippines/thumb/cfi-20260603-wa0043.jpg",
+      "src": "assets/media/gallery/philippines/full/cfi-20260603-wa0043.jpg",
+      "alt": "CharityFaith International The Philippines \u2014 education",
+      "source": "IMG-20260603-WA0043.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0116",
+      "country": "philippines",
+      "countryLabel": "The Philippines",
+      "category": "healthcare",
+      "type": "image",
+      "thumb": "assets/media/gallery/philippines/thumb/cfi-20260603-wa0116.jpg",
+      "src": "assets/media/gallery/philippines/full/cfi-20260603-wa0116.jpg",
+      "alt": "CharityFaith International The Philippines \u2014 healthcare",
+      "source": "IMG-20260603-WA0116.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0035",
+      "country": "philippines",
+      "countryLabel": "The Philippines",
+      "category": "widow",
+      "type": "image",
+      "thumb": "assets/media/gallery/philippines/thumb/cfi-20260603-wa0035.jpg",
+      "src": "assets/media/gallery/philippines/full/cfi-20260603-wa0035.jpg",
+      "alt": "CharityFaith International The Philippines \u2014 widow",
+      "source": "IMG-20260603-WA0035.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0028",
+      "country": "niger",
+      "countryLabel": "Niger Republic",
+      "category": "shelter",
+      "type": "image",
+      "thumb": "assets/media/gallery/niger/thumb/cfi-20260603-wa0028.jpg",
+      "src": "assets/media/gallery/niger/full/cfi-20260603-wa0028.jpg",
+      "alt": "CharityFaith International Niger Republic \u2014 shelter",
+      "source": "IMG-20260603-WA0028.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0080",
+      "country": "niger",
+      "countryLabel": "Niger Republic",
+      "category": "outreach",
+      "type": "image",
+      "thumb": "assets/media/gallery/niger/thumb/cfi-20260603-wa0080.jpg",
+      "src": "assets/media/gallery/niger/full/cfi-20260603-wa0080.jpg",
+      "alt": "CharityFaith International Niger Republic \u2014 outreach",
+      "source": "IMG-20260603-WA0080.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0062",
+      "country": "niger",
+      "countryLabel": "Niger Republic",
+      "category": "crusades",
+      "type": "image",
+      "thumb": "assets/media/gallery/niger/thumb/cfi-20260603-wa0062.jpg",
+      "src": "assets/media/gallery/niger/full/cfi-20260603-wa0062.jpg",
+      "alt": "CharityFaith International Niger Republic \u2014 crusades",
+      "source": "IMG-20260603-WA0062.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0045",
+      "country": "niger",
+      "countryLabel": "Niger Republic",
+      "category": "food",
+      "type": "image",
+      "thumb": "assets/media/gallery/niger/thumb/cfi-20260603-wa0045.jpg",
+      "src": "assets/media/gallery/niger/full/cfi-20260603-wa0045.jpg",
+      "alt": "CharityFaith International Niger Republic \u2014 food",
+      "source": "IMG-20260603-WA0045.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0119",
+      "country": "niger",
+      "countryLabel": "Niger Republic",
+      "category": "education",
+      "type": "image",
+      "thumb": "assets/media/gallery/niger/thumb/cfi-20260603-wa0119.jpg",
+      "src": "assets/media/gallery/niger/full/cfi-20260603-wa0119.jpg",
+      "alt": "CharityFaith International Niger Republic \u2014 education",
+      "source": "IMG-20260603-WA0119.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0113",
+      "country": "niger",
+      "countryLabel": "Niger Republic",
+      "category": "healthcare",
+      "type": "image",
+      "thumb": "assets/media/gallery/niger/thumb/cfi-20260603-wa0113.jpg",
+      "src": "assets/media/gallery/niger/full/cfi-20260603-wa0113.jpg",
+      "alt": "CharityFaith International Niger Republic \u2014 healthcare",
+      "source": "IMG-20260603-WA0113.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0010",
+      "country": "niger",
+      "countryLabel": "Niger Republic",
+      "category": "widow",
+      "type": "image",
+      "thumb": "assets/media/gallery/niger/thumb/cfi-20260603-wa0010.jpg",
+      "src": "assets/media/gallery/niger/full/cfi-20260603-wa0010.jpg",
+      "alt": "CharityFaith International Niger Republic \u2014 widow",
+      "source": "IMG-20260603-WA0010.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0246",
+      "country": "niger",
+      "countryLabel": "Niger Republic",
+      "category": "shelter",
+      "type": "image",
+      "thumb": "assets/media/gallery/niger/thumb/cfi-20260603-wa0246.jpg",
+      "src": "assets/media/gallery/niger/full/cfi-20260603-wa0246.jpg",
+      "alt": "CharityFaith International Niger Republic \u2014 shelter",
+      "source": "IMG-20260603-WA0246.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0093",
+      "country": "botswana",
+      "countryLabel": "Botswana",
+      "category": "outreach",
+      "type": "image",
+      "thumb": "assets/media/gallery/botswana/thumb/cfi-20260603-wa0093.jpg",
+      "src": "assets/media/gallery/botswana/full/cfi-20260603-wa0093.jpg",
+      "alt": "CharityFaith International Botswana \u2014 outreach",
+      "source": "IMG-20260603-WA0093.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0009",
+      "country": "botswana",
+      "countryLabel": "Botswana",
+      "category": "crusades",
+      "type": "image",
+      "thumb": "assets/media/gallery/botswana/thumb/cfi-20260603-wa0009.jpg",
+      "src": "assets/media/gallery/botswana/full/cfi-20260603-wa0009.jpg",
+      "alt": "CharityFaith International Botswana \u2014 crusades",
+      "source": "IMG-20260603-WA0009.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0095",
+      "country": "botswana",
+      "countryLabel": "Botswana",
+      "category": "food",
+      "type": "image",
+      "thumb": "assets/media/gallery/botswana/thumb/cfi-20260603-wa0095.jpg",
+      "src": "assets/media/gallery/botswana/full/cfi-20260603-wa0095.jpg",
+      "alt": "CharityFaith International Botswana \u2014 food",
+      "source": "IMG-20260603-WA0095.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0101",
+      "country": "botswana",
+      "countryLabel": "Botswana",
+      "category": "education",
+      "type": "image",
+      "thumb": "assets/media/gallery/botswana/thumb/cfi-20260603-wa0101.jpg",
+      "src": "assets/media/gallery/botswana/full/cfi-20260603-wa0101.jpg",
+      "alt": "CharityFaith International Botswana \u2014 education",
+      "source": "IMG-20260603-WA0101.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0092",
+      "country": "botswana",
+      "countryLabel": "Botswana",
+      "category": "healthcare",
+      "type": "image",
+      "thumb": "assets/media/gallery/botswana/thumb/cfi-20260603-wa0092.jpg",
+      "src": "assets/media/gallery/botswana/full/cfi-20260603-wa0092.jpg",
+      "alt": "CharityFaith International Botswana \u2014 healthcare",
+      "source": "IMG-20260603-WA0092.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0172",
+      "country": "botswana",
+      "countryLabel": "Botswana",
+      "category": "widow",
+      "type": "image",
+      "thumb": "assets/media/gallery/botswana/thumb/cfi-20260603-wa0172.jpg",
+      "src": "assets/media/gallery/botswana/full/cfi-20260603-wa0172.jpg",
+      "alt": "CharityFaith International Botswana \u2014 widow",
+      "source": "IMG-20260603-WA0172.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0181",
+      "country": "botswana",
+      "countryLabel": "Botswana",
+      "category": "shelter",
+      "type": "image",
+      "thumb": "assets/media/gallery/botswana/thumb/cfi-20260603-wa0181.jpg",
+      "src": "assets/media/gallery/botswana/full/cfi-20260603-wa0181.jpg",
+      "alt": "CharityFaith International Botswana \u2014 shelter",
+      "source": "IMG-20260603-WA0181.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0168",
+      "country": "botswana",
+      "countryLabel": "Botswana",
+      "category": "outreach",
+      "type": "image",
+      "thumb": "assets/media/gallery/botswana/thumb/cfi-20260603-wa0168.jpg",
+      "src": "assets/media/gallery/botswana/full/cfi-20260603-wa0168.jpg",
+      "alt": "CharityFaith International Botswana \u2014 outreach",
+      "source": "IMG-20260603-WA0168.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0106",
+      "country": "malawi",
+      "countryLabel": "Malawi",
+      "category": "crusades",
+      "type": "image",
+      "thumb": "assets/media/gallery/malawi/thumb/cfi-20260603-wa0106.jpg",
+      "src": "assets/media/gallery/malawi/full/cfi-20260603-wa0106.jpg",
+      "alt": "CharityFaith International Malawi \u2014 crusades",
+      "source": "IMG-20260603-WA0106.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0162",
+      "country": "malawi",
+      "countryLabel": "Malawi",
+      "category": "food",
+      "type": "image",
+      "thumb": "assets/media/gallery/malawi/thumb/cfi-20260603-wa0162.jpg",
+      "src": "assets/media/gallery/malawi/full/cfi-20260603-wa0162.jpg",
+      "alt": "CharityFaith International Malawi \u2014 food",
+      "source": "IMG-20260603-WA0162.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0060",
+      "country": "malawi",
+      "countryLabel": "Malawi",
+      "category": "education",
+      "type": "image",
+      "thumb": "assets/media/gallery/malawi/thumb/cfi-20260603-wa0060.jpg",
+      "src": "assets/media/gallery/malawi/full/cfi-20260603-wa0060.jpg",
+      "alt": "CharityFaith International Malawi \u2014 education",
+      "source": "IMG-20260603-WA0060.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0121",
+      "country": "malawi",
+      "countryLabel": "Malawi",
+      "category": "healthcare",
+      "type": "image",
+      "thumb": "assets/media/gallery/malawi/thumb/cfi-20260603-wa0121.jpg",
+      "src": "assets/media/gallery/malawi/full/cfi-20260603-wa0121.jpg",
+      "alt": "CharityFaith International Malawi \u2014 healthcare",
+      "source": "IMG-20260603-WA0121.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0111",
+      "country": "malawi",
+      "countryLabel": "Malawi",
+      "category": "widow",
+      "type": "image",
+      "thumb": "assets/media/gallery/malawi/thumb/cfi-20260603-wa0111.jpg",
+      "src": "assets/media/gallery/malawi/full/cfi-20260603-wa0111.jpg",
+      "alt": "CharityFaith International Malawi \u2014 widow",
+      "source": "IMG-20260603-WA0111.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0058",
+      "country": "malawi",
+      "countryLabel": "Malawi",
+      "category": "shelter",
+      "type": "image",
+      "thumb": "assets/media/gallery/malawi/thumb/cfi-20260603-wa0058.jpg",
+      "src": "assets/media/gallery/malawi/full/cfi-20260603-wa0058.jpg",
+      "alt": "CharityFaith International Malawi \u2014 shelter",
+      "source": "IMG-20260603-WA0058.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0099",
+      "country": "malawi",
+      "countryLabel": "Malawi",
+      "category": "outreach",
+      "type": "image",
+      "thumb": "assets/media/gallery/malawi/thumb/cfi-20260603-wa0099.jpg",
+      "src": "assets/media/gallery/malawi/full/cfi-20260603-wa0099.jpg",
+      "alt": "CharityFaith International Malawi \u2014 outreach",
+      "source": "IMG-20260603-WA0099.jpg"
+    },
+    {
+      "id": "cfi-20260603-wa0079",
+      "country": "malawi",
+      "countryLabel": "Malawi",
+      "category": "crusades",
+      "type": "image",
+      "thumb": "assets/media/gallery/malawi/thumb/cfi-20260603-wa0079.jpg",
+      "src": "assets/media/gallery/malawi/full/cfi-20260603-wa0079.jpg",
+      "alt": "CharityFaith International Malawi \u2014 crusades",
+      "source": "IMG-20260603-WA0079.jpg"
+    },
+    {
+      "id": "cfi-video-1",
+      "country": "zimbabwe",
+      "countryLabel": "Zimbabwe",
+      "category": "crusades",
+      "type": "video",
+      "thumb": "assets/media/gallery/zimbabwe/thumb/cfi-20260603-wa0220.jpg",
+      "src": "assets/media/videos/cfi-video-1.mp4",
+      "alt": "CharityFaith International field video \u2014 Zimbabwe",
+      "source": "VID-20260603-WA0182.mp4"
+    },
+    {
+      "id": "cfi-video-2",
+      "country": "namibia",
+      "countryLabel": "Namibia",
+      "category": "outreach",
+      "type": "video",
+      "thumb": "assets/media/gallery/zimbabwe/thumb/cfi-20260603-wa0221.jpg",
+      "src": "assets/media/videos/cfi-video-2.mp4",
+      "alt": "CharityFaith International field video \u2014 Namibia",
+      "source": "VID-20260603-WA0136.mp4"
+    },
+    {
+      "id": "cfi-video-3",
+      "country": "lesotho",
+      "countryLabel": "Lesotho",
+      "category": "crusades",
+      "type": "video",
+      "thumb": "assets/media/gallery/zimbabwe/thumb/cfi-20260603-wa0040.jpg",
+      "src": "assets/media/videos/cfi-video-3.mp4",
+      "alt": "CharityFaith International field video \u2014 Lesotho",
+      "source": "VID-20260603-WA0135.mp4"
+    },
+    {
+      "id": "cfi-video-4",
+      "country": "south-africa",
+      "countryLabel": "South Africa",
+      "category": "outreach",
+      "type": "video",
+      "thumb": "assets/media/gallery/zimbabwe/thumb/cfi-20260603-wa0231.jpg",
+      "src": "assets/media/videos/cfi-video-4.mp4",
+      "alt": "CharityFaith International field video \u2014 South Africa",
+      "source": "VID-20260603-WA0126.mp4"
+    },
+    {
+      "id": "cfi-video-5",
+      "country": "nigeria",
+      "countryLabel": "Nigeria",
+      "category": "crusades",
+      "type": "video",
+      "thumb": "assets/media/gallery/zimbabwe/thumb/cfi-20260603-wa0038.jpg",
+      "src": "assets/media/videos/cfi-video-5.mp4",
+      "alt": "CharityFaith International field video \u2014 Nigeria",
+      "source": "VID-20260606-WA0019.mp4"
+    },
+    {
+      "id": "cfi-video-6",
+      "country": "philippines",
+      "countryLabel": "The Philippines",
+      "category": "outreach",
+      "type": "video",
+      "thumb": "assets/media/gallery/zimbabwe/thumb/cfi-20260603-wa0232.jpg",
+      "src": "assets/media/videos/cfi-video-6.mp4",
+      "alt": "CharityFaith International field video \u2014 The Philippines",
+      "source": "VID-20260603-WA0140.mp4"
+    },
+    {
+      "id": "cfi-video-7",
+      "country": "niger",
+      "countryLabel": "Niger Republic",
+      "category": "crusades",
+      "type": "video",
+      "thumb": "assets/media/gallery/zimbabwe/thumb/cfi-20260603-wa0233.jpg",
+      "src": "assets/media/videos/cfi-video-7.mp4",
+      "alt": "CharityFaith International field video \u2014 Niger Republic",
+      "source": "VID-20260606-WA0024.mp4"
+    },
+    {
+      "id": "cfi-video-8",
+      "country": "botswana",
+      "countryLabel": "Botswana",
+      "category": "outreach",
+      "type": "video",
+      "thumb": "assets/media/gallery/zimbabwe/thumb/cfi-20260603-wa0235.jpg",
+      "src": "assets/media/videos/cfi-video-8.mp4",
+      "alt": "CharityFaith International field video \u2014 Botswana",
+      "source": "VID-20260603-WA0180.mp4"
+    },
+    {
+      "id": "cfi-video-9",
+      "country": "malawi",
+      "countryLabel": "Malawi",
+      "category": "crusades",
+      "type": "video",
+      "thumb": "assets/media/gallery/namibia/thumb/cfi-20260603-wa0234.jpg",
+      "src": "assets/media/videos/cfi-video-9.mp4",
+      "alt": "CharityFaith International field video \u2014 Malawi",
+      "source": "VID-20260603-WA0145.mp4"
+    }
+  ]
+}

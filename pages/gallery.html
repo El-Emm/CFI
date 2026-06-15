@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Photo and video gallery from Charity Faith International — healthcare, education, food distribution, widow empowerment, shelter, crusades, and outreach.">
-  <title>Media Gallery | Charity Faith International</title>
+  <meta name="description" content="Photo and video gallery from CharityFaith International — field work in Zimbabwe, Namibia, Nigeria, South Africa, The Philippines, and more.">
+  <title>Media Gallery | CharityFaith International</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
   <a href="#main" class="cfi-skip-link">Skip to main content</a>
   <header class="cfi-header" role="banner">
     <div class="cfi-container cfi-header__inner">
-      <a href="../index.html" class="cfi-logo"><img src="../assets/images/cfi-logo.png" alt="Charity Faith International logo" class="cfi-logo__img" width="120" height="56"><span class="cfi-logo__text">Charity Faith<br>International</span></a>
+      <a href="../index.html" class="cfi-logo"><img src="../assets/images/cfi-logo.png" alt="CharityFaith International logo" class="cfi-logo__img" width="120" height="56"><span class="cfi-logo__text">CharityFaith International</span></a>
       <nav class="cfi-nav" aria-label="Primary navigation">
         <a href="../index.html" class="cfi-nav__link">Home</a>
         <a href="gallery.html" class="cfi-nav__link is-active">Media</a>
@@ -38,61 +38,40 @@
     <header class="cfi-page-hero">
       <div class="cfi-container">
         <h1>Photo &amp; Video Gallery</h1>
-        <p>Explore authentic moments from the field — replace placeholder media with your organization's library in WordPress.</p>
+        <p>Authentic moments from the field across nine nations — Zimbabwe, Namibia, Lesotho, South Africa, Nigeria, The Philippines, Niger Republic, Botswana, and Malawi.</p>
       </div>
     </header>
 
+    <section class="cfi-section cfi-section--ivory">
+      <div class="cfi-container">
+        <header class="cfi-section__header">
+          <span class="cfi-section__label">Global Field Work</span>
+          <h2>Countries We Serve</h2>
+          <p class="cfi-section__lead">Select a country to filter photos and videos from that region. Country tags can be updated in WordPress as new field reports arrive.</p>
+        </header>
+        <div id="cfi-countries-grid" class="cfi-countries-grid" aria-label="Countries served"></div>
+      </div>
+    </section>
+
     <section class="cfi-section">
       <div class="cfi-container">
-        <div class="cfi-gallery-filters" role="tablist" aria-label="Filter gallery">
-          <button type="button" class="cfi-filter-btn is-active" data-filter="all">All</button>
-          <button type="button" class="cfi-filter-btn" data-filter="healthcare">Healthcare</button>
-          <button type="button" class="cfi-filter-btn" data-filter="education">Education</button>
-          <button type="button" class="cfi-filter-btn" data-filter="food">Food Distribution</button>
-          <button type="button" class="cfi-filter-btn" data-filter="widow">Widow Empowerment</button>
-          <button type="button" class="cfi-filter-btn" data-filter="shelter">Shelter</button>
-          <button type="button" class="cfi-filter-btn" data-filter="crusades">Crusades</button>
-          <button type="button" class="cfi-filter-btn" data-filter="outreach">Community Outreach</button>
+        <div class="cfi-gallery-filters cfi-gallery-filters--row">
+          <span class="cfi-gallery-filters__label">Filter by country</span>
+          <div id="cfi-country-filters" class="cfi-gallery-filters" role="tablist" aria-label="Filter by country"></div>
+        </div>
+        <div class="cfi-gallery-filters cfi-gallery-filters--row">
+          <span class="cfi-gallery-filters__label">Filter by program</span>
+          <div id="cfi-category-filters" class="cfi-gallery-filters" role="tablist" aria-label="Filter by program"></div>
         </div>
 
-        <div class="cfi-gallery-grid" data-wp-block="cfi/media-gallery">
-          <button type="button" class="cfi-gallery-item" data-category="healthcare" data-type="image" data-src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=1200&q=80" data-alt="Healthcare outreach">
-            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&q=80" alt="Healthcare outreach" loading="lazy">
-            <span class="cfi-gallery-item__overlay"><span class="cfi-gallery-item__label">Healthcare</span></span>
-          </button>
-          <button type="button" class="cfi-gallery-item" data-category="education" data-type="image" data-src="https://images.unsplash.com/photo-1503676260728-8b72d766a112?w=1200&q=80" data-alt="Education support">
-            <img src="https://images.unsplash.com/photo-1503676260728-8b72d766a112?w=400&q=80" alt="Education support" loading="lazy">
-            <span class="cfi-gallery-item__overlay"><span class="cfi-gallery-item__label">Education</span></span>
-          </button>
-          <button type="button" class="cfi-gallery-item" data-category="food" data-type="image" data-src="https://images.unsplash.com/photo-1532629345422-7a988c81c636?w=1200&q=80" data-alt="Food distribution">
-            <img src="https://images.unsplash.com/photo-1532629345422-7a988c81c636?w=400&q=80" alt="Food distribution" loading="lazy">
-            <span class="cfi-gallery-item__overlay"><span class="cfi-gallery-item__label">Food Distribution</span></span>
-          </button>
-          <button type="button" class="cfi-gallery-item" data-category="widow" data-type="image" data-src="https://images.unsplash.com/photo-1573496359142-b8cc5c97d818?w=1200&q=80" data-alt="Widow empowerment">
-            <img src="https://images.unsplash.com/photo-1573496359142-b8cc5c97d818?w=400&q=80" alt="Widow empowerment" loading="lazy">
-            <span class="cfi-gallery-item__overlay"><span class="cfi-gallery-item__label">Widow Empowerment</span></span>
-          </button>
-          <button type="button" class="cfi-gallery-item" data-category="shelter" data-type="image" data-src="https://images.unsplash.com/photo-1560185007-5f0bb1866cab?w=1200&q=80" data-alt="Shelter project">
-            <img src="https://images.unsplash.com/photo-1560185007-5f0bb1866cab?w=400&q=80" alt="Shelter project" loading="lazy">
-            <span class="cfi-gallery-item__overlay"><span class="cfi-gallery-item__label">Shelter</span></span>
-          </button>
-          <button type="button" class="cfi-gallery-item cfi-gallery-item--video" data-category="crusades" data-type="video" data-src="https://www.youtube.com/embed/dQw4w9WgXcQ" data-alt="Crusade outreach video placeholder">
-            <img src="https://images.unsplash.com/photo-1509099836639-18ba13537135?w=400&q=80" alt="Crusade gathering" loading="lazy">
-            <span class="cfi-gallery-item__overlay"><span class="cfi-gallery-item__label">Crusades (Video)</span></span>
-          </button>
-          <button type="button" class="cfi-gallery-item" data-category="outreach" data-type="image" data-src="https://images.unsplash.com/photo-1559027615-cd462f0e0a0a?w=1200&q=80" data-alt="Community outreach">
-            <img src="https://images.unsplash.com/photo-1559027615-cd462f0e0a0a?w=400&q=80" alt="Community outreach" loading="lazy">
-            <span class="cfi-gallery-item__overlay"><span class="cfi-gallery-item__label">Outreach</span></span>
-          </button>
-          <button type="button" class="cfi-gallery-item" data-category="education" data-type="image" data-src="https://images.unsplash.com/photo-1491434639816-1a0a0a0a0a0a?w=1200&q=80" data-alt="School supplies">
-            <img src="https://images.unsplash.com/photo-1491434639816-1a0a0a0a0a0a?w=400&q=80" alt="School supplies" loading="lazy">
-            <span class="cfi-gallery-item__overlay"><span class="cfi-gallery-item__label">School Supplies</span></span>
-          </button>
+        <div id="cfi-gallery-grid" class="cfi-gallery-grid" data-wp-block="cfi/media-gallery" aria-live="polite">
+          <p class="cfi-gallery-empty">Loading gallery…</p>
         </div>
+        <p id="cfi-gallery-empty" class="cfi-gallery-empty" hidden>No media matches these filters. Try another country or program.</p>
 
         <div class="cfi-text-center" style="margin-top:3rem;padding:2rem;background:var(--cfi-ivory);border-radius:var(--cfi-radius-lg)">
           <h2>Media Resources</h2>
-          <p>Download logos, press kits, and campaign assets for partners and churches.</p>
+          <p>Download our logo for church partnerships, press, and campaign materials.</p>
           <a href="../assets/images/cfi-logo.png" download class="cfi-btn cfi-btn--primary">Download Logo (PNG)</a>
         </div>
       </div>
@@ -107,12 +86,14 @@
   <footer class="cfi-footer" role="contentinfo">
     <div class="cfi-container">
       <div class="cfi-footer__bottom" style="border:none;padding:0">
-        <span>&copy; <span id="cfi-year"></span> Charity Faith International</span>
+        <span>&copy; <span id="cfi-year"></span> CharityFaith International</span>
         <a href="../index.html">Return Home</a>
       </div>
     </div>
   </footer>
   <script>document.getElementById('cfi-year').textContent = new Date().getFullYear();</script>
+  <script src="../assets/js/site-data.js" defer></script>
   <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/gallery.js" defer></script>
 </body>
 </html>
