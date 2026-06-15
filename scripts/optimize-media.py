@@ -5,7 +5,7 @@ import json
 import shutil
 from pathlib import Path
 
-from PIL import Image, ImageOps
+from PIL import Image, ImageOps, ImageEnhance
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "CFI"
@@ -46,7 +46,7 @@ FEATURED = {
     ],
     "mission": "IMG-20260603-WA0230.jpg",
     "story-featured": "IMG-20260603-WA0217.jpg",
-    "founder": "IMG-20260603-WA0039.jpg",
+    "founder": "IMG-20260603-WA0236.jpg",
     "stories": [
         "IMG-20260603-WA0242.jpg",
         "IMG-20260603-WA0238.jpg",
@@ -66,6 +66,31 @@ def image_score(path: Path) -> tuple:
         return (w * h * landscape_bonus, w, h, size, path.name)
     except Exception:
         return (0, 0, 0, 0, path.name)
+
+
+def save_founder_image(src: Path, dest: Path) -> None:
+    """Crop, upscale, and sharpen founder photo — focus on prayer moment."""
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    with Image.open(src) as im:
+        im = ImageOps.exif_transpose(im)
+        if im.mode not in ("RGB", "L"):
+            im = im.convert("RGB")
+        left, top, right, bottom = 45, 95, 875, 1310
+        cropped = im.crop((left, top, right, bottom))
+        cw, ch = cropped.size
+        target_ratio = 3 / 4
+        if cw / ch > target_ratio:
+            new_w = int(ch * target_ratio)
+            x0 = (cw - new_w) // 2
+            cropped = cropped.crop((x0, 0, x0 + new_w, ch))
+        else:
+            new_h = int(cw / target_ratio)
+            cropped = cropped.crop((0, 0, cw, min(ch, new_h)))
+        out_w, out_h = 1500, 2000
+        upscaled = cropped.resize((out_w, out_h), Image.Resampling.LANCZOS)
+        upscaled = ImageEnhance.Sharpness(upscaled).enhance(1.35)
+        upscaled = ImageEnhance.Contrast(upscaled).enhance(1.05)
+        upscaled.save(dest, "JPEG", quality=88, optimize=True, progressive=True)
 
 
 def save_variant(src: Path, dest: Path, max_width: int) -> None:
@@ -131,13 +156,19 @@ def main() -> None:
             save_variant(src, dest, 1920)
             featured_out[key].append(f"assets/media/featured/hero-{idx + 1}.jpg")
 
-    for key in ("mission", "story-featured", "founder"):
+    for key in ("mission", "story-featured"):
         name = FEATURED[key]
         src = SRC / name
         if src.exists():
             dest = OUT / "featured" / f"{key}.jpg"
             save_variant(src, dest, FULL_W)
             featured_out[key] = f"assets/media/featured/{key}.jpg"
+
+    founder_src = SRC / FEATURED["founder"]
+    if founder_src.exists():
+        founder_dest = OUT / "featured" / "founder.jpg"
+        save_founder_image(founder_src, founder_dest)
+        featured_out["founder"] = "assets/media/featured/founder.jpg"
 
     featured_out["stories"] = []
     for idx, name in enumerate(FEATURED["stories"]):

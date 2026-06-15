@@ -2,7 +2,17 @@
 
 A world-class, modern nonprofit website for **CharityFaith International** — a US-registered humanitarian and faith-based organization founded by **Evangelist Ebele Philips**.
 
-## Live site (GitHub Pages)
+## WordPress theme (Truehost → charityfaithinternational.org)
+
+Production theme: **`wordpress-theme/cfi/`** · Package: **`wordpress-theme/cfi.zip`** (~37 MB)
+
+**Full launch guide:** [WORDPRESS-INSTALL.md](WORDPRESS-INSTALL.md)
+
+```bash
+./scripts/package-theme.sh   # rebuild cfi.zip after changes
+```
+
+## Live site (GitHub Pages demo)
 
 **https://el-emm.github.io/CFI/**
 
