@@ -19,9 +19,17 @@
 <header class="cfi-header" role="banner">
 	<div class="cfi-container cfi-header__inner">
 		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="cfi-logo" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) . ' — Home' ); ?>">
-			<?php if ( has_custom_logo() ) : ?>
-				<?php the_custom_logo(); ?>
-			<?php else : ?>
+			<?php
+			$custom_logo_id = get_theme_mod( 'custom_logo' );
+			if ( $custom_logo_id ) :
+				$logo = wp_get_attachment_image_src( $custom_logo_id, 'full' );
+				if ( $logo ) :
+					?>
+					<img src="<?php echo esc_url( $logo[0] ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?> logo" class="cfi-logo__img custom-logo" width="<?php echo esc_attr( $logo[1] ); ?>" height="<?php echo esc_attr( $logo[2] ); ?>">
+					<?php
+				endif;
+			else :
+				?>
 				<img src="<?php echo esc_url( cfi_asset( 'images/cfi-logo.png' ) ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?> logo" class="cfi-logo__img" width="120" height="56">
 			<?php endif; ?>
 			<span class="cfi-logo__text"><?php bloginfo( 'name' ); ?></span>

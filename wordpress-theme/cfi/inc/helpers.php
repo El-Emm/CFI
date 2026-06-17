@@ -59,7 +59,11 @@ function cfi_format_phone( $number ) {
  * Theme mod with default.
  */
 function cfi_mod( $key, $default = '' ) {
-	return get_theme_mod( $key, $default );
+	$value = get_theme_mod( $key, $default );
+	if ( ( '' === $value || null === $value ) && '' !== $default ) {
+		return $default;
+	}
+	return $value;
 }
 
 /**

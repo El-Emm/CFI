@@ -18,8 +18,8 @@ get_header();
 		</div>
 		<div class="cfi-hero__overlay" aria-hidden="true"></div>
 		<div class="cfi-container cfi-hero__content">
-			<h1><?php echo esc_html( cfi_mod( 'cfi_hero_title' ) ); ?></h1>
-			<p class="cfi-hero__sub"><?php echo esc_html( cfi_mod( 'cfi_hero_subtitle' ) ); ?></p>
+			<h1><?php echo esc_html( cfi_mod( 'cfi_hero_title', 'Transforming Lives Through Faith, Compassion, and Action' ) ); ?></h1>
+			<p class="cfi-hero__sub"><?php echo esc_html( cfi_mod( 'cfi_hero_subtitle', 'CharityFaith International is a global humanitarian and faith-based nonprofit dedicated to uplifting vulnerable communities through education, healthcare assistance, widow empowerment, shelter initiatives, food support, and Christian outreach.' ) ); ?></p>
 			<div class="cfi-btn-group">
 				<a href="<?php echo esc_url( cfi_page_url( 'donate' ) ); ?>" class="cfi-btn cfi-btn--primary"><?php esc_html_e( 'Donate Now', 'cfi' ); ?></a>
 				<a href="<?php echo esc_url( cfi_page_url( 'partners' ) ); ?>" class="cfi-btn cfi-btn--secondary"><?php esc_html_e( 'Become a Partner', 'cfi' ); ?></a>

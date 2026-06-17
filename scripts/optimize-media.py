@@ -19,10 +19,16 @@ COUNTRIES = [
     "philippines", "niger", "botswana", "malawi",
 ]
 
+BUILDING_HOUSE_DIR = SRC / "Building house"
+BUILDING_HOUSE_COUNT = 8
+
 CATEGORIES = [
     "outreach", "crusades", "food", "education",
     "healthcare", "widow", "shelter",
 ]
+
+# All program filters shown in the gallery UI (includes dedicated imports).
+GALLERY_FILTER_CATEGORIES = CATEGORIES + ["building-houses"]
 
 COUNTRY_LABELS = {
     "zimbabwe": "Zimbabwe",
@@ -106,6 +112,46 @@ def save_variant(src: Path, dest: Path, max_width: int) -> None:
         im.save(dest, "JPEG", quality=JPEG_QUALITY, optimize=True, progressive=True)
 
 
+def slugify_filename(name: str) -> str:
+    stem = Path(name).stem.lower()
+    cleaned = "".join(ch if ch.isalnum() else "-" for ch in stem)
+    while "--" in cleaned:
+        cleaned = cleaned.replace("--", "-")
+    return cleaned.strip("-") or "cfi-building"
+
+
+def process_building_houses(gallery_items: list) -> list:
+    """Add optimized images from CFI/Building house/ to the gallery."""
+    if not BUILDING_HOUSE_DIR.exists():
+        return gallery_items
+
+    imgs = sorted(BUILDING_HOUSE_DIR.glob("*.jpeg")) + sorted(BUILDING_HOUSE_DIR.glob("*.jpg"))
+    ranked = sorted((image_score(p) for p in imgs), reverse=True)
+    selected = [name for score, _, _, _, name in ranked if score > 0][:BUILDING_HOUSE_COUNT]
+
+    for i, name in enumerate(selected):
+        src = BUILDING_HOUSE_DIR / name
+        country = COUNTRIES[i % len(COUNTRIES)]
+        slug = f"cfi-building-{slugify_filename(name)}"
+        thumb = OUT / "gallery" / "building-houses" / "thumb" / f"{slug}.jpg"
+        full = OUT / "gallery" / "building-houses" / "full" / f"{slug}.jpg"
+        save_variant(src, thumb, THUMB_W)
+        save_variant(src, full, FULL_W)
+        gallery_items.append({
+            "id": slug,
+            "country": country,
+            "countryLabel": COUNTRY_LABELS[country],
+            "category": "building-houses",
+            "type": "image",
+            "thumb": f"assets/media/gallery/building-houses/thumb/{slug}.jpg",
+            "src": f"assets/media/gallery/building-houses/full/{slug}.jpg",
+            "alt": f"CharityFaith International — building houses for folks in {COUNTRY_LABELS[country]}",
+            "source": name,
+        })
+
+    return gallery_items
+
+
 def main() -> None:
     if not SRC.exists():
         raise SystemExit(f"Source folder not found: {SRC}")
@@ -143,6 +189,8 @@ def main() -> None:
             "alt": f"CharityFaith International {COUNTRY_LABELS[country]} — {category.replace('-', ' ')}",
             "source": name,
         })
+
+    gallery_items = process_building_houses(gallery_items)
 
     # Featured / hero images
     featured_out = {}
@@ -206,7 +254,7 @@ def main() -> None:
 
     manifest = {
         "countries": [{"id": c, "label": COUNTRY_LABELS[c]} for c in COUNTRIES],
-        "categories": CATEGORIES,
+        "categories": GALLERY_FILTER_CATEGORIES,
         "featured": featured_out,
         "gallery": gallery_items + video_items,
     }
@@ -215,7 +263,8 @@ def main() -> None:
     data_dir.mkdir(parents=True, exist_ok=True)
     (data_dir / "gallery.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
 
-    print(f"Gallery images: {len(gallery_items)}")
+    building_count = sum(1 for item in gallery_items if item.get("category") == "building-houses")
+    print(f"Gallery images: {len(gallery_items)} ({building_count} building houses)")
     print(f"Videos: {len(video_items)}")
     print(f"Featured hero slides: {len(featured_out.get('hero', []))}")
     print(f"Manifest: {data_dir / 'gallery.json'}")

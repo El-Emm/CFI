@@ -15,6 +15,7 @@
     healthcare: 'Healthcare',
     widow: 'Widow Empowerment',
     shelter: 'Shelter',
+    'building-houses': 'Building Houses for Folks',
   };
 
   const isSubpage = window.location.pathname.includes('/pages/');
