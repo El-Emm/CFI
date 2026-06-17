@@ -7,19 +7,26 @@
 
 defined( 'ABSPATH' ) || exit;
 
-function cfi_create_pages_on_activation() {
-	if ( get_option( 'cfi_pages_created' ) ) {
-		return;
-	}
+define( 'CFI_PAGES_VERSION', 2 );
 
-	$pages = array(
-		'donate'   => array( 'title' => 'Donate', 'template' => 'page-templates/template-donate.php' ),
-		'contact'  => array( 'title' => 'Contact', 'template' => 'page-templates/template-contact.php' ),
-		'gallery'  => array( 'title' => 'Media Gallery', 'template' => 'page-templates/template-gallery.php' ),
-		'founder'  => array( 'title' => 'Founder', 'template' => 'page-templates/template-founder.php' ),
-		'partners' => array( 'title' => 'Partner With Us', 'template' => 'page-templates/template-partners.php' ),
-		'news'     => array( 'title' => 'News & Impact', 'template' => '' ),
+/**
+ * Pages required by the theme.
+ */
+function cfi_get_required_pages() {
+	return array(
+		'accept-jesus'     => array( 'title' => 'Accept Jesus', 'template' => 'page-templates/template-accept-jesus.php' ),
+		'prayer-requests'  => array( 'title' => 'Prayer Requests', 'template' => 'page-templates/template-prayer-requests.php' ),
+		'donate'           => array( 'title' => 'Donate', 'template' => 'page-templates/template-donate.php' ),
+		'contact'          => array( 'title' => 'Contact', 'template' => 'page-templates/template-contact.php' ),
+		'gallery'          => array( 'title' => 'Media Gallery', 'template' => 'page-templates/template-gallery.php' ),
+		'founder'          => array( 'title' => 'Founder', 'template' => 'page-templates/template-founder.php' ),
+		'partners'         => array( 'title' => 'Partner With Us', 'template' => 'page-templates/template-partners.php' ),
+		'news'             => array( 'title' => 'News & Impact', 'template' => '' ),
 	);
+}
+
+function cfi_create_pages_on_activation() {
+	$pages = cfi_get_required_pages();
 
 	$front_id = 0;
 	$blog_id  = 0;
@@ -27,6 +34,9 @@ function cfi_create_pages_on_activation() {
 	foreach ( $pages as $slug => $data ) {
 		$existing = get_page_by_path( $slug );
 		if ( $existing ) {
+			if ( ! empty( $data['template'] ) ) {
+				update_post_meta( $existing->ID, '_wp_page_template', $data['template'] );
+			}
 			if ( 'news' === $slug ) {
 				$blog_id = $existing->ID;
 			}
@@ -77,6 +87,7 @@ function cfi_create_pages_on_activation() {
 	}
 
 	update_option( 'cfi_pages_created', 1 );
+	update_option( 'cfi_pages_version', CFI_PAGES_VERSION );
 
 	/* Default site text */
 	if ( ! get_option( 'blogdescription' ) || 'Just another WordPress site' === get_option( 'blogdescription' ) ) {
@@ -91,6 +102,18 @@ function cfi_create_pages_on_activation() {
 		}
 	}
 }
+
+/**
+ * Create any pages added in newer theme versions.
+ */
+function cfi_maybe_upgrade_pages() {
+	$version = (int) get_option( 'cfi_pages_version', 0 );
+	if ( $version >= CFI_PAGES_VERSION ) {
+		return;
+	}
+	cfi_create_pages_on_activation();
+}
+add_action( 'after_setup_theme', 'cfi_maybe_upgrade_pages' );
 
 function cfi_after_switch_theme() {
 	cfi_create_pages_on_activation();

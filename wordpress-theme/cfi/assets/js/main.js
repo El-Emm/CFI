@@ -249,6 +249,20 @@
     });
   }
 
+  /* Prayer request form (static fallback) */
+  function initPrayer() {
+    const form = $('.cfi-prayer-form');
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const notice = form.parentElement?.querySelector('.cfi-donate-notice');
+      if (notice) {
+        notice.hidden = false;
+        notice.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        form.reset();
+      }
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     initHeader();
     initHero();
@@ -257,5 +271,6 @@
     initLightbox();
     initDonate();
     initContact();
+    initPrayer();
   });
 })();

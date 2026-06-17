@@ -175,5 +175,8 @@ function cfi_nav_active( $slug ) {
 	if ( ( is_home() || is_singular( 'post' ) || is_category() ) && 'blog' === $slug ) {
 		return ' is-active';
 	}
+	if ( is_page( 'news' ) && 'blog' === $slug ) {
+		return ' is-active';
+	}
 	return '';
 }

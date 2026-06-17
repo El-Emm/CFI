@@ -140,5 +140,16 @@ function cfi_customize_register( $wp_customize ) {
 		'section'     => 'cfi_integrations',
 		'type'        => 'text',
 	) );
+
+	$wp_customize->add_setting( 'cfi_prayer_shortcode', array(
+		'default'           => '',
+		'sanitize_callback' => 'sanitize_text_field',
+	) );
+	$wp_customize->add_control( 'cfi_prayer_shortcode', array(
+		'label'       => __( 'Prayer Request Form Shortcode', 'cfi' ),
+		'description' => __( 'Example: [contact-form-7 id="prayer"]', 'cfi' ),
+		'section'     => 'cfi_integrations',
+		'type'        => 'text',
+	) );
 }
 add_action( 'customize_register', 'cfi_customize_register' );

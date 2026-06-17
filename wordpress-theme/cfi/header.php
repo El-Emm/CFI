@@ -39,7 +39,7 @@
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="cfi-nav__link<?php echo esc_attr( cfi_nav_active( 'home' ) ); ?>"><?php esc_html_e( 'Home', 'cfi' ); ?></a>
 			<a href="<?php echo esc_url( home_url( '/#mission' ) ); ?>" class="cfi-nav__link"><?php esc_html_e( 'Mission', 'cfi' ); ?></a>
 			<a href="<?php echo esc_url( home_url( '/#programs' ) ); ?>" class="cfi-nav__link"><?php esc_html_e( 'Programs', 'cfi' ); ?></a>
-			<a href="<?php echo esc_url( home_url( '/#impact' ) ); ?>" class="cfi-nav__link"><?php esc_html_e( 'Impact', 'cfi' ); ?></a>
+			<a href="<?php echo esc_url( cfi_page_url( 'prayer-requests' ) ); ?>" class="cfi-nav__link<?php echo esc_attr( cfi_nav_active( 'prayer-requests' ) ); ?>"><?php esc_html_e( 'Prayer Requests', 'cfi' ); ?></a>
 			<a href="<?php echo esc_url( cfi_page_url( 'gallery' ) ); ?>" class="cfi-nav__link<?php echo esc_attr( cfi_nav_active( 'gallery' ) ); ?>"><?php esc_html_e( 'Media', 'cfi' ); ?></a>
 			<a href="<?php echo esc_url( cfi_page_url( 'founder' ) ); ?>" class="cfi-nav__link<?php echo esc_attr( cfi_nav_active( 'founder' ) ); ?>"><?php esc_html_e( 'Founder', 'cfi' ); ?></a>
 			<a href="<?php echo esc_url( cfi_blog_url() ); ?>" class="cfi-nav__link<?php echo esc_attr( cfi_nav_active( 'blog' ) ); ?>"><?php esc_html_e( 'News', 'cfi' ); ?></a>
@@ -47,7 +47,7 @@
 		</nav>
 
 		<div class="cfi-header__actions">
-			<a href="<?php echo esc_url( cfi_page_url( 'donate' ) ); ?>" class="cfi-btn cfi-btn--primary cfi-header__donate"><?php esc_html_e( 'Donate Now', 'cfi' ); ?></a>
+			<a href="<?php echo esc_url( cfi_page_url( 'accept-jesus' ) ); ?>" class="cfi-btn cfi-btn--primary cfi-header__cta"><?php esc_html_e( 'Accept Jesus Today', 'cfi' ); ?></a>
 			<button type="button" class="cfi-menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="<?php esc_attr_e( 'Open menu', 'cfi' ); ?>">
 				<span></span><span></span><span></span>
 			</button>
@@ -57,11 +57,13 @@
 
 <nav id="mobile-nav" class="cfi-mobile-nav" aria-label="<?php esc_attr_e( 'Mobile navigation', 'cfi' ); ?>" hidden>
 	<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="cfi-mobile-nav__link"><?php esc_html_e( 'Home', 'cfi' ); ?></a>
+	<a href="<?php echo esc_url( cfi_page_url( 'prayer-requests' ) ); ?>" class="cfi-mobile-nav__link"><?php esc_html_e( 'Prayer Requests', 'cfi' ); ?></a>
 	<a href="<?php echo esc_url( home_url( '/#programs' ) ); ?>" class="cfi-mobile-nav__link"><?php esc_html_e( 'Programs', 'cfi' ); ?></a>
 	<a href="<?php echo esc_url( cfi_page_url( 'gallery' ) ); ?>" class="cfi-mobile-nav__link"><?php esc_html_e( 'Media Gallery', 'cfi' ); ?></a>
 	<a href="<?php echo esc_url( cfi_page_url( 'founder' ) ); ?>" class="cfi-mobile-nav__link"><?php esc_html_e( 'Founder', 'cfi' ); ?></a>
 	<a href="<?php echo esc_url( cfi_page_url( 'partners' ) ); ?>" class="cfi-mobile-nav__link"><?php esc_html_e( 'Partner With Us', 'cfi' ); ?></a>
 	<a href="<?php echo esc_url( cfi_blog_url() ); ?>" class="cfi-mobile-nav__link"><?php esc_html_e( 'News & Impact', 'cfi' ); ?></a>
 	<a href="<?php echo esc_url( cfi_page_url( 'contact' ) ); ?>" class="cfi-mobile-nav__link"><?php esc_html_e( 'Contact', 'cfi' ); ?></a>
-	<a href="<?php echo esc_url( cfi_page_url( 'donate' ) ); ?>" class="cfi-btn cfi-btn--primary" style="margin-top:1.5rem;width:100%"><?php esc_html_e( 'Donate Now', 'cfi' ); ?></a>
+	<a href="<?php echo esc_url( cfi_page_url( 'donate' ) ); ?>" class="cfi-mobile-nav__link"><?php esc_html_e( 'Donate', 'cfi' ); ?></a>
+	<a href="<?php echo esc_url( cfi_page_url( 'accept-jesus' ) ); ?>" class="cfi-btn cfi-btn--primary" style="margin-top:1.5rem;width:100%"><?php esc_html_e( 'Accept Jesus Today', 'cfi' ); ?></a>
 </nav>

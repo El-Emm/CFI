@@ -14,10 +14,16 @@
 		</header>
 		<div class="cfi-partner-grid">
 			<div class="cfi-partner-card">
-				<div class="cfi-partner-card__icon" aria-hidden="true">❤️</div>
-				<h3><?php esc_html_e( 'Donate', 'cfi' ); ?></h3>
-				<p><?php esc_html_e( 'Give to healthcare, education, food relief, widows, shelter, or general impact.', 'cfi' ); ?></p>
-				<a href="<?php echo esc_url( cfi_page_url( 'donate' ) ); ?>" class="cfi-btn cfi-btn--primary"><?php esc_html_e( 'Donate Now', 'cfi' ); ?></a>
+				<div class="cfi-partner-card__icon" aria-hidden="true">✝️</div>
+				<h3><?php esc_html_e( 'Accept Jesus', 'cfi' ); ?></h3>
+				<p><?php esc_html_e( 'Receive Christ and begin a new life of faith, forgiveness, and hope.', 'cfi' ); ?></p>
+				<a href="<?php echo esc_url( cfi_page_url( 'accept-jesus' ) ); ?>" class="cfi-btn cfi-btn--primary"><?php esc_html_e( 'Accept Jesus Today', 'cfi' ); ?></a>
+			</div>
+			<div class="cfi-partner-card">
+				<div class="cfi-partner-card__icon" aria-hidden="true">🙏</div>
+				<h3><?php esc_html_e( 'Prayer Requests', 'cfi' ); ?></h3>
+				<p><?php esc_html_e( 'Share your need and let our team agree with you in prayer for breakthrough.', 'cfi' ); ?></p>
+				<a href="<?php echo esc_url( cfi_page_url( 'prayer-requests' ) ); ?>" class="cfi-btn cfi-btn--outline"><?php esc_html_e( 'Send Request', 'cfi' ); ?></a>
 			</div>
 			<div class="cfi-partner-card" id="sponsor">
 				<div class="cfi-partner-card__icon" aria-hidden="true">👧</div>

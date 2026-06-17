@@ -8,7 +8,7 @@ node_modules/
 .idea/
 
 # Raw client uploads — optimized copies live in assets/media/
-CFI/
+/CFI/
 
 # WordPress theme build artifact (run ./scripts/package-theme.sh)
 wordpress-theme/cfi.zip

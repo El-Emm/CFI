@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Submit your prayer request to CharityFaith International. Our prayer team stands with you for healing, breakthrough, salvation, and restoration.">
+  <title>Prayer Requests | CharityFaith International</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="icon" href="../assets/images/cfi-logo.png" type="image/png">
+</head>
+<body>
+  <a href="#main" class="cfi-skip-link">Skip to main content</a>
+  <header class="cfi-header" role="banner">
+    <div class="cfi-container cfi-header__inner">
+      <a href="../index.html" class="cfi-logo"><img src="../assets/images/cfi-logo.png" alt="CharityFaith International logo" class="cfi-logo__img" width="120" height="56"><span class="cfi-logo__text">CharityFaith International</span></a>
+      <nav class="cfi-nav" aria-label="Primary navigation">
+        <a href="../index.html" class="cfi-nav__link">Home</a>
+        <a href="prayer-requests.html" class="cfi-nav__link is-active">Prayer Requests</a>
+        <a href="accept-jesus.html" class="cfi-nav__link">Accept Jesus</a>
+        <a href="contact.html" class="cfi-nav__link">Contact</a>
+      </nav>
+      <div class="cfi-header__actions">
+        <a href="accept-jesus.html" class="cfi-btn cfi-btn--primary cfi-header__cta">Accept Jesus Today</a>
+        <button type="button" class="cfi-menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+  <nav id="mobile-nav" class="cfi-mobile-nav" hidden aria-label="Mobile navigation">
+    <a href="../index.html" class="cfi-mobile-nav__link">Home</a>
+    <a href="accept-jesus.html" class="cfi-btn cfi-btn--primary" style="margin-top:1.5rem;width:100%">Accept Jesus Today</a>
+  </nav>
+
+  <main id="main">
+    <header class="cfi-page-hero cfi-page-hero--faith">
+      <div class="cfi-container">
+        <span class="cfi-section__label">We Stand With You</span>
+        <h1>Prayer Requests</h1>
+        <p>Share what is on your heart. Evangelist Ebele Philips and the CharityFaith International prayer team are believing God with you for healing, breakthrough, salvation, and restoration.</p>
+      </div>
+    </header>
+    <section class="cfi-section">
+      <div class="cfi-container">
+        <div class="cfi-contact-grid">
+          <div class="cfi-prayer-aside">
+            <h2>How We Pray</h2>
+            <p>Every request is received with compassion and confidentiality. We pray in agreement for your needs — whether spiritual, physical, emotional, or financial.</p>
+            <ul class="cfi-prayer-list">
+              <li>Healing and deliverance</li>
+              <li>Salvation for loved ones</li>
+              <li>Family and marriage restoration</li>
+              <li>Provision and breakthrough</li>
+              <li>Guidance and peace</li>
+            </ul>
+            <p>Call our team: <a href="tel:+13309999170">+1 (330) 999-9170</a></p>
+          </div>
+          <div>
+            <h2>Submit Your Request</h2>
+            <form class="cfi-form cfi-prayer-form" action="#" method="post">
+              <div class="cfi-form__group"><label for="prayer-name">Full Name</label><input type="text" id="prayer-name" name="name" required autocomplete="name"></div>
+              <div class="cfi-form__group"><label for="prayer-email">Email</label><input type="email" id="prayer-email" name="email" required autocomplete="email"></div>
+              <div class="cfi-form__group"><label for="prayer-phone">Phone (optional)</label><input type="tel" id="prayer-phone" name="phone" autocomplete="tel"></div>
+              <div class="cfi-form__group"><label for="prayer-request">Your Prayer Request</label><textarea id="prayer-request" name="request" rows="6" required placeholder="Share what you would like us to pray for…"></textarea></div>
+              <button type="submit" class="cfi-btn cfi-btn--primary">Submit Prayer Request</button>
+            </form>
+            <div class="cfi-donate-notice" hidden role="status" style="margin-top:1.5rem;padding:1.25rem;background:var(--cfi-green);color:white;border-radius:var(--cfi-radius)">Thank you. Our prayer team has received your request.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="cfi-footer" role="contentinfo">
+    <div class="cfi-container">
+      <div class="cfi-footer__bottom" style="border:none;padding:0">
+        <span>&copy; <span id="cfi-year"></span> CharityFaith International</span>
+        <span><a href="accept-jesus.html">Accept Jesus Today</a></span>
+      </div>
+    </div>
+  </footer>
+  <script src="../assets/js/main.js" defer></script>
+  <script>document.getElementById('cfi-year')?.textContent = new Date().getFullYear();</script>
+</body>
+</html>

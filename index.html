@@ -60,13 +60,14 @@
         <a href="#mission" class="cfi-nav__link">Mission</a>
         <a href="#programs" class="cfi-nav__link">Programs</a>
         <a href="#impact" class="cfi-nav__link">Impact</a>
+        <a href="pages/prayer-requests.html" class="cfi-nav__link">Prayer Requests</a>
         <a href="pages/gallery.html" class="cfi-nav__link">Media</a>
         <a href="pages/founder.html" class="cfi-nav__link">Founder</a>
         <a href="pages/blog.html" class="cfi-nav__link">News</a>
         <a href="pages/contact.html" class="cfi-nav__link">Contact</a>
       </nav>
       <div class="cfi-header__actions">
-        <a href="pages/donate.html" class="cfi-btn cfi-btn--primary cfi-header__donate">Donate Now</a>
+        <a href="pages/accept-jesus.html" class="cfi-btn cfi-btn--primary cfi-header__cta">Accept Jesus Today</a>
         <button type="button" class="cfi-menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
           <span></span><span></span><span></span>
         </button>
@@ -77,12 +78,14 @@
   <nav id="mobile-nav" class="cfi-mobile-nav" aria-label="Mobile navigation" hidden>
     <a href="index.html" class="cfi-mobile-nav__link">Home</a>
     <a href="#programs" class="cfi-mobile-nav__link">Programs</a>
+    <a href="pages/prayer-requests.html" class="cfi-mobile-nav__link">Prayer Requests</a>
     <a href="pages/gallery.html" class="cfi-mobile-nav__link">Media Gallery</a>
     <a href="pages/founder.html" class="cfi-mobile-nav__link">Founder</a>
     <a href="pages/partners.html" class="cfi-mobile-nav__link">Partner With Us</a>
     <a href="pages/blog.html" class="cfi-mobile-nav__link">News &amp; Impact</a>
     <a href="pages/contact.html" class="cfi-mobile-nav__link">Contact</a>
-    <a href="pages/donate.html" class="cfi-btn cfi-btn--primary" style="margin-top:1.5rem;width:100%">Donate Now</a>
+    <a href="pages/donate.html" class="cfi-mobile-nav__link">Donate</a>
+    <a href="pages/accept-jesus.html" class="cfi-btn cfi-btn--primary" style="margin-top:1.5rem;width:100%">Accept Jesus Today</a>
   </nav>
 
   <main id="main">
@@ -95,12 +98,12 @@
         <div class="cfi-hero__slide" style="background-image:url('assets/media/featured/hero-4.jpg')"></div>
       </div>
       <div class="cfi-hero__overlay" aria-hidden="true"></div>
-      <div class="cfi-container cfi-hero__content">
+      <div class="cfi-container cfi-hero__content cfi-hero__content--centered">
         <h1>Transforming Lives Through Faith, Compassion, and Action</h1>
         <p class="cfi-hero__sub">CharityFaith International is a global humanitarian and faith-based nonprofit dedicated to uplifting vulnerable communities through education, healthcare assistance, widow empowerment, shelter initiatives, food support, and Christian outreach.</p>
-        <div class="cfi-btn-group">
-          <a href="pages/donate.html" class="cfi-btn cfi-btn--primary">Donate Now</a>
-          <a href="pages/partners.html" class="cfi-btn cfi-btn--secondary">Become a Partner</a>
+        <div class="cfi-btn-group cfi-btn-group--center">
+          <a href="pages/accept-jesus.html" class="cfi-btn cfi-btn--primary">Accept Jesus Today</a>
+          <a href="pages/prayer-requests.html" class="cfi-btn cfi-btn--secondary">Prayer Requests</a>
           <a href="#impact" class="cfi-btn cfi-btn--secondary">Explore Our Impact</a>
         </div>
       </div>
@@ -145,6 +148,20 @@
             <div class="cfi-stat__number" data-target="45" data-suffix="+">0</div>
             <div class="cfi-stat__label">Crusades Conducted</div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cfi-section cfi-section--dark cfi-salvation-banner" id="salvation" aria-labelledby="salvation-heading">
+      <div class="cfi-container cfi-salvation-banner__inner">
+        <div>
+          <span class="cfi-section__label">Salvation</span>
+          <h2 id="salvation-heading">Are You Ready for Jesus to Change Your Life?</h2>
+          <p>Wherever you are in the world, you can receive Christ today — and our prayer team will stand with you in faith for what comes next.</p>
+        </div>
+        <div class="cfi-btn-group cfi-btn-group--center">
+          <a href="pages/accept-jesus.html" class="cfi-btn cfi-btn--primary">Accept Jesus Today</a>
+          <a href="pages/prayer-requests.html" class="cfi-btn cfi-btn--secondary">Prayer Requests</a>
         </div>
       </div>
     </section>
@@ -367,10 +384,16 @@
         </header>
         <div class="cfi-partner-grid">
           <div class="cfi-partner-card">
-            <div class="cfi-partner-card__icon" aria-hidden="true">❤️</div>
-            <h3>Donate</h3>
-            <p>Give to healthcare, education, food relief, widows, shelter, or general impact.</p>
-            <a href="pages/donate.html" class="cfi-btn cfi-btn--primary">Donate Now</a>
+            <div class="cfi-partner-card__icon" aria-hidden="true">✝️</div>
+            <h3>Accept Jesus</h3>
+            <p>Receive Christ and begin a new life of faith, forgiveness, and hope.</p>
+            <a href="pages/accept-jesus.html" class="cfi-btn cfi-btn--primary">Accept Jesus Today</a>
+          </div>
+          <div class="cfi-partner-card">
+            <div class="cfi-partner-card__icon" aria-hidden="true">🙏</div>
+            <h3>Prayer Requests</h3>
+            <p>Share your need and let our team agree with you in prayer for breakthrough.</p>
+            <a href="pages/prayer-requests.html" class="cfi-btn cfi-btn--outline">Send Request</a>
           </div>
           <div class="cfi-partner-card">
             <div class="cfi-partner-card__icon" aria-hidden="true">👧</div>
@@ -411,10 +434,11 @@
       <div class="cfi-container">
         <div class="cfi-cta">
           <img src="assets/images/cfi-logo.png" alt="" width="80" height="48" style="margin:0 auto 1.5rem;opacity:0.95">
-          <h2>Your Gift Changes Lives Today</h2>
-          <p>Every donation provides food, education, medical care, shelter, and gospel hope to those who need it most.</p>
-          <div class="cfi-btn-group" style="justify-content:center">
-            <a href="pages/donate.html" class="cfi-btn cfi-btn--primary">Give Now</a>
+          <h2>Stand With Us in Faith and Compassion</h2>
+          <p>Pray with us, partner with our mission, or give to support humanitarian outreach across nine nations.</p>
+          <div class="cfi-btn-group cfi-btn-group--center">
+            <a href="pages/prayer-requests.html" class="cfi-btn cfi-btn--primary">Submit a Prayer Request</a>
+            <a href="pages/donate.html" class="cfi-btn cfi-btn--secondary">Give to CFI</a>
             <a href="pages/contact.html" class="cfi-btn cfi-btn--secondary">Contact Our Team</a>
           </div>
         </div>
@@ -444,12 +468,12 @@
           </ul>
         </div>
         <div>
-          <h4>Get Involved</h4>
+          <h4>Faith &amp; Prayer</h4>
           <ul class="cfi-footer__links">
+            <li><a href="pages/accept-jesus.html">Accept Jesus Today</a></li>
+            <li><a href="pages/prayer-requests.html">Prayer Requests</a></li>
             <li><a href="pages/donate.html">Donate</a></li>
             <li><a href="pages/partners.html">Partner With Us</a></li>
-            <li><a href="pages/partners.html#volunteer">Volunteer</a></li>
-            <li><a href="pages/gallery.html">Media Center</a></li>
           </ul>
         </div>
         <div>

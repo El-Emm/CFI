@@ -294,9 +294,19 @@ body.cfi-theme .cfi-hero__content .cfi-hero__sub {
   gap: 0.75rem;
 }
 
-.cfi-header__donate { display: none; }
+.cfi-header__cta,
+.cfi-header__donate {
+  display: inline-flex;
+  font-size: clamp(0.75rem, 2vw, 0.9375rem);
+  padding: 0.625rem 1rem;
+  white-space: nowrap;
+}
 @media (min-width: 768px) {
-  .cfi-header__donate { display: inline-flex; }
+  .cfi-header__cta,
+  .cfi-header__donate {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9375rem;
+  }
 }
 
 .cfi-menu-toggle {
@@ -355,10 +365,16 @@ body.cfi-theme .cfi-hero__content .cfi-hero__sub {
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
   padding-top: var(--cfi-header-h);
   overflow: hidden;
   isolation: isolate;
+  text-align: center;
+}
+
+.cfi-hero .cfi-container {
+  width: min(100% - clamp(2rem, 8vw, 5rem), var(--cfi-max));
 }
 
 .cfi-hero__slides {
@@ -385,10 +401,10 @@ body.cfi-theme .cfi-hero__content .cfi-hero__sub {
   z-index: 2;
   pointer-events: none;
   background: linear-gradient(
-    to top,
-    rgba(17, 17, 17, 0.92) 0%,
-    rgba(17, 17, 17, 0.55) 45%,
-    rgba(17, 17, 17, 0.25) 100%
+    180deg,
+    rgba(17, 17, 17, 0.45) 0%,
+    rgba(17, 17, 17, 0.72) 45%,
+    rgba(17, 17, 17, 0.45) 100%
   );
 }
 
@@ -396,35 +412,46 @@ body.cfi-theme .cfi-hero__content .cfi-hero__sub {
   position: relative;
   z-index: 3;
   width: 100%;
-  padding: clamp(3rem, 10vw, 6rem) 0 clamp(4rem, 12vw, 7rem);
+  padding: clamp(2rem, 6vw, 4rem) 0;
   color: var(--cfi-white);
+}
+
+.cfi-hero__content--centered,
+.cfi-hero__content.cfi-hero__content--centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .cfi-hero__content h1 {
   color: var(--cfi-white);
-  margin-bottom: 1.25rem;
-  max-width: 900px;
+  margin: 0 auto 1.25rem;
+  max-width: min(920px, 100%);
   text-shadow: 0 2px 16px rgba(17, 17, 17, 0.45);
 }
 .cfi-hero__content .cfi-hero__sub {
   font-size: clamp(1.05rem, 2vw, 1.25rem);
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.92);
-  max-width: 720px;
-  margin-bottom: 2rem;
+  max-width: min(760px, 100%);
+  margin: 0 auto 2rem;
   text-shadow: 0 1px 12px rgba(17, 17, 17, 0.4);
 }
+
+.cfi-btn-group--center { justify-content: center; }
 
 .cfi-hero__dots {
   position: absolute;
   bottom: 2rem;
-  right: 1.25rem;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
   z-index: 4;
   display: flex;
   gap: 0.5rem;
 }
 @media (min-width: 768px) {
-  .cfi-hero__dots { right: calc((100% - var(--cfi-max)) / 2 + 1.25rem); }
+  .cfi-hero__dots { left: 50%; right: auto; transform: translateX(-50%); }
 }
 
 .cfi-hero__dot {
@@ -869,6 +896,59 @@ body.cfi-theme .cfi-hero__content .cfi-hero__sub {
 
 .cfi-page-hero h1 { margin-bottom: 1rem; }
 .cfi-page-hero p { max-width: 640px; margin: 0 auto; font-size: 1.125rem; }
+
+.cfi-page-hero--faith {
+  background: linear-gradient(135deg, var(--cfi-black) 0%, #2a1810 55%, var(--cfi-orange-dark) 100%);
+  color: var(--cfi-white);
+}
+.cfi-page-hero--faith h1,
+.cfi-page-hero--faith p { color: var(--cfi-white); }
+
+.cfi-salvation-banner__inner {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+  text-align: center;
+}
+@media (min-width: 900px) {
+  .cfi-salvation-banner__inner {
+    grid-template-columns: 1fr auto;
+    text-align: left;
+  }
+  .cfi-salvation-banner__inner .cfi-btn-group { justify-content: flex-end; }
+}
+
+.cfi-salvation-card,
+.cfi-salvation-steps {
+  background: var(--cfi-ivory);
+  border-radius: var(--cfi-radius-lg);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  margin-bottom: 2rem;
+  box-shadow: var(--cfi-shadow);
+}
+
+.cfi-salvation-prayer {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  font-style: italic;
+  color: var(--cfi-black);
+  background: var(--cfi-white);
+  border-left: 4px solid var(--cfi-orange);
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--cfi-radius);
+}
+
+.cfi-prayer-list {
+  padding-left: 1.25rem;
+  margin: 1rem 0 1.5rem;
+}
+.cfi-prayer-list li { margin-bottom: 0.5rem; }
+
+.cfi-prayer-aside {
+  background: var(--cfi-ivory);
+  border-radius: var(--cfi-radius-lg);
+  padding: 2rem;
+}
 
 /* Forms */
 .cfi-form { max-width: 640px; }

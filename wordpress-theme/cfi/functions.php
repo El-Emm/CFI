@@ -7,11 +7,12 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'CFI_VERSION', '1.0.1' );
+define( 'CFI_VERSION', '1.1.0' );
 
 require get_template_directory() . '/inc/helpers.php';
 require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/theme-setup.php';
+require get_template_directory() . '/inc/seo.php';
 
 /**
  * Theme setup.

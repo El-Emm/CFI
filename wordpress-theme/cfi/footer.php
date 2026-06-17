@@ -33,12 +33,12 @@
 				</ul>
 			</div>
 			<div>
-				<h4><?php esc_html_e( 'Get Involved', 'cfi' ); ?></h4>
+				<h4><?php esc_html_e( 'Faith &amp; Prayer', 'cfi' ); ?></h4>
 				<ul class="cfi-footer__links">
+					<li><a href="<?php echo esc_url( cfi_page_url( 'accept-jesus' ) ); ?>"><?php esc_html_e( 'Accept Jesus Today', 'cfi' ); ?></a></li>
+					<li><a href="<?php echo esc_url( cfi_page_url( 'prayer-requests' ) ); ?>"><?php esc_html_e( 'Prayer Requests', 'cfi' ); ?></a></li>
 					<li><a href="<?php echo esc_url( cfi_page_url( 'donate' ) ); ?>"><?php esc_html_e( 'Donate', 'cfi' ); ?></a></li>
 					<li><a href="<?php echo esc_url( cfi_page_url( 'partners' ) ); ?>"><?php esc_html_e( 'Partner With Us', 'cfi' ); ?></a></li>
-					<li><a href="<?php echo esc_url( cfi_page_url( 'partners' ) . '#volunteer' ); ?>"><?php esc_html_e( 'Volunteer', 'cfi' ); ?></a></li>
-					<li><a href="<?php echo esc_url( cfi_page_url( 'gallery' ) ); ?>"><?php esc_html_e( 'Media Center', 'cfi' ); ?></a></li>
 				</ul>
 			</div>
 			<div>

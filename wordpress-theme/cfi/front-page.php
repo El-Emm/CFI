@@ -17,12 +17,12 @@ get_header();
 			<?php endfor; ?>
 		</div>
 		<div class="cfi-hero__overlay" aria-hidden="true"></div>
-		<div class="cfi-container cfi-hero__content">
+		<div class="cfi-container cfi-hero__content cfi-hero__content--centered">
 			<h1><?php echo esc_html( cfi_mod( 'cfi_hero_title', 'Transforming Lives Through Faith, Compassion, and Action' ) ); ?></h1>
 			<p class="cfi-hero__sub"><?php echo esc_html( cfi_mod( 'cfi_hero_subtitle', 'CharityFaith International is a global humanitarian and faith-based nonprofit dedicated to uplifting vulnerable communities through education, healthcare assistance, widow empowerment, shelter initiatives, food support, and Christian outreach.' ) ); ?></p>
-			<div class="cfi-btn-group">
-				<a href="<?php echo esc_url( cfi_page_url( 'donate' ) ); ?>" class="cfi-btn cfi-btn--primary"><?php esc_html_e( 'Donate Now', 'cfi' ); ?></a>
-				<a href="<?php echo esc_url( cfi_page_url( 'partners' ) ); ?>" class="cfi-btn cfi-btn--secondary"><?php esc_html_e( 'Become a Partner', 'cfi' ); ?></a>
+			<div class="cfi-btn-group cfi-btn-group--center">
+				<a href="<?php echo esc_url( cfi_page_url( 'accept-jesus' ) ); ?>" class="cfi-btn cfi-btn--primary"><?php esc_html_e( 'Accept Jesus Today', 'cfi' ); ?></a>
+				<a href="<?php echo esc_url( cfi_page_url( 'prayer-requests' ) ); ?>" class="cfi-btn cfi-btn--secondary"><?php esc_html_e( 'Prayer Requests', 'cfi' ); ?></a>
 				<a href="#impact" class="cfi-btn cfi-btn--secondary"><?php esc_html_e( 'Explore Our Impact', 'cfi' ); ?></a>
 			</div>
 		</div>
@@ -47,6 +47,20 @@ get_header();
 						<div class="cfi-stat__label"><?php echo esc_html( $stat['label'] ); ?></div>
 					</div>
 				<?php endforeach; ?>
+			</div>
+		</div>
+	</section>
+
+	<section class="cfi-section cfi-section--dark cfi-salvation-banner" id="salvation" aria-labelledby="salvation-heading">
+		<div class="cfi-container cfi-salvation-banner__inner">
+			<div>
+				<span class="cfi-section__label"><?php esc_html_e( 'Salvation', 'cfi' ); ?></span>
+				<h2 id="salvation-heading"><?php esc_html_e( 'Are You Ready for Jesus to Change Your Life?', 'cfi' ); ?></h2>
+				<p><?php esc_html_e( 'Wherever you are in the world, you can receive Christ today — and our prayer team will stand with you in faith for what comes next.', 'cfi' ); ?></p>
+			</div>
+			<div class="cfi-btn-group cfi-btn-group--center">
+				<a href="<?php echo esc_url( cfi_page_url( 'accept-jesus' ) ); ?>" class="cfi-btn cfi-btn--primary"><?php esc_html_e( 'Accept Jesus Today', 'cfi' ); ?></a>
+				<a href="<?php echo esc_url( cfi_page_url( 'prayer-requests' ) ); ?>" class="cfi-btn cfi-btn--secondary"><?php esc_html_e( 'Prayer Requests', 'cfi' ); ?></a>
 			</div>
 		</div>
 	</section>
@@ -159,10 +173,11 @@ get_header();
 		<div class="cfi-container">
 			<div class="cfi-cta">
 				<img src="<?php echo esc_url( cfi_asset( 'images/cfi-logo.png' ) ); ?>" alt="" width="80" height="48" style="margin:0 auto 1.5rem;opacity:0.95">
-				<h2><?php esc_html_e( 'Your Gift Changes Lives Today', 'cfi' ); ?></h2>
-				<p><?php esc_html_e( 'Every donation provides food, education, medical care, shelter, and gospel hope to those who need it most.', 'cfi' ); ?></p>
-				<div class="cfi-btn-group" style="justify-content:center">
-					<a href="<?php echo esc_url( cfi_page_url( 'donate' ) ); ?>" class="cfi-btn cfi-btn--primary"><?php esc_html_e( 'Give Now', 'cfi' ); ?></a>
+				<h2><?php esc_html_e( 'Stand With Us in Faith and Compassion', 'cfi' ); ?></h2>
+				<p><?php esc_html_e( 'Pray with us, partner with our mission, or give to support humanitarian outreach across nine nations.', 'cfi' ); ?></p>
+				<div class="cfi-btn-group cfi-btn-group--center">
+					<a href="<?php echo esc_url( cfi_page_url( 'prayer-requests' ) ); ?>" class="cfi-btn cfi-btn--primary"><?php esc_html_e( 'Submit a Prayer Request', 'cfi' ); ?></a>
+					<a href="<?php echo esc_url( cfi_page_url( 'donate' ) ); ?>" class="cfi-btn cfi-btn--secondary"><?php esc_html_e( 'Give to CFI', 'cfi' ); ?></a>
 					<a href="<?php echo esc_url( cfi_page_url( 'contact' ) ); ?>" class="cfi-btn cfi-btn--secondary"><?php esc_html_e( 'Contact Our Team', 'cfi' ); ?></a>
 				</div>
 			</div>
