@@ -639,15 +639,36 @@ body.cfi-theme .cfi-hero__content .cfi-hero__sub {
   stroke-width: 2.5;
 }
 
+.cfi-map-land {
+  pointer-events: none;
+}
+
 .cfi-map-marker {
   cursor: pointer;
-  transition: transform 0.2s ease;
+  pointer-events: none;
 }
-.cfi-map-marker:hover,
-.cfi-map-marker.is-active { transform: scale(1.3); }
 
-.cfi-map-marker circle { fill: var(--cfi-orange); stroke: var(--cfi-white); stroke-width: 2; }
-.cfi-map-marker.is-active circle { fill: var(--cfi-green); }
+.cfi-map-marker__dot {
+  pointer-events: none;
+  fill: var(--cfi-orange);
+  stroke: var(--cfi-white);
+  stroke-width: 2;
+  transition: fill 0.2s ease, stroke 0.2s ease, stroke-width 0.2s ease;
+}
+
+.cfi-map-marker.is-hover .cfi-map-marker__dot,
+.cfi-map-marker.is-active .cfi-map-marker__dot {
+  stroke: var(--cfi-green);
+  stroke-width: 3;
+}
+
+.cfi-map-marker.is-hover .cfi-map-marker__dot {
+  fill: var(--cfi-orange-dark);
+}
+
+.cfi-map-marker.is-active .cfi-map-marker__dot {
+  fill: var(--cfi-green);
+}
 
 .cfi-map-story {
   background: var(--cfi-white);
@@ -1398,6 +1419,17 @@ body.cfi-theme .cfi-hero__content .cfi-hero__sub {
   font-family: var(--cfi-font-sans);
   font-size: 1rem;
   margin-bottom: 0.25rem;
+}
+
+.cfi-contact-info p {
+  margin: 0 0 0.35rem;
+  color: var(--cfi-black);
+}
+
+.cfi-contact-info a {
+  color: var(--cfi-orange);
+  font-weight: 600;
+  word-break: break-word;
 }
 
 /* Utilities */

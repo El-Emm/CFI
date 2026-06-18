@@ -112,22 +112,47 @@
     stats.forEach((s) => observer.observe(s));
   }
 
-  /* Global impact map — loads Africa SVG, countries from site-data.js */
-  function bindMapInteractions() {
+  /* Global impact map — loads world SVG with markers, countries from site-data.js */
+  function bindMapInteractions(mapWrap) {
     const storyEl = $('.cfi-map-story__content');
-    const markers = $$('.cfi-map-marker[data-country], .cfi-map-country[data-country]');
     const site = window.CFI_SITE;
-    if (!storyEl || !markers.length || !site) return;
+    const wrap = mapWrap || $('.cfi-map-wrap[data-map-src]');
+    if (!storyEl || !site || !wrap) return;
 
     const galleryBase = (window.cfiTheme && window.cfiTheme.galleryUrl)
       ? window.cfiTheme.galleryUrl
       : (window.location.pathname.includes('/pages/') ? 'gallery.html' : 'pages/gallery.html');
 
+    const svg = wrap.querySelector('svg');
+
+    function getMarkers() {
+      return $$('[data-country]', wrap).filter((el) =>
+        el.classList.contains('cfi-map-marker') || el.classList.contains('cfi-map-country')
+      );
+    }
+
+    function markerKey(el) {
+      return el && el.getAttribute('data-country');
+    }
+
+    function markerPoint(marker) {
+      const x = parseFloat(marker.getAttribute('data-map-x'));
+      const y = parseFloat(marker.getAttribute('data-map-y'));
+      if (!Number.isNaN(x) && !Number.isNaN(y)) return { x, y };
+
+      const transform = marker.getAttribute('transform') || '';
+      const match = transform.match(/translate\(\s*([-\d.]+)(?:[,\s]+([-\d.]+))?\s*\)/);
+      if (!match) return null;
+      return { x: parseFloat(match[1]), y: parseFloat(match[2] || 0) };
+    }
+
     function showStory(key) {
+      if (!key) return;
       const country = site.countries.find((c) => c.id === key);
       const text = site.mapStories[key];
       if (!country || !text) return;
-      markers.forEach((m) => m.classList.toggle('is-active', m.dataset.country === key));
+
+      getMarkers().forEach((m) => m.classList.toggle('is-active', markerKey(m) === key));
       storyEl.innerHTML = `
         <h3 class="cfi-map-story__country">${country.label}</h3>
         <p>${text}</p>
@@ -135,15 +160,87 @@
       `;
     }
 
-    markers.forEach((m) => {
-      m.addEventListener('click', () => showStory(m.dataset.country));
-      m.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          showStory(m.dataset.country);
+    function countryAtPoint(clientX, clientY) {
+      if (!svg) return null;
+
+      const ctm = svg.getScreenCTM();
+      if (!ctm) return null;
+
+      const pt = svg.createSVGPoint();
+      pt.x = clientX;
+      pt.y = clientY;
+      const svgPt = pt.matrixTransform(ctm.inverse());
+
+      let closestKey = null;
+      let closestDist = Infinity;
+
+      getMarkers().forEach((marker) => {
+        const point = markerPoint(marker);
+        if (!point) return;
+
+        const dist = Math.hypot(svgPt.x - point.x, svgPt.y - point.y);
+        const hitRadius = parseFloat(marker.getAttribute('data-hit-r')) || 14;
+        if (dist <= hitRadius && dist < closestDist) {
+          closestDist = dist;
+          closestKey = markerKey(marker);
         }
       });
+
+      return closestKey;
+    }
+
+    if (!wrap.hasAttribute('data-map-bound')) {
+      wrap.setAttribute('data-map-bound', 'true');
+
+      wrap.addEventListener('click', (e) => {
+        const key = countryAtPoint(e.clientX, e.clientY);
+        if (!key) return;
+        e.preventDefault();
+        showStory(key);
+      });
+
+      wrap.addEventListener('touchend', (e) => {
+        const touch = e.changedTouches && e.changedTouches[0];
+        if (!touch) return;
+        const key = countryAtPoint(touch.clientX, touch.clientY);
+        if (!key) return;
+        e.preventDefault();
+        showStory(key);
+      }, { passive: false });
+
+      wrap.addEventListener('mousemove', (e) => {
+        const key = countryAtPoint(e.clientX, e.clientY);
+        getMarkers().forEach((m) => m.classList.toggle('is-hover', markerKey(m) === key));
+        wrap.style.cursor = key ? 'pointer' : 'default';
+      });
+
+      wrap.addEventListener('mouseleave', () => {
+        getMarkers().forEach((m) => m.classList.remove('is-hover'));
+        wrap.style.cursor = 'default';
+      });
+
+      wrap.addEventListener('keydown', (e) => {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        const marker = e.target.closest('[data-country]');
+        if (!marker || !wrap.contains(marker)) return;
+        e.preventDefault();
+        showStory(markerKey(marker));
+      });
+    }
+
+    $$('.cfi-map-legend a[data-country], .cfi-map-legend a[href*="country="]').forEach((link) => {
+      if (link.hasAttribute('data-legend-bound')) return;
+      link.setAttribute('data-legend-bound', 'true');
+      link.addEventListener('click', (e) => {
+        const key = link.getAttribute('data-country')
+          || (link.getAttribute('href') || '').match(/country=([^&]+)/)?.[1];
+        if (!key) return;
+        e.preventDefault();
+        showStory(key);
+      });
     });
+
+    if (!getMarkers().length) return;
 
     showStory('nigeria');
   }
@@ -158,13 +255,15 @@
         if (!res.ok) throw new Error('Map failed to load');
         wrap.innerHTML = await res.text();
         wrap.classList.remove('is-loading');
+        wrap.removeAttribute('aria-busy');
       } catch {
         wrap.classList.remove('is-loading');
+        wrap.removeAttribute('aria-busy');
         wrap.innerHTML = '<p class="cfi-map-story__placeholder">Map unavailable. Use the country links below.</p>';
         return;
       }
     }
-    bindMapInteractions();
+    bindMapInteractions(wrap);
   }
 
   /* Lightbox — shared with dynamic gallery */

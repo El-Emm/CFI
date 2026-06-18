@@ -27,14 +27,14 @@ $map_query         = rawurlencode( '2727 Overlook Dr, Twinsburg, OH 44087' );
 						<div class="cfi-contact-info__icon" aria-hidden="true">✉</div>
 						<div>
 							<h3><?php esc_html_e( 'Email', 'cfi' ); ?></h3>
-							<p><a href="mailto:<?php echo esc_attr( cfi_mod( 'cfi_email' ) ); ?>"><?php echo esc_html( cfi_mod( 'cfi_email' ) ); ?></a></p>
+							<p><a href="mailto:<?php echo esc_attr( cfi_get_email() ); ?>"><?php echo esc_html( cfi_get_email() ); ?></a></p>
 						</div>
 					</div>
 					<div class="cfi-contact-info__item">
 						<div class="cfi-contact-info__icon" aria-hidden="true">☎</div>
 						<div>
 							<h3><?php esc_html_e( 'Phone', 'cfi' ); ?></h3>
-							<?php foreach ( array_filter( array( cfi_mod( 'cfi_phone_1' ), cfi_mod( 'cfi_phone_2' ) ) ) as $phone ) : ?>
+							<?php foreach ( cfi_get_phones() as $phone ) : ?>
 								<p><a href="tel:<?php echo esc_attr( preg_replace( '/\D+/', '', $phone ) ); ?>"><?php echo esc_html( cfi_format_phone( $phone ) ); ?></a></p>
 							<?php endforeach; ?>
 						</div>

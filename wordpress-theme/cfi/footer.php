@@ -44,14 +44,11 @@
 			<div>
 				<h4><?php esc_html_e( 'Contact', 'cfi' ); ?></h4>
 				<ul class="cfi-footer__links">
-					<li><a href="mailto:<?php echo esc_attr( cfi_mod( 'cfi_email' ) ); ?>"><?php echo esc_html( cfi_mod( 'cfi_email' ) ); ?></a></li>
-					<?php if ( $p1 = cfi_mod( 'cfi_phone_1' ) ) : ?>
-						<li><a href="tel:<?php echo esc_attr( preg_replace( '/\D+/', '', $p1 ) ); ?>"><?php echo esc_html( cfi_format_phone( $p1 ) ); ?></a></li>
-					<?php endif; ?>
-					<?php if ( $p2 = cfi_mod( 'cfi_phone_2' ) ) : ?>
-						<li><a href="tel:<?php echo esc_attr( preg_replace( '/\D+/', '', $p2 ) ); ?>"><?php echo esc_html( cfi_format_phone( $p2 ) ); ?></a></li>
-					<?php endif; ?>
-					<li><?php echo esc_html( cfi_mod( 'cfi_address' ) ); ?></li>
+					<li><a href="mailto:<?php echo esc_attr( cfi_get_email() ); ?>"><?php echo esc_html( cfi_get_email() ); ?></a></li>
+					<?php foreach ( cfi_get_phones() as $phone ) : ?>
+						<li><a href="tel:<?php echo esc_attr( preg_replace( '/\D+/', '', $phone ) ); ?>"><?php echo esc_html( cfi_format_phone( $phone ) ); ?></a></li>
+					<?php endforeach; ?>
+					<li><?php echo esc_html( cfi_mod( 'cfi_address', '2727 Overlook Dr, Twinsburg, OH 44087' ) ); ?></li>
 					<li><a href="<?php echo esc_url( cfi_page_url( 'contact' ) ); ?>"><?php esc_html_e( 'Contact Form', 'cfi' ); ?></a></li>
 					<li><a href="<?php echo esc_url( cfi_blog_url() ); ?>"><?php esc_html_e( 'News & Blog', 'cfi' ); ?></a></li>
 				</ul>

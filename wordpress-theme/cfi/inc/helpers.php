@@ -45,6 +45,29 @@ function cfi_blog_url() {
 }
 
 /**
+ * Contact email with Customizer default.
+ */
+function cfi_get_email() {
+	return cfi_mod( 'cfi_email', 'info@charityfaithinternational.org' );
+}
+
+/**
+ * Contact phone numbers with Customizer defaults.
+ *
+ * @return string[]
+ */
+function cfi_get_phones() {
+	return array_values(
+		array_filter(
+			array(
+				cfi_mod( 'cfi_phone_1', '+13309999170' ),
+				cfi_mod( 'cfi_phone_2', '+12163559320' ),
+			)
+		)
+	);
+}
+
+/**
  * Format phone for display.
  */
 function cfi_format_phone( $number ) {

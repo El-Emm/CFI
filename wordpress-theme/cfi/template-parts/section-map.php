@@ -14,7 +14,7 @@ $countries = cfi_get_countries();
 			<p class="cfi-section__lead"><?php esc_html_e( 'Select a country to explore our field work across Africa and Asia. View photos and videos from each nation in our media gallery.', 'cfi' ); ?></p>
 		</header>
 		<div class="cfi-map-section">
-			<div class="cfi-map-wrap is-loading" data-map-src="<?php echo esc_url( cfi_asset( 'images/africa-map.svg' ) ); ?>" aria-busy="true">
+			<div class="cfi-map-wrap is-loading" data-map-src="<?php echo esc_url( cfi_asset( 'images/world-map.svg' ) ); ?>" aria-busy="true">
 				<p class="cfi-map-story__placeholder"><?php esc_html_e( 'Loading map…', 'cfi' ); ?></p>
 			</div>
 			<aside class="cfi-map-story" aria-live="polite">
@@ -28,7 +28,7 @@ $countries = cfi_get_countries();
 			<?php
 			$links = array();
 			foreach ( $countries as $country ) {
-				$links[] = '<a href="' . esc_url( cfi_page_url( 'gallery' ) . '?country=' . $country['id'] ) . '">' . esc_html( $country['label'] ) . '</a>';
+				$links[] = '<a href="' . esc_url( cfi_page_url( 'gallery' ) . '?country=' . $country['id'] ) . '" data-country="' . esc_attr( $country['id'] ) . '">' . esc_html( $country['label'] ) . '</a>';
 			}
 			echo implode( ' · ', $links ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			?>

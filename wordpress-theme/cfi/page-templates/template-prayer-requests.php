@@ -33,9 +33,9 @@ $prayer_shortcode = cfi_mod( 'cfi_prayer_shortcode' );
 						<li><?php esc_html_e( 'Guidance and peace', 'cfi' ); ?></li>
 					</ul>
 					<p><?php esc_html_e( 'You may also call our team directly:', 'cfi' ); ?></p>
-					<?php if ( $p1 = cfi_mod( 'cfi_phone_1' ) ) : ?>
-						<p><a href="tel:<?php echo esc_attr( preg_replace( '/\D+/', '', $p1 ) ); ?>" class="cfi-btn cfi-btn--outline"><?php echo esc_html( cfi_format_phone( $p1 ) ); ?></a></p>
-					<?php endif; ?>
+					<?php foreach ( cfi_get_phones() as $phone ) : ?>
+						<p><a href="tel:<?php echo esc_attr( preg_replace( '/\D+/', '', $phone ) ); ?>" class="cfi-btn cfi-btn--outline"><?php echo esc_html( cfi_format_phone( $phone ) ); ?></a></p>
+					<?php endforeach; ?>
 				</div>
 				<div>
 					<h2><?php esc_html_e( 'Submit Your Request', 'cfi' ); ?></h2>
