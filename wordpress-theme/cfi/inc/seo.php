@@ -25,7 +25,7 @@ function cfi_meta_description() {
 	$description = get_bloginfo( 'description' );
 
 	if ( is_front_page() ) {
-		$description = 'CharityFaith International is a global humanitarian and faith-based nonprofit founded by Evangelist Ebele Philips, serving vulnerable communities through aid, education, widow empowerment, and Christian outreach across nine nations.';
+		$description = 'CharityFaith International is a global humanitarian and faith-based nonprofit founded by Evangelist Ebel Philips, serving vulnerable communities through aid, education, widow empowerment, and Christian outreach across nine nations.';
 	} elseif ( is_page( 'accept-jesus' ) ) {
 		$description = 'Accept Jesus Christ today. Learn the gospel, pray the salvation prayer, and begin your new life in faith with CharityFaith International.';
 	} elseif ( is_page( 'prayer-requests' ) ) {

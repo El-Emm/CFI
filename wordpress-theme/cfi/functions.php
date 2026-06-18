@@ -140,7 +140,7 @@ function cfi_schema_markup() {
 		'email'           => cfi_mod( 'cfi_email', 'info@charityfaithinternational.org' ),
 		'founder'         => array(
 			'@type'    => 'Person',
-			'name'     => 'Evangelist Ebele Philips',
+			'name'     => 'Evangelist Ebel Philips',
 			'jobTitle' => 'Founder',
 		),
 		'address'         => array(

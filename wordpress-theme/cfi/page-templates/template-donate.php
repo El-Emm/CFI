@@ -61,7 +61,7 @@ $give_shortcode = cfi_mod( 'cfi_give_shortcode' );
 						<li><?php esc_html_e( 'US-registered nonprofit with transparent impact', 'cfi' ); ?></li>
 						<li><?php esc_html_e( 'Faith-driven, practically focused humanitarian work', 'cfi' ); ?></li>
 						<li><?php esc_html_e( 'Programs spanning healthcare, education, food, widows & shelter', 'cfi' ); ?></li>
-						<li><?php esc_html_e( 'Founded by Evangelist Ebele Philips', 'cfi' ); ?></li>
+						<li><?php esc_html_e( 'Founded by Evangelist Ebel Philips', 'cfi' ); ?></li>
 					</ul>
 					<img src="<?php echo esc_url( cfi_asset( 'media/featured/hero-2.jpg' ) ); ?>" alt="" width="400" height="260" loading="lazy" style="border-radius:var(--cfi-radius);margin-top:1.5rem;width:100%">
 				</aside>

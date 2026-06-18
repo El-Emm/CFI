@@ -15,7 +15,7 @@ $prayer_shortcode = cfi_mod( 'cfi_prayer_shortcode' );
 		<div class="cfi-container">
 			<span class="cfi-section__label"><?php esc_html_e( 'We Stand With You', 'cfi' ); ?></span>
 			<h1><?php esc_html_e( 'Prayer Requests', 'cfi' ); ?></h1>
-			<p><?php esc_html_e( 'Share what is on your heart. Evangelist Ebele Philips and the CharityFaith International prayer team are believing God with you for healing, breakthrough, salvation, and restoration.', 'cfi' ); ?></p>
+			<p><?php esc_html_e( 'Share what is on your heart. Evangelist Ebel Philips and the CharityFaith International prayer team are believing God with you for healing, breakthrough, salvation, and restoration.', 'cfi' ); ?></p>
 		</div>
 	</header>
 

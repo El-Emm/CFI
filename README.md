@@ -1,6 +1,6 @@
 # CharityFaith International (CFI)
 
-A world-class, modern nonprofit website for **CharityFaith International** — a US-registered humanitarian and faith-based organization founded by **Evangelist Ebele Philips**.
+A world-class, modern nonprofit website for **CharityFaith International** — a US-registered humanitarian and faith-based organization founded by **Evangelist Ebel Philips**.
 
 ## WordPress theme (Truehost → charityfaithinternational.org)
 
@@ -38,7 +38,7 @@ python3 -m http.server 8080
 | Donate | `pages/donate.html` | Fund selection, amounts, payment-ready form |
 | Contact | `pages/contact.html` | Form, contact info, maps placeholder |
 | Gallery | `pages/gallery.html` | Filterable media, lightbox, downloads |
-| Founder | `pages/founder.html` | Evangelist Ebele Philips biography |
+| Founder | `pages/founder.html` | Evangelist Ebel Philips biography |
 | Partners | `pages/partners.html` | Donate, sponsor, volunteer, church & corporate |
 | Blog | `pages/blog.html` | News & impact (WordPress loop ready) |
 

@@ -153,14 +153,14 @@ get_header();
 		<div class="cfi-container">
 			<div class="cfi-founder">
 				<div class="cfi-founder__photo">
-					<img src="<?php echo esc_url( cfi_asset( 'media/featured/founder.jpg' ) ); ?>" alt="<?php esc_attr_e( 'Evangelist Ebele Philips blessing children during a CharityFaith International outreach', 'cfi' ); ?>" width="1500" height="2000" loading="lazy">
+					<img src="<?php echo esc_url( cfi_asset( 'media/featured/founder.jpg' ) ); ?>" alt="<?php esc_attr_e( 'Evangelist Ebel Philips blessing children during a CharityFaith International outreach', 'cfi' ); ?>" width="1500" height="2000" loading="lazy">
 				</div>
 				<div>
 					<span class="cfi-section__label"><?php esc_html_e( 'Leadership', 'cfi' ); ?></span>
-					<h2 id="founder-heading"><?php esc_html_e( 'Meet Evangelist Ebele Philips', 'cfi' ); ?></h2>
-					<p><?php esc_html_e( 'Evangelist Ebele Philips is a faith leader and humanitarian visionary called to serve the poor, the widow, and the fatherless. Her heart for global outreach has shaped CharityFaith International into a trusted channel of compassion and gospel hope.', 'cfi' ); ?></p>
+					<h2 id="founder-heading"><?php esc_html_e( 'Meet Evangelist Ebel Philips', 'cfi' ); ?></h2>
+					<p><?php esc_html_e( 'Evangelist Ebel Philips is a faith leader and humanitarian visionary called to serve the poor, the widow, and the fatherless. Her heart for global outreach has shaped CharityFaith International into a trusted channel of compassion and gospel hope.', 'cfi' ); ?></p>
 					<blockquote class="cfi-founder__quote">&ldquo;<?php esc_html_e( 'God did not call us to pity the vulnerable — He called us to stand with them, restore their dignity, and point them to everlasting hope.', 'cfi' ); ?>&rdquo;</blockquote>
-					<p><?php esc_html_e( 'Through crusades, community development, and hands-on aid, Evangelist Ebele leads CFI with integrity, prayer, and an unwavering commitment to Christ-centered service.', 'cfi' ); ?></p>
+					<p><?php esc_html_e( 'Through crusades, community development, and hands-on aid, Evangelist Ebel leads CFI with integrity, prayer, and an unwavering commitment to Christ-centered service.', 'cfi' ); ?></p>
 					<a href="<?php echo esc_url( cfi_page_url( 'founder' ) ); ?>" class="cfi-btn cfi-btn--dark"><?php esc_html_e( 'Read Full Biography', 'cfi' ); ?></a>
 				</div>
 			</div>

@@ -29,7 +29,7 @@ Ensure nothing blocks the site. Default should allow crawling.
 | Field | Suggested value |
 |-------|-----------------|
 | **Title** | CharityFaith International \| Faith, Compassion & Humanitarian Aid |
-| **Description** | CharityFaith International is a global faith-based nonprofit founded by Evangelist Ebele Philips — healthcare, education, food relief, widow empowerment, and Christian outreach in 9 nations. |
+| **Description** | CharityFaith International is a global faith-based nonprofit founded by Evangelist Ebel Philips — healthcare, education, food relief, widow empowerment, and Christian outreach in 9 nations. |
 
 ### Titles & Meta → Pages
 Set unique titles and descriptions for key pages:
@@ -40,7 +40,7 @@ Set unique titles and descriptions for key pages:
 | Prayer Requests | prayer request, faith prayer team |
 | Donate | donate nonprofit, humanitarian giving |
 | Media Gallery | CFI photos, mission gallery, Africa outreach |
-| Founder | Evangelist Ebele Philips, CFI founder |
+| Founder | Evangelist Ebel Philips, CFI founder |
 | Contact | contact CharityFaith International |
 
 ### Sitemap
