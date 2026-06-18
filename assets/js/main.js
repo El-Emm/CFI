@@ -112,10 +112,10 @@
     stats.forEach((s) => observer.observe(s));
   }
 
-  /* Global impact map — countries from site-data.js */
-  function initMap() {
+  /* Global impact map — loads Africa SVG, countries from site-data.js */
+  function bindMapInteractions() {
     const storyEl = $('.cfi-map-story__content');
-    const markers = $$('.cfi-map-marker[data-country]');
+    const markers = $$('.cfi-map-marker[data-country], .cfi-map-country[data-country]');
     const site = window.CFI_SITE;
     if (!storyEl || !markers.length || !site) return;
 
@@ -146,6 +146,25 @@
     });
 
     showStory('nigeria');
+  }
+
+  async function initMap() {
+    const wrap = $('.cfi-map-wrap[data-map-src]');
+    if (wrap) {
+      const src = wrap.dataset.mapSrc;
+      wrap.classList.add('is-loading');
+      try {
+        const res = await fetch(src);
+        if (!res.ok) throw new Error('Map failed to load');
+        wrap.innerHTML = await res.text();
+        wrap.classList.remove('is-loading');
+      } catch {
+        wrap.classList.remove('is-loading');
+        wrap.innerHTML = '<p class="cfi-map-story__placeholder">Map unavailable. Use the country links below.</p>';
+        return;
+      }
+    }
+    bindMapInteractions();
   }
 
   /* Lightbox — shared with dynamic gallery */

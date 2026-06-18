@@ -296,16 +296,15 @@ body.cfi-theme .cfi-hero__content .cfi-hero__sub {
 
 .cfi-header__cta,
 .cfi-header__donate {
-  display: inline-flex;
-  font-size: clamp(0.75rem, 2vw, 0.9375rem);
-  padding: 0.625rem 1rem;
+  display: none;
+  font-size: 0.9375rem;
+  padding: 0.75rem 1.5rem;
   white-space: nowrap;
 }
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .cfi-header__cta,
   .cfi-header__donate {
-    padding: 0.75rem 1.5rem;
-    font-size: 0.9375rem;
+    display: inline-flex;
   }
 }
 
@@ -609,14 +608,35 @@ body.cfi-theme .cfi-hero__content .cfi-hero__sub {
 .cfi-map-wrap {
   background: var(--cfi-white);
   border-radius: var(--cfi-radius-lg);
-  padding: 1.5rem;
+  padding: 1rem;
   box-shadow: var(--cfi-shadow);
   position: relative;
+  min-height: 280px;
+}
+
+.cfi-map-wrap.is-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cfi-grey);
+  font-style: italic;
 }
 
 .cfi-map-svg {
   width: 100%;
   height: auto;
+  display: block;
+}
+
+.cfi-map-country {
+  cursor: pointer;
+  transition: fill 0.2s ease, stroke 0.2s ease, opacity 0.2s ease;
+}
+.cfi-map-country:hover,
+.cfi-map-country.is-active {
+  fill: var(--cfi-orange-dark);
+  stroke: var(--cfi-green);
+  stroke-width: 2.5;
 }
 
 .cfi-map-marker {
@@ -843,8 +863,10 @@ body.cfi-theme .cfi-hero__content .cfi-hero__sub {
 .cfi-footer__logo {
   height: 72px;
   width: auto;
+  max-width: 140px;
   margin-bottom: 1rem;
-  filter: brightness(0) invert(1);
+  display: block;
+  object-fit: contain;
 }
 
 .cfi-footer h4 {

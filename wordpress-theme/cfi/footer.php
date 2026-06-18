@@ -9,7 +9,7 @@
 	<div class="cfi-container">
 		<div class="cfi-footer__grid">
 			<div class="cfi-footer__brand">
-				<img src="<?php echo esc_url( cfi_asset( 'images/cfi-logo.png' ) ); ?>" alt="" class="cfi-footer__logo" width="120" height="72">
+				<img src="<?php echo esc_url( cfi_asset( 'images/cfi-logo.png' ) ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" class="cfi-footer__logo" width="120" height="72">
 				<p><?php echo esc_html( get_bloginfo( 'description' ) ); ?></p>
 				<div class="cfi-footer__social" aria-label="<?php esc_attr_e( 'Social media', 'cfi' ); ?>">
 					<?php if ( $fb = cfi_mod( 'cfi_facebook' ) ) : ?>
