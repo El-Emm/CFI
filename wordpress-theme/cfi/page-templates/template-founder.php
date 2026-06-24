@@ -52,6 +52,8 @@ get_header();
 		</div>
 	</section>
 
+	<?php get_template_part( 'template-parts/section', 'team' ); ?>
+
 	<section class="cfi-section cfi-section--ivory">
 		<div class="cfi-container cfi-text-center">
 			<h2><?php esc_html_e( 'Support the Vision', 'cfi' ); ?></h2>

@@ -186,6 +186,48 @@ function cfi_get_programs() {
 }
 
 /**
+ * Leadership profiles for homepage slider.
+ *
+ * @return array<int, array<string, mixed>>
+ */
+function cfi_get_leadership_profiles() {
+	return array(
+		array(
+			'id'         => 'ebel-philips',
+			'photo'      => 'media/featured/founder.jpg',
+			'photo_alt'  => __( 'Evangelist Ebel Philips blessing children during a CharityFaith International outreach', 'cfi' ),
+			'heading'    => __( 'Meet Evangelist Ebel Philips', 'cfi' ),
+			'paragraphs' => array(
+				__( 'Evangelist Ebel Philips is a faith leader and humanitarian visionary called to serve the poor, the widow, and the fatherless. Her heart for global outreach has shaped CharityFaith International into a trusted channel of compassion and gospel hope.', 'cfi' ),
+				__( 'Through crusades, community development, and hands-on aid, Evangelist Ebel leads CFI with integrity, prayer, and an unwavering commitment to Christ-centered service.', 'cfi' ),
+			),
+			'quote'      => __( 'God did not call us to pity the vulnerable — He called us to stand with them, restore their dignity, and point them to everlasting hope.', 'cfi' ),
+			'quote_after'=> 0,
+			'cta'        => array(
+				'label' => __( 'Read Full Biography', 'cfi' ),
+				'url'   => cfi_page_url( 'founder' ),
+			),
+		),
+		array(
+			'id'         => 'uchenna-ojukwu',
+			'photo'      => 'media/featured/team-uchenna-ojukwu.png',
+			'photo_alt'  => __( 'Dr. Uchenna Collins Ojukwu', 'cfi' ),
+			'heading'    => __( 'Meet Dr. Uchenna Collins Ojukwu', 'cfi' ),
+			'paragraphs' => array(
+				__( 'Dr. Uchenna Collins Ojukwu is a Pastor, medical professional, public health advocate, and humanitarian leader committed to advancing both spiritual and physical well-being. He serves with Charity Faith International, where he promotes evangelism, discipleship, medical missions, and community outreach.', 'cfi' ),
+				__( 'As a researcher, author, and scientific reviewer, he has contributed to numerous peer-reviewed publications in public health and infectious diseases. He has led medical missions and humanitarian programs among underserved communities across different nations.', 'cfi' ),
+			),
+			'quote'      => __( 'Hope and healing belong together — we serve Christ by caring for the whole person, body and soul.', 'cfi' ),
+			'quote_after'=> 0,
+			'cta'        => array(
+				'label' => __( 'Meet Our Team', 'cfi' ),
+				'url'   => cfi_page_url( 'founder' ) . '#team',
+			),
+		),
+	);
+}
+
+/**
  * Nav link active class helper.
  */
 function cfi_nav_active( $slug ) {

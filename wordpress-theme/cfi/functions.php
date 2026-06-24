@@ -7,11 +7,13 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'CFI_VERSION', '1.1.2' );
+define( 'CFI_VERSION', '1.3.0' );
 
 require get_template_directory() . '/inc/helpers.php';
 require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/theme-setup.php';
+require get_template_directory() . '/inc/stories.php';
+require get_template_directory() . '/inc/gallery.php';
 require get_template_directory() . '/inc/seo.php';
 
 /**
@@ -96,28 +98,18 @@ function cfi_enqueue_assets() {
 		'before'
 	);
 
-	wp_localize_script(
-		'cfi-main',
-		'cfiTheme',
-		array(
-			'homeUrl'     => home_url( '/' ),
-			'themeUri'    => $uri,
-			'galleryUrl'  => cfi_page_url( 'gallery' ),
-			'galleryJson' => $uri . '/assets/data/gallery.json',
-		)
+	$gallery_localize = array(
+		'homeUrl'     => home_url( '/' ),
+		'themeUri'    => $uri,
+		'galleryUrl'  => cfi_page_url( 'gallery' ),
+		'galleryApi'  => rest_url( 'cfi/v1/gallery' ),
+		'galleryJson' => $uri . '/assets/data/gallery.json',
 	);
 
+	wp_localize_script( 'cfi-main', 'cfiTheme', $gallery_localize );
+
 	if ( wp_script_is( 'cfi-gallery', 'enqueued' ) ) {
-		wp_localize_script(
-			'cfi-gallery',
-			'cfiTheme',
-			array(
-				'homeUrl'     => home_url( '/' ),
-				'themeUri'    => $uri,
-				'galleryUrl'  => cfi_page_url( 'gallery' ),
-				'galleryJson' => $uri . '/assets/data/gallery.json',
-			)
-		);
+		wp_localize_script( 'cfi-gallery', 'cfiTheme', $gallery_localize );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'cfi_enqueue_assets' );

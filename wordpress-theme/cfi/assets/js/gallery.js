@@ -22,9 +22,18 @@
   const base = (window.cfiTheme && window.cfiTheme.themeUri)
     ? window.cfiTheme.themeUri
     : (isSubpage ? '..' : '.');
-  const manifestPath = (window.cfiTheme && window.cfiTheme.galleryJson)
-    ? window.cfiTheme.galleryJson
-    : `${base}/assets/data/gallery.json`;
+
+  const manifestPath = (window.cfiTheme && window.cfiTheme.galleryApi)
+    ? window.cfiTheme.galleryApi
+    : ((window.cfiTheme && window.cfiTheme.galleryJson)
+      ? window.cfiTheme.galleryJson
+      : `${base}/assets/data/gallery.json`);
+
+  let allItems = [];
+  let countries = [];
+  let categories = [];
+  let activeCountry = 'all';
+  let activeCategory = 'all';
 
   function resolveAsset(path) {
     if (!path || path.startsWith('http')) return path;
@@ -34,92 +43,173 @@
     return `${base}/${path}`;
   }
 
-  let activeCountry = 'all';
-  let activeCategory = 'all';
-
-  function formatPhone(num) {
-    const d = num.replace(/\D/g, '');
-    if (d.length === 11 && d.startsWith('1')) {
-      return `+1 (${d.slice(1, 4)}) ${d.slice(4, 7)}-${d.slice(7)}`;
-    }
-    return num;
+  function countItems(filterCountry, filterCategory) {
+    return allItems.filter((item) => {
+      const countryOk = filterCountry === 'all' || item.country === filterCountry;
+      const catOk = filterCategory === 'all' || item.category === filterCategory;
+      return countryOk && catOk;
+    }).length;
   }
 
-  function renderCountries(countries, counts) {
+  function countryCounts() {
+    const counts = {};
+    countries.forEach((c) => {
+      counts[c.id] = countItems(c.id, activeCategory);
+    });
+    return counts;
+  }
+
+  function categoryCounts() {
+    const counts = {};
+    categories.forEach((cat) => {
+      counts[cat] = countItems(activeCountry, cat);
+    });
+    return counts;
+  }
+
+  function updateMetaBar() {
+    const meta = $('#cfi-gallery-meta');
+    if (!meta) return;
+
+    const visible = countItems(activeCountry, activeCategory);
+    const parts = [];
+
+    if (activeCountry !== 'all') {
+      const country = countries.find((c) => c.id === activeCountry);
+      parts.push(country ? country.label : activeCountry);
+    }
+    if (activeCategory !== 'all') {
+      parts.push(CATEGORY_LABELS[activeCategory] || activeCategory);
+    }
+
+    const summary = parts.length
+      ? parts.join(' · ')
+      : 'All countries & programs';
+
+    meta.innerHTML = `
+      <p class="cfi-gallery-meta__summary">
+        <strong>${visible}</strong> ${visible === 1 ? 'item' : 'items'}
+        <span class="cfi-gallery-meta__filters">${summary}</span>
+      </p>
+      ${(activeCountry !== 'all' || activeCategory !== 'all')
+        ? '<button type="button" class="cfi-gallery-meta__clear" id="cfi-gallery-clear">Clear filters</button>'
+        : ''}`;
+    $('#cfi-gallery-clear')?.addEventListener('click', clearFilters);
+  }
+
+  function renderCountries() {
     const grid = $('#cfi-countries-grid');
     if (!grid) return;
 
-    grid.innerHTML = countries.map((c) => {
-      const count = counts[c.id] || 0;
-      return `
-        <button type="button" class="cfi-country-card" data-country="${c.id}" aria-pressed="false">
+    const counts = countryCounts();
+    const totalAll = countItems('all', activeCategory);
+
+    grid.innerHTML = `
+      <button type="button" class="cfi-country-card${activeCountry === 'all' ? ' is-active' : ''}"
+        data-country="all" aria-pressed="${activeCountry === 'all'}">
+        <span class="cfi-country-card__name">All Countries</span>
+        <span class="cfi-country-card__count">${totalAll} media</span>
+      </button>
+      ${countries.map((c) => {
+        const count = counts[c.id] || 0;
+        const active = activeCountry === c.id;
+        return `
+        <button type="button" class="cfi-country-card${active ? ' is-active' : ''}${count === 0 ? ' is-empty' : ''}"
+          data-country="${c.id}" aria-pressed="${active}" ${count === 0 ? 'disabled' : ''}>
           <span class="cfi-country-card__name">${c.label}</span>
           <span class="cfi-country-card__count">${count} media</span>
         </button>`;
-    }).join('');
+      }).join('')}`;
 
     $$('.cfi-country-card', grid).forEach((btn) => {
       btn.addEventListener('click', () => {
-        const id = btn.dataset.country;
-        const next = activeCountry === id ? 'all' : id;
-        setCountryFilter(next);
-        if (next !== 'all') scrollToGrid();
+        if (btn.disabled) return;
+        setCountryFilter(btn.dataset.country);
+        scrollToGrid();
       });
     });
   }
 
-  function renderFilters(countries, categories) {
-    const countryFilters = $('#cfi-country-filters');
+  function renderCategoryFilters() {
     const catFilters = $('#cfi-category-filters');
+    if (!catFilters) return;
 
-    if (countryFilters) {
-      countryFilters.innerHTML = `
-        <button type="button" class="cfi-filter-btn cfi-country-filter is-active" data-filter="all">All Countries</button>
-        ${countries.map((c) => `<button type="button" class="cfi-filter-btn cfi-country-filter" data-filter="${c.id}">${c.label}</button>`).join('')}
-      `;
-      $$('.cfi-country-filter', countryFilters).forEach((btn) => {
-        btn.addEventListener('click', () => {
-          setCountryFilter(btn.dataset.filter);
-          syncCountryCards(btn.dataset.filter);
-        });
-      });
-    }
+    const counts = categoryCounts();
+    const totalAll = countItems(activeCountry, 'all');
 
-    if (catFilters) {
-      catFilters.innerHTML = `
-        <button type="button" class="cfi-filter-btn cfi-category-filter is-active" data-filter="all">All Programs</button>
-        ${categories.map((c) => `<button type="button" class="cfi-filter-btn cfi-category-filter" data-filter="${c}">${CATEGORY_LABELS[c] || c}</button>`).join('')}
-      `;
-      $$('.cfi-category-filter', catFilters).forEach((btn) => {
-        btn.addEventListener('click', () => setCategoryFilter(btn.dataset.filter));
+    catFilters.innerHTML = `
+      <button type="button" class="cfi-filter-btn cfi-category-filter${activeCategory === 'all' ? ' is-active' : ''}"
+        data-filter="all">All Programs <span class="cfi-filter-btn__count">(${totalAll})</span></button>
+      ${categories.map((cat) => {
+        const count = counts[cat] || 0;
+        const active = activeCategory === cat;
+        return `<button type="button" class="cfi-filter-btn cfi-category-filter${active ? ' is-active' : ''}${count === 0 ? ' is-empty' : ''}"
+          data-filter="${cat}" ${count === 0 ? 'disabled' : ''}>${CATEGORY_LABELS[cat] || cat}
+          <span class="cfi-filter-btn__count">(${count})</span></button>`;
+      }).join('')}`;
+
+    $$('.cfi-category-filter', catFilters).forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (btn.disabled) return;
+        setCategoryFilter(btn.dataset.filter);
       });
-    }
+    });
   }
 
-  function syncCountryCards(id) {
-    $$('.cfi-country-card').forEach((b) => {
-      const on = id !== 'all' && b.dataset.country === id;
-      b.classList.toggle('is-active', on);
-      b.setAttribute('aria-pressed', on ? 'true' : 'false');
-    });
+  function refreshFilters() {
+    renderCountries();
+    renderCategoryFilters();
+    updateMetaBar();
   }
 
   function setCountryFilter(id) {
     activeCountry = id;
-    $$('.cfi-country-filter').forEach((b) => b.classList.toggle('is-active', b.dataset.filter === id));
-    syncCountryCards(id);
+    if (activeCategory !== 'all' && countItems(id, activeCategory) === 0) {
+      activeCategory = 'all';
+    }
+    syncUrl();
+    refreshFilters();
     applyFilters();
   }
 
   function setCategoryFilter(id) {
     activeCategory = id;
-    $$('.cfi-category-filter').forEach((b) => b.classList.toggle('is-active', b.dataset.filter === id));
+    if (activeCountry !== 'all' && countItems(activeCountry, id) === 0) {
+      activeCountry = 'all';
+    }
+    syncUrl();
+    refreshFilters();
     applyFilters();
+  }
+
+  function clearFilters() {
+    activeCountry = 'all';
+    activeCategory = 'all';
+    syncUrl();
+    refreshFilters();
+    applyFilters();
+  }
+
+  function syncUrl() {
+    const params = new URLSearchParams();
+    if (activeCountry !== 'all') params.set('country', activeCountry);
+    if (activeCategory !== 'all') params.set('program', activeCategory);
+    const query = params.toString();
+    const next = `${window.location.pathname}${query ? `?${query}` : ''}`;
+    window.history.replaceState({}, '', next);
   }
 
   function renderGallery(items) {
     const grid = $('#cfi-gallery-grid');
     if (!grid) return;
+
+    allItems = items;
+
+    if (!items.length) {
+      grid.innerHTML = '';
+      applyFilters();
+      return;
+    }
 
     grid.innerHTML = items.map((item) => {
       const thumbSrc = resolveAsset(item.thumb);
@@ -141,6 +231,7 @@
     }).join('');
 
     window.CFI_initLightbox?.();
+    refreshFilters();
     applyFilters();
   }
 
@@ -151,20 +242,24 @@
       const countryOk = activeCountry === 'all' || item.dataset.country === activeCountry;
       const catOk = activeCategory === 'all' || item.dataset.category === activeCategory;
       const show = countryOk && catOk;
-      item.style.display = show ? '' : 'none';
+      item.hidden = !show;
       if (show) visible += 1;
     });
     const empty = $('#cfi-gallery-empty');
     if (empty) empty.hidden = visible > 0;
+    updateMetaBar();
   }
 
   function scrollToGrid() {
-    $('#cfi-gallery-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    $('#cfi-gallery-toolbar')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  function readUrlCountry() {
+  function readUrlFilters() {
     const params = new URLSearchParams(window.location.search);
-    return params.get('country');
+    const country = params.get('country');
+    const program = params.get('program') || params.get('category');
+    if (country) activeCountry = country;
+    if (program) activeCategory = program;
   }
 
   async function init() {
@@ -173,20 +268,14 @@
 
     try {
       const res = await fetch(manifestPath);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      const items = data.gallery || [];
 
-      const counts = {};
-      items.forEach((item) => {
-        counts[item.country] = (counts[item.country] || 0) + 1;
-      });
+      countries = data.countries || [];
+      categories = data.categories || [];
 
-      renderCountries(data.countries || [], counts);
-      renderFilters(data.countries || [], data.categories || []);
-      renderGallery(items);
-
-      const urlCountry = readUrlCountry();
-      if (urlCountry) setCountryFilter(urlCountry);
+      readUrlFilters();
+      renderGallery(data.gallery || []);
     } catch (err) {
       grid.innerHTML = '<p class="cfi-gallery-error">Unable to load gallery. Please refresh the page.</p>';
       console.error(err);

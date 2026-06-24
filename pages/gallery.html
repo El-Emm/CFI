@@ -18,7 +18,12 @@
       <a href="../index.html" class="cfi-logo"><img src="../assets/images/cfi-logo.png" alt="CharityFaith International logo" class="cfi-logo__img" width="120" height="56"><span class="cfi-logo__text">CharityFaith International</span></a>
       <nav class="cfi-nav" aria-label="Primary navigation">
         <a href="../index.html" class="cfi-nav__link">Home</a>
+        <a href="../index.html#mission" class="cfi-nav__link">Mission</a>
+        <a href="../index.html#programs" class="cfi-nav__link">Programs</a>
+        <a href="../index.html#impact" class="cfi-nav__link">Impact</a>
+        <a href="prayer-requests.html" class="cfi-nav__link">Prayer Requests</a>
         <a href="gallery.html" class="cfi-nav__link is-active">Media</a>
+        <a href="founder.html" class="cfi-nav__link">Founder</a>
         <a href="blog.html" class="cfi-nav__link">News</a>
         <a href="contact.html" class="cfi-nav__link">Contact</a>
       </nav>
@@ -30,7 +35,14 @@
   </header>
   <nav id="mobile-nav" class="cfi-mobile-nav" hidden aria-label="Mobile navigation">
     <a href="../index.html" class="cfi-mobile-nav__link">Home</a>
-    <a href="gallery.html" class="cfi-mobile-nav__link">Gallery</a>
+    <a href="prayer-requests.html" class="cfi-mobile-nav__link">Prayer Requests</a>
+    <a href="../index.html#programs" class="cfi-mobile-nav__link">Programs</a>
+    <a href="gallery.html" class="cfi-mobile-nav__link">Media Gallery</a>
+    <a href="founder.html" class="cfi-mobile-nav__link">Founder</a>
+    <a href="partners.html" class="cfi-mobile-nav__link">Partner With Us</a>
+    <a href="blog.html" class="cfi-mobile-nav__link">News &amp; Impact</a>
+    <a href="contact.html" class="cfi-mobile-nav__link">Contact</a>
+    <a href="donate.html" class="cfi-mobile-nav__link">Donate</a>
     <a href="accept-jesus.html" class="cfi-btn cfi-btn--primary" style="margin-top:1.5rem;width:100%">Accept Jesus Today</a>
   </nav>
 
@@ -42,26 +54,20 @@
       </div>
     </header>
 
-    <section class="cfi-section cfi-section--ivory">
-      <div class="cfi-container">
-        <header class="cfi-section__header">
-          <span class="cfi-section__label">Global Field Work</span>
-          <h2>Countries We Serve</h2>
-          <p class="cfi-section__lead">Select a country to filter photos and videos from that region. Country tags can be updated in WordPress as new field reports arrive.</p>
-        </header>
-        <div id="cfi-countries-grid" class="cfi-countries-grid" aria-label="Countries served"></div>
-      </div>
-    </section>
-
     <section class="cfi-section">
       <div class="cfi-container">
-        <div class="cfi-gallery-filters cfi-gallery-filters--row">
-          <span class="cfi-gallery-filters__label">Filter by country</span>
-          <div id="cfi-country-filters" class="cfi-gallery-filters" role="tablist" aria-label="Filter by country"></div>
-        </div>
-        <div class="cfi-gallery-filters cfi-gallery-filters--row">
-          <span class="cfi-gallery-filters__label">Filter by program</span>
-          <div id="cfi-category-filters" class="cfi-gallery-filters" role="tablist" aria-label="Filter by program"></div>
+        <div id="cfi-gallery-toolbar" class="cfi-gallery-toolbar">
+          <header class="cfi-section__header">
+            <span class="cfi-section__label">Browse by Location</span>
+            <h2>Filter Field Media</h2>
+            <p class="cfi-section__lead">Choose a country and program to view photos and videos from that outreach. Counts update as you filter.</p>
+          </header>
+          <div id="cfi-countries-grid" class="cfi-countries-grid" aria-label="Countries served"></div>
+          <div class="cfi-gallery-filters cfi-gallery-filters--row">
+            <span class="cfi-gallery-filters__label">Program / cause</span>
+            <div id="cfi-category-filters" class="cfi-gallery-filters" role="tablist" aria-label="Filter by program"></div>
+          </div>
+          <div id="cfi-gallery-meta" class="cfi-gallery-meta" aria-live="polite"></div>
         </div>
 
         <div id="cfi-gallery-grid" class="cfi-gallery-grid" data-wp-block="cfi/media-gallery" aria-live="polite">

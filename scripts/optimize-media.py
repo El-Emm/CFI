@@ -133,18 +133,19 @@ def process_building_houses(gallery_items: list) -> list:
         src = BUILDING_HOUSE_DIR / name
         country = COUNTRIES[i % len(COUNTRIES)]
         slug = f"cfi-building-{slugify_filename(name)}"
-        thumb = OUT / "gallery" / "building-houses" / "thumb" / f"{slug}.jpg"
-        full = OUT / "gallery" / "building-houses" / "full" / f"{slug}.jpg"
+        category = "building-houses"
+        thumb = OUT / "gallery" / country / category / "thumb" / f"{slug}.jpg"
+        full = OUT / "gallery" / country / category / "full" / f"{slug}.jpg"
         save_variant(src, thumb, THUMB_W)
         save_variant(src, full, FULL_W)
         gallery_items.append({
             "id": slug,
             "country": country,
             "countryLabel": COUNTRY_LABELS[country],
-            "category": "building-houses",
+            "category": category,
             "type": "image",
-            "thumb": f"assets/media/gallery/building-houses/thumb/{slug}.jpg",
-            "src": f"assets/media/gallery/building-houses/full/{slug}.jpg",
+            "thumb": f"assets/media/gallery/{country}/{category}/thumb/{slug}.jpg",
+            "src": f"assets/media/gallery/{country}/{category}/full/{slug}.jpg",
             "alt": f"CharityFaith International — building houses for folks in {COUNTRY_LABELS[country]}",
             "source": name,
         })
@@ -174,8 +175,8 @@ def main() -> None:
         category = CATEGORIES[i % len(CATEGORIES)]
         src = SRC / name
         slug = Path(name).stem.lower().replace("img-", "cfi-")
-        thumb = OUT / "gallery" / country / "thumb" / f"{slug}.jpg"
-        full = OUT / "gallery" / country / "full" / f"{slug}.jpg"
+        thumb = OUT / "gallery" / country / category / "thumb" / f"{slug}.jpg"
+        full = OUT / "gallery" / country / category / "full" / f"{slug}.jpg"
         save_variant(src, thumb, THUMB_W)
         save_variant(src, full, FULL_W)
         gallery_items.append({
@@ -184,8 +185,8 @@ def main() -> None:
             "countryLabel": COUNTRY_LABELS[country],
             "category": category,
             "type": "image",
-            "thumb": f"assets/media/gallery/{country}/thumb/{slug}.jpg",
-            "src": f"assets/media/gallery/{country}/full/{slug}.jpg",
+            "thumb": f"assets/media/gallery/{country}/{category}/thumb/{slug}.jpg",
+            "src": f"assets/media/gallery/{country}/{category}/full/{slug}.jpg",
             "alt": f"CharityFaith International {COUNTRY_LABELS[country]} — {category.replace('-', ' ')}",
             "source": name,
         })
@@ -240,13 +241,14 @@ def main() -> None:
         slug = f"cfi-video-{i + 1}"
         dest = vid_out / f"{slug}.mp4"
         shutil.copy2(src, dest)
+        thumb_ref = gallery_items[i % len(gallery_items)]["thumb"] if gallery_items else ""
         video_items.append({
             "id": slug,
             "country": country,
             "countryLabel": COUNTRY_LABELS[country],
             "category": category,
             "type": "video",
-            "thumb": gallery_items[i % len(gallery_items)]["thumb"] if gallery_items else "",
+            "thumb": thumb_ref,
             "src": f"assets/media/videos/{slug}.mp4",
             "alt": f"CharityFaith International field video — {COUNTRY_LABELS[country]}",
             "source": src.name,

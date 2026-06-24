@@ -89,6 +89,14 @@ function cfi_create_pages_on_activation() {
 	update_option( 'cfi_pages_created', 1 );
 	update_option( 'cfi_pages_version', CFI_PAGES_VERSION );
 
+	if ( function_exists( 'cfi_seed_story_posts' ) ) {
+		cfi_seed_story_posts();
+	}
+
+	if ( function_exists( 'cfi_seed_gallery_media' ) ) {
+		cfi_seed_gallery_media();
+	}
+
 	/* Default site text */
 	if ( ! get_option( 'blogdescription' ) || 'Just another WordPress site' === get_option( 'blogdescription' ) ) {
 		update_option( 'blogdescription', 'Transforming Lives Through Faith, Compassion, and Action' );

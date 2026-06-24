@@ -381,6 +381,59 @@
     });
   }
 
+  /* Leadership slider */
+  function initLeadershipSlider() {
+    const slider = $('[data-leadership-slider]');
+    if (!slider) return;
+
+    const slides = $$('.cfi-founder-slider__slide', slider);
+    const dots = $$('.cfi-founder-slider__dot', slider);
+    const prev = $('.cfi-founder-slider__arrow--prev', slider);
+    const next = $('.cfi-founder-slider__arrow--next', slider);
+    if (!slides.length) return;
+
+    let current = 0;
+    let timer;
+
+    function goTo(index) {
+      current = (index + slides.length) % slides.length;
+      slides.forEach((slide, i) => {
+        const active = i === current;
+        slide.classList.toggle('is-active', active);
+        slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('is-active', i === current);
+        dot.setAttribute('aria-selected', i === current ? 'true' : 'false');
+      });
+    }
+
+    function startAutoplay() {
+      clearInterval(timer);
+      timer = setInterval(() => goTo(current + 1), 8000);
+    }
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        goTo(i);
+        startAutoplay();
+      });
+    });
+
+    prev?.addEventListener('click', () => {
+      goTo(current - 1);
+      startAutoplay();
+    });
+
+    next?.addEventListener('click', () => {
+      goTo(current + 1);
+      startAutoplay();
+    });
+
+    goTo(0);
+    startAutoplay();
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     initHeader();
     initHero();
@@ -390,5 +443,6 @@
     initDonate();
     initContact();
     initPrayer();
+    initLeadershipSlider();
   });
 })();

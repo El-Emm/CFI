@@ -161,10 +161,49 @@ Test:
 - [ ] Impact counters animate
 - [ ] Map country clicks → gallery filter links
 - [ ] Gallery filters (country + program) and lightbox
-- [ ] Contact form sends email
-- [ ] Donation form (test mode) works
-- [ ] Mobile menu
-- [ ] Founder photo displays correctly
+
+---
+
+## Part 6b — Uploading field photos & videos (Media Gallery)
+
+The theme adds **Field Media** in the WordPress admin (`Field Media` in the left menu). Each item is tagged with a **Country** and **Program / Cause**, which powers the filters on the Media Gallery page.
+
+### Add a photo
+
+1. Go to **Field Media → Add Media**
+2. Enter a short title (used for accessibility / alt text)
+3. Set **Featured Image** — this is the image shown in the gallery grid
+4. Under **Countries**, select one country (e.g. Zimbabwe)
+5. Under **Programs / Causes**, select one program (e.g. Crusades, Food Distribution)
+6. Leave **Media type** as **Image**
+7. Click **Publish**
+
+### Add a video
+
+1. **Field Media → Add Media**
+2. Set **Featured Image** — poster frame shown in the grid (required)
+3. Choose **Country** and **Program / Cause**
+4. Set **Media type** to **Video**
+5. Click **Select / Upload Video** and choose an MP4 from the Media Library (or upload a new one)
+6. **Publish**
+
+### Tips
+
+- One country + one program per item keeps filters accurate
+- After publishing, open **Media Gallery** on the site — filters update immediately (no zip re-upload needed)
+- On first theme activation, existing bundled photos are imported automatically into Field Media
+- To hide an item, move it to **Trash** or switch to **Draft**
+
+### Folder layout (developers / bulk imports)
+
+When regenerating assets locally with `python3 scripts/optimize-media.py`, images are stored as:
+
+```
+assets/media/gallery/{country}/{program}/thumb/
+assets/media/gallery/{country}/{program}/full/
+```
+
+Videos remain in `assets/media/videos/`. The manifest is written to `assets/data/gallery.json`.
 
 ---
 
@@ -196,7 +235,7 @@ Test:
 | Issue | Fix |
 |-------|-----|
 | **White screen** | Enable `WP_DEBUG` in `wp-config.php`; check PHP version ≥ 7.4 in cPanel |
-| **Gallery empty** | Confirm `wp-content/themes/cfi/assets/data/gallery.json` exists; check browser console |
+| **Gallery empty** | Open browser devtools → Network; confirm `/wp-json/cfi/v1/gallery` returns items. Re-save permalinks. Check Field Media posts are **Published** with Country + Program assigned. |
 | **Styles missing** | Re-activate theme; clear LiteSpeed/cache plugin |
 | **Upload zip too large** | Increase `upload_max_filesize` in cPanel → MultiPHP INI, or upload via FTP |
 | **Emails not sending** | Configure WP Mail SMTP with Gmail or SendGrid |
