@@ -93,8 +93,8 @@ function cfi_create_pages_on_activation() {
 		cfi_seed_story_posts();
 	}
 
-	if ( function_exists( 'cfi_seed_gallery_media' ) ) {
-		cfi_seed_gallery_media();
+	if ( function_exists( 'cfi_seed_gallery_terms' ) ) {
+		cfi_seed_gallery_terms();
 	}
 
 	/* Default site text */

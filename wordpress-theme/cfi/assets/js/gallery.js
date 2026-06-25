@@ -13,9 +13,8 @@
     food: 'Food Distribution',
     education: 'Education',
     healthcare: 'Healthcare',
-    widow: 'Widow Empowerment',
+    'widow': 'Widow Empowerment',
     shelter: 'Shelter',
-    'building-houses': 'Building Houses for Folks',
   };
 
   const isSubpage = window.location.pathname.includes('/pages/');

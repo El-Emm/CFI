@@ -1,13 +1,13 @@
 <?php
 /**
- * Field media gallery — CPT, taxonomies, REST manifest, and seeding.
+ * Field media gallery — CPT, taxonomies, REST manifest, and admin uploads.
  *
  * @package CFI
  */
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'CFI_GALLERY_VERSION', 1 );
+define( 'CFI_GALLERY_VERSION', 3 );
 
 /**
  * Program / cause slugs used by the public gallery filters.
@@ -16,14 +16,13 @@ define( 'CFI_GALLERY_VERSION', 1 );
  */
 function cfi_get_gallery_programs() {
 	return array(
-		'outreach'         => __( 'Community Outreach', 'cfi' ),
-		'crusades'         => __( 'Crusades', 'cfi' ),
-		'food'             => __( 'Food Distribution', 'cfi' ),
-		'education'        => __( 'Education', 'cfi' ),
-		'healthcare'       => __( 'Healthcare', 'cfi' ),
-		'widow'            => __( 'Widow Empowerment', 'cfi' ),
-		'shelter'          => __( 'Shelter', 'cfi' ),
-		'building-houses'  => __( 'Building Houses for Folks', 'cfi' ),
+		'outreach'        => __( 'Community Outreach', 'cfi' ),
+		'crusades'        => __( 'Crusades', 'cfi' ),
+		'food'            => __( 'Food Distribution', 'cfi' ),
+		'education'       => __( 'Education', 'cfi' ),
+		'healthcare'      => __( 'Healthcare', 'cfi' ),
+		'widow'     => __( 'Widow Empowerment', 'cfi' ),
+		'shelter'   => __( 'Shelter', 'cfi' ),
 	);
 }
 
@@ -55,7 +54,7 @@ function cfi_register_gallery_cpt() {
 			'capability_type'     => 'post',
 			'has_archive'         => false,
 			'hierarchical'        => false,
-			'supports'            => array( 'title', 'thumbnail' ),
+			'supports'            => array( 'title' ),
 			'show_in_rest'        => false,
 		)
 	);
@@ -67,12 +66,7 @@ function cfi_register_gallery_cpt() {
 			'labels'            => array(
 				'name'          => __( 'Countries', 'cfi' ),
 				'singular_name' => __( 'Country', 'cfi' ),
-				'search_items'  => __( 'Search Countries', 'cfi' ),
 				'all_items'     => __( 'All Countries', 'cfi' ),
-				'edit_item'     => __( 'Edit Country', 'cfi' ),
-				'update_item'   => __( 'Update Country', 'cfi' ),
-				'add_new_item'  => __( 'Add Country', 'cfi' ),
-				'new_item_name' => __( 'New Country', 'cfi' ),
 				'menu_name'     => __( 'Countries', 'cfi' ),
 			),
 			'public'            => false,
@@ -90,12 +84,7 @@ function cfi_register_gallery_cpt() {
 			'labels'            => array(
 				'name'          => __( 'Programs / Causes', 'cfi' ),
 				'singular_name' => __( 'Program', 'cfi' ),
-				'search_items'  => __( 'Search Programs', 'cfi' ),
 				'all_items'     => __( 'All Programs', 'cfi' ),
-				'edit_item'     => __( 'Edit Program', 'cfi' ),
-				'update_item'   => __( 'Update Program', 'cfi' ),
-				'add_new_item'  => __( 'Add Program', 'cfi' ),
-				'new_item_name' => __( 'New Program', 'cfi' ),
 				'menu_name'     => __( 'Programs', 'cfi' ),
 			),
 			'public'            => false,
@@ -126,12 +115,30 @@ function cfi_seed_gallery_terms() {
 }
 
 /**
- * Meta box — media type and optional video file.
+ * Delete every Field Media post (used when resetting the gallery).
+ */
+function cfi_purge_field_media() {
+	$post_ids = get_posts(
+		array(
+			'post_type'      => 'cfi_field_media',
+			'post_status'    => 'any',
+			'posts_per_page' => -1,
+			'fields'         => 'ids',
+		)
+	);
+
+	foreach ( $post_ids as $post_id ) {
+		wp_delete_post( (int) $post_id, true );
+	}
+}
+
+/**
+ * Meta box — upload controls for images and videos.
  */
 function cfi_gallery_meta_boxes() {
 	add_meta_box(
 		'cfi_field_media_details',
-		__( 'Media Details', 'cfi' ),
+		__( 'Gallery Media', 'cfi' ),
 		'cfi_render_gallery_meta_box',
 		'cfi_field_media',
 		'normal',
@@ -141,77 +148,82 @@ function cfi_gallery_meta_boxes() {
 add_action( 'add_meta_boxes', 'cfi_gallery_meta_boxes' );
 
 /**
+ * Attachment preview markup for the meta box.
+ *
+ * @param int $attachment_id Attachment ID.
+ */
+function cfi_gallery_admin_preview_html( $attachment_id ) {
+	if ( ! $attachment_id ) {
+		return '';
+	}
+
+	$url = wp_get_attachment_image_url( $attachment_id, 'medium' );
+	if ( ! $url ) {
+		return '';
+	}
+
+	return '<img src="' . esc_url( $url ) . '" alt="" style="max-width:240px;height:auto;border-radius:8px;display:block">';
+}
+
+/**
  * @param WP_Post $post Post object.
  */
 function cfi_render_gallery_meta_box( $post ) {
 	wp_nonce_field( 'cfi_save_gallery_meta', 'cfi_gallery_meta_nonce' );
 
 	$type     = get_post_meta( $post->ID, '_cfi_media_type', true ) ?: 'image';
+	$image_id = (int) get_post_meta( $post->ID, '_cfi_image_id', true );
+	$poster_id = (int) get_post_meta( $post->ID, '_cfi_poster_id', true );
 	$video_id = (int) get_post_meta( $post->ID, '_cfi_video_id', true );
 	$video_url = $video_id ? wp_get_attachment_url( $video_id ) : '';
 
 	?>
-	<p>
-		<label for="cfi_media_type"><strong><?php esc_html_e( 'Media type', 'cfi' ); ?></strong></label><br>
-		<select name="cfi_media_type" id="cfi_media_type">
-			<option value="image" <?php selected( $type, 'image' ); ?>><?php esc_html_e( 'Image', 'cfi' ); ?></option>
-			<option value="video" <?php selected( $type, 'video' ); ?>><?php esc_html_e( 'Video', 'cfi' ); ?></option>
-		</select>
-	</p>
-	<p class="description">
-		<?php esc_html_e( 'Assign one Country and one Program using the boxes on the right. Use Featured Image as the gallery thumbnail (required for videos).', 'cfi' ); ?>
-	</p>
-	<div id="cfi-video-field" style="<?php echo 'video' === $type ? '' : 'display:none'; ?>">
+	<div id="cfi-field-media-box" class="cfi-field-media-box">
 		<p>
-			<label><strong><?php esc_html_e( 'Video file', 'cfi' ); ?></strong></label><br>
-			<input type="hidden" name="cfi_video_id" id="cfi_video_id" value="<?php echo esc_attr( (string) $video_id ); ?>">
-			<button type="button" class="button" id="cfi-video-upload"><?php esc_html_e( 'Select / Upload Video', 'cfi' ); ?></button>
-			<button type="button" class="button" id="cfi-video-remove" style="<?php echo $video_id ? '' : 'display:none'; ?>"><?php esc_html_e( 'Remove', 'cfi' ); ?></button>
+			<label for="cfi_media_type"><strong><?php esc_html_e( 'Media type', 'cfi' ); ?></strong></label><br>
+			<select name="cfi_media_type" id="cfi_media_type">
+				<option value="image" <?php selected( $type, 'image' ); ?>><?php esc_html_e( 'Image', 'cfi' ); ?></option>
+				<option value="video" <?php selected( $type, 'video' ); ?>><?php esc_html_e( 'Video', 'cfi' ); ?></option>
+			</select>
 		</p>
-		<p id="cfi-video-preview">
-			<?php if ( $video_url ) : ?>
-				<code><?php echo esc_html( basename( $video_url ) ); ?></code>
-			<?php endif; ?>
+		<p class="description">
+			<?php esc_html_e( 'Select one Country and one Program in the sidebar, then upload your file below.', 'cfi' ); ?>
 		</p>
+
+		<div id="cfi-image-fields" class="cfi-field-media-panel" style="<?php echo 'image' === $type ? '' : 'display:none'; ?>">
+			<p><strong><?php esc_html_e( 'Gallery image', 'cfi' ); ?></strong></p>
+			<input type="hidden" name="cfi_image_id" data-cfi-image-id value="<?php echo esc_attr( (string) $image_id ); ?>">
+			<p>
+				<button type="button" class="button button-primary" data-cfi-image-upload><?php esc_html_e( 'Upload / Select Image', 'cfi' ); ?></button>
+				<button type="button" class="button" data-cfi-image-remove style="<?php echo $image_id ? '' : 'display:none'; ?>"><?php esc_html_e( 'Remove', 'cfi' ); ?></button>
+			</p>
+			<div data-cfi-image-preview><?php echo cfi_gallery_admin_preview_html( $image_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
+		</div>
+
+		<div id="cfi-video-fields" class="cfi-field-media-panel" style="<?php echo 'video' === $type ? '' : 'display:none'; ?>">
+			<div id="cfi-poster-fields" class="cfi-field-media-panel" style="margin-bottom:1.5rem">
+				<p><strong><?php esc_html_e( 'Video poster (thumbnail in gallery)', 'cfi' ); ?></strong></p>
+				<input type="hidden" name="cfi_poster_id" data-cfi-poster-id value="<?php echo esc_attr( (string) $poster_id ); ?>">
+				<p>
+					<button type="button" class="button button-primary" data-cfi-poster-upload><?php esc_html_e( 'Upload / Select Poster Image', 'cfi' ); ?></button>
+					<button type="button" class="button" data-cfi-poster-remove style="<?php echo $poster_id ? '' : 'display:none'; ?>"><?php esc_html_e( 'Remove', 'cfi' ); ?></button>
+				</p>
+				<div data-cfi-poster-preview><?php echo cfi_gallery_admin_preview_html( $poster_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
+			</div>
+
+			<p><strong><?php esc_html_e( 'Video file', 'cfi' ); ?></strong></p>
+			<input type="hidden" name="cfi_video_id" data-cfi-video-id value="<?php echo esc_attr( (string) $video_id ); ?>">
+			<p>
+				<button type="button" class="button button-primary" data-cfi-video-upload><?php esc_html_e( 'Upload / Select Video', 'cfi' ); ?></button>
+				<button type="button" class="button" data-cfi-video-remove style="<?php echo $video_id ? '' : 'display:none'; ?>"><?php esc_html_e( 'Remove', 'cfi' ); ?></button>
+			</p>
+			<p data-cfi-video-preview>
+				<?php if ( $video_url ) : ?>
+					<code><?php echo esc_html( basename( $video_url ) ); ?></code>
+				<?php endif; ?>
+			</p>
+		</div>
 	</div>
-	<script>
-	(function () {
-		const typeSelect = document.getElementById('cfi_media_type');
-		const videoField = document.getElementById('cfi-video-field');
-		const videoInput = document.getElementById('cfi_video_id');
-		const preview = document.getElementById('cfi-video-preview');
-		const removeBtn = document.getElementById('cfi-video-remove');
-		if (!typeSelect || !videoField) return;
-
-		typeSelect.addEventListener('change', function () {
-			videoField.style.display = typeSelect.value === 'video' ? '' : 'none';
-		});
-
-		document.getElementById('cfi-video-upload')?.addEventListener('click', function (e) {
-			e.preventDefault();
-			const frame = wp.media({
-				title: '<?php echo esc_js( __( 'Select Video', 'cfi' ) ); ?>',
-				library: { type: 'video' },
-				button: { text: '<?php echo esc_js( __( 'Use this video', 'cfi' ) ); ?>' },
-				multiple: false
-			});
-			frame.on('select', function () {
-				const attachment = frame.state().get('selection').first().toJSON();
-				videoInput.value = attachment.id;
-				preview.innerHTML = '<code>' + attachment.filename + '</code>';
-				removeBtn.style.display = '';
-			});
-			frame.open();
-		});
-
-		removeBtn?.addEventListener('click', function (e) {
-			e.preventDefault();
-			videoInput.value = '';
-			preview.innerHTML = '';
-			removeBtn.style.display = 'none';
-		});
-	})();
-	</script>
 	<?php
 }
 
@@ -240,11 +252,37 @@ function cfi_save_gallery_meta( $post_id ) {
 	}
 	update_post_meta( $post_id, '_cfi_media_type', $type );
 
-	$video_id = isset( $_POST['cfi_video_id'] ) ? absint( $_POST['cfi_video_id'] ) : 0;
+	$image_id  = isset( $_POST['cfi_image_id'] ) ? absint( $_POST['cfi_image_id'] ) : 0;
+	$poster_id = isset( $_POST['cfi_poster_id'] ) ? absint( $_POST['cfi_poster_id'] ) : 0;
+	$video_id  = isset( $_POST['cfi_video_id'] ) ? absint( $_POST['cfi_video_id'] ) : 0;
+
+	if ( $image_id ) {
+		update_post_meta( $post_id, '_cfi_image_id', $image_id );
+	} else {
+		delete_post_meta( $post_id, '_cfi_image_id' );
+	}
+
+	if ( $poster_id ) {
+		update_post_meta( $post_id, '_cfi_poster_id', $poster_id );
+	} else {
+		delete_post_meta( $post_id, '_cfi_poster_id' );
+	}
+
 	if ( $video_id ) {
 		update_post_meta( $post_id, '_cfi_video_id', $video_id );
 	} else {
 		delete_post_meta( $post_id, '_cfi_video_id' );
+	}
+
+	delete_post_meta( $post_id, '_cfi_media_thumb' );
+	delete_post_meta( $post_id, '_cfi_media_src' );
+	delete_post_meta( $post_id, '_cfi_gallery_id' );
+
+	$thumbnail_id = 'video' === $type ? $poster_id : $image_id;
+	if ( $thumbnail_id ) {
+		set_post_thumbnail( $post_id, $thumbnail_id );
+	} else {
+		delete_post_thumbnail( $post_id );
 	}
 }
 add_action( 'save_post_cfi_field_media', 'cfi_save_gallery_meta' );
@@ -255,14 +293,46 @@ add_action( 'save_post_cfi_field_media', 'cfi_save_gallery_meta' );
  * @param string $hook Admin hook.
  */
 function cfi_gallery_admin_assets( $hook ) {
-	if ( ! in_array( $hook, array( 'post.php', 'post-new.php' ), true ) ) {
-		return;
-	}
 	$screen = get_current_screen();
 	if ( ! $screen || 'cfi_field_media' !== $screen->post_type ) {
 		return;
 	}
+
+	if ( ! in_array( $hook, array( 'post.php', 'post-new.php', 'edit.php' ), true ) ) {
+		return;
+	}
+
 	wp_enqueue_media();
+	wp_enqueue_script(
+		'cfi-field-media-admin',
+		get_template_directory_uri() . '/assets/js/field-media-admin.js',
+		array( 'jquery', 'media-upload', 'media-views' ),
+		CFI_VERSION,
+		true
+	);
+	wp_localize_script(
+		'cfi-field-media-admin',
+		'cfiFieldMedia',
+		array(
+			'i18n' => array(
+				'selectImage'  => __( 'Select gallery image', 'cfi' ),
+				'useImage'     => __( 'Use this image', 'cfi' ),
+				'selectPoster' => __( 'Select poster image', 'cfi' ),
+				'usePoster'    => __( 'Use this poster', 'cfi' ),
+				'selectVideo'  => __( 'Select video', 'cfi' ),
+				'useVideo'     => __( 'Use this video', 'cfi' ),
+			),
+		)
+	);
+
+	if ( 'edit.php' === $hook ) {
+		return;
+	}
+
+	wp_add_inline_style(
+		'wp-admin',
+		'.cfi-field-media-box .cfi-field-media-panel{margin-top:1rem;padding-top:1rem;border-top:1px solid #dcdcde}'
+	);
 }
 add_action( 'admin_enqueue_scripts', 'cfi_gallery_admin_assets' );
 
@@ -277,7 +347,8 @@ function cfi_gallery_columns( $columns ) {
 	foreach ( $columns as $key => $label ) {
 		$new[ $key ] = $label;
 		if ( 'title' === $key ) {
-			$new['cfi_media_type'] = __( 'Type', 'cfi' );
+			$new['cfi_media_thumb'] = __( 'Preview', 'cfi' );
+			$new['cfi_media_type']  = __( 'Type', 'cfi' );
 		}
 	}
 	return $new;
@@ -289,31 +360,32 @@ add_filter( 'manage_cfi_field_media_posts_columns', 'cfi_gallery_columns' );
  * @param int    $post_id Post ID.
  */
 function cfi_gallery_column_content( $column, $post_id ) {
-	if ( 'cfi_media_type' !== $column ) {
+	if ( 'cfi_media_type' === $column ) {
+		$type = get_post_meta( $post_id, '_cfi_media_type', true ) ?: 'image';
+		echo esc_html( ucfirst( $type ) );
 		return;
 	}
-	$type = get_post_meta( $post_id, '_cfi_media_type', true ) ?: 'image';
-	echo esc_html( ucfirst( $type ) );
+
+	if ( 'cfi_media_thumb' !== $column ) {
+		return;
+	}
+
+	$type      = get_post_meta( $post_id, '_cfi_media_type', true ) ?: 'image';
+	$thumb_id  = 'video' === $type
+		? (int) get_post_meta( $post_id, '_cfi_poster_id', true )
+		: (int) get_post_meta( $post_id, '_cfi_image_id', true );
+
+	if ( ! $thumb_id && has_post_thumbnail( $post_id ) ) {
+		$thumb_id = (int) get_post_thumbnail_id( $post_id );
+	}
+
+	if ( $thumb_id ) {
+		echo wp_get_attachment_image( $thumb_id, array( 60, 60 ) );
+	} else {
+		echo '&mdash;';
+	}
 }
 add_action( 'manage_cfi_field_media_posts_custom_column', 'cfi_gallery_column_content', 10, 2 );
-
-/**
- * Resolve a theme-relative asset path to a full URL.
- *
- * @param string $path Relative or absolute path.
- */
-function cfi_gallery_resolve_url( $path ) {
-	if ( ! $path ) {
-		return '';
-	}
-	if ( 0 === strpos( $path, 'http' ) ) {
-		return $path;
-	}
-	if ( 0 === strpos( $path, 'assets/' ) ) {
-		return trailingslashit( get_template_directory_uri() ) . $path;
-	}
-	return $path;
-}
 
 /**
  * Country label from slug.
@@ -347,35 +419,30 @@ function cfi_gallery_item_from_post( $post ) {
 	$program = $programs[0]->slug;
 	$type    = get_post_meta( $post->ID, '_cfi_media_type', true ) ?: 'image';
 
-	$thumb = get_post_meta( $post->ID, '_cfi_media_thumb', true );
-	$src   = get_post_meta( $post->ID, '_cfi_media_src', true );
+	$image_id  = (int) get_post_meta( $post->ID, '_cfi_image_id', true );
+	$poster_id = (int) get_post_meta( $post->ID, '_cfi_poster_id', true );
+	$video_id  = (int) get_post_meta( $post->ID, '_cfi_video_id', true );
 
-	if ( has_post_thumbnail( $post->ID ) ) {
-		$thumb_id = get_post_thumbnail_id( $post->ID );
-		if ( ! $thumb ) {
-			$thumb = wp_get_attachment_image_url( $thumb_id, 'medium_large' ) ?: wp_get_attachment_image_url( $thumb_id, 'large' );
-		}
-		if ( 'image' === $type && ! $src ) {
-			$src = wp_get_attachment_image_url( $thumb_id, 'full' );
-		}
-	}
+	$thumb = '';
+	$src   = '';
 
-	if ( 'video' === $type ) {
-		$video_id = (int) get_post_meta( $post->ID, '_cfi_video_id', true );
+	if ( 'image' === $type ) {
+		if ( $image_id ) {
+			$thumb = wp_get_attachment_image_url( $image_id, 'medium_large' ) ?: wp_get_attachment_image_url( $image_id, 'large' );
+			$src   = wp_get_attachment_image_url( $image_id, 'full' );
+		}
+	} else {
+		if ( $poster_id ) {
+			$thumb = wp_get_attachment_image_url( $poster_id, 'medium_large' ) ?: wp_get_attachment_image_url( $poster_id, 'large' );
+		}
 		if ( $video_id ) {
-			$src = wp_get_attachment_url( $video_id ) ?: $src;
+			$src = wp_get_attachment_url( $video_id );
 		}
 	}
-
-	$thumb = cfi_gallery_resolve_url( $thumb );
-	$src   = cfi_gallery_resolve_url( $src );
 
 	if ( ! $thumb || ! $src ) {
 		return null;
 	}
-
-	$gallery_id = get_post_meta( $post->ID, '_cfi_gallery_id', true );
-	$id         = $gallery_id ? $gallery_id : 'cfi-media-' . $post->ID;
 
 	$alt = $post->post_title;
 	if ( ! $alt || 'Auto Draft' === $alt ) {
@@ -389,7 +456,7 @@ function cfi_gallery_item_from_post( $post ) {
 	}
 
 	return array(
-		'id'           => $id,
+		'id'           => 'cfi-media-' . $post->ID,
 		'country'      => $country,
 		'countryLabel' => cfi_gallery_country_label( $country ),
 		'category'     => $program,
@@ -401,22 +468,7 @@ function cfi_gallery_item_from_post( $post ) {
 }
 
 /**
- * Load bundled gallery.json manifest.
- *
- * @return array<string, mixed>|null
- */
-function cfi_get_bundled_gallery_manifest() {
-	$path = get_template_directory() . '/assets/data/gallery.json';
-	if ( ! file_exists( $path ) ) {
-		return null;
-	}
-
-	$data = json_decode( file_get_contents( $path ), true ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
-	return is_array( $data ) ? $data : null;
-}
-
-/**
- * Gallery manifest for the public page (WordPress posts + bundled fallback).
+ * Gallery manifest for the public page.
  *
  * @return array<string, mixed>
  */
@@ -447,17 +499,10 @@ function cfi_get_gallery_manifest() {
 		}
 	}
 
-	$bundled = cfi_get_bundled_gallery_manifest();
-	$featured = $bundled['featured'] ?? array();
-
-	if ( empty( $gallery ) && $bundled ) {
-		$gallery = $bundled['gallery'] ?? array();
-	}
-
 	return array(
 		'countries'  => $countries,
 		'categories' => $categories,
-		'featured'   => $featured,
+		'featured'   => array(),
 		'gallery'    => $gallery,
 	);
 }
@@ -481,73 +526,55 @@ function cfi_register_gallery_rest() {
 add_action( 'rest_api_init', 'cfi_register_gallery_rest' );
 
 /**
- * Seed bundled gallery.json items into Field Media (idempotent).
+ * Remove deprecated program terms and reassign legacy items.
  */
-function cfi_seed_gallery_media() {
-	cfi_seed_gallery_terms();
-
-	$bundled = cfi_get_bundled_gallery_manifest();
-	if ( ! $bundled || empty( $bundled['gallery'] ) ) {
-		update_option( 'cfi_gallery_version', CFI_GALLERY_VERSION );
+function cfi_remove_building_houses_program() {
+	$term = get_term_by( 'slug', 'building-houses', 'cfi_program' );
+	if ( ! $term || is_wp_error( $term ) ) {
 		return;
 	}
 
-	foreach ( $bundled['gallery'] as $item ) {
-		if ( empty( $item['id'] ) ) {
-			continue;
-		}
-
-		$existing = get_posts(
-			array(
-				'post_type'      => 'cfi_field_media',
-				'post_status'    => 'any',
-				'posts_per_page' => 1,
-				'meta_key'       => '_cfi_gallery_id',
-				'meta_value'     => $item['id'],
-				'fields'         => 'ids',
-			)
-		);
-		if ( $existing ) {
-			continue;
-		}
-
-		$title = ! empty( $item['alt'] ) ? $item['alt'] : $item['id'];
-		$post_id = wp_insert_post(
-			array(
-				'post_title'  => $title,
-				'post_status' => 'publish',
-				'post_type'   => 'cfi_field_media',
+	$posts = get_posts(
+		array(
+			'post_type'      => 'cfi_field_media',
+			'post_status'    => 'any',
+			'posts_per_page' => -1,
+			'tax_query'      => array(
+				array(
+					'taxonomy' => 'cfi_program',
+					'field'    => 'slug',
+					'terms'    => 'building-houses',
+				),
 			),
-			true
-		);
-		if ( is_wp_error( $post_id ) || ! $post_id ) {
-			continue;
-		}
+		)
+	);
 
-		update_post_meta( $post_id, '_cfi_gallery_id', sanitize_text_field( $item['id'] ) );
-		update_post_meta( $post_id, '_cfi_media_type', ! empty( $item['type'] ) ? $item['type'] : 'image' );
-		update_post_meta( $post_id, '_cfi_media_thumb', sanitize_text_field( $item['thumb'] ?? '' ) );
-		update_post_meta( $post_id, '_cfi_media_src', sanitize_text_field( $item['src'] ?? '' ) );
-
-		if ( ! empty( $item['country'] ) ) {
-			wp_set_object_terms( $post_id, $item['country'], 'cfi_country', false );
-		}
-		if ( ! empty( $item['category'] ) ) {
-			wp_set_object_terms( $post_id, $item['category'], 'cfi_program', false );
-		}
+	foreach ( $posts as $post ) {
+		wp_set_object_terms( $post->ID, 'shelter', 'cfi_program', false );
 	}
 
-	update_option( 'cfi_gallery_version', CFI_GALLERY_VERSION );
+	wp_delete_term( $term->term_id, 'cfi_program' );
 }
 
 /**
- * Upgrade hook for gallery seeding.
+ * Run gallery data upgrades (purge seeded demo items once).
  */
-function cfi_maybe_seed_gallery() {
+function cfi_maybe_upgrade_gallery() {
 	$version = (int) get_option( 'cfi_gallery_version', 0 );
 	if ( $version >= CFI_GALLERY_VERSION ) {
 		return;
 	}
-	cfi_seed_gallery_media();
+
+	cfi_seed_gallery_terms();
+
+	if ( $version < 2 ) {
+		cfi_purge_field_media();
+	}
+
+	if ( $version < 3 ) {
+		cfi_remove_building_houses_program();
+	}
+
+	update_option( 'cfi_gallery_version', CFI_GALLERY_VERSION );
 }
-add_action( 'after_setup_theme', 'cfi_maybe_seed_gallery', 25 );
+add_action( 'after_setup_theme', 'cfi_maybe_upgrade_gallery', 25 );

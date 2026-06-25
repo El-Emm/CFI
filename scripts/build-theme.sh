@@ -12,6 +12,7 @@ echo "→ Syncing JavaScript..."
 cp "$ROOT/assets/js/main.js" "$THEME/assets/js/main.js"
 cp "$ROOT/assets/js/gallery.js" "$THEME/assets/js/gallery.js"
 cp "$ROOT/assets/js/stories-home.js" "$THEME/assets/js/stories-home.js"
+cp "$ROOT/assets/js/field-media-admin.js" "$THEME/assets/js/field-media-admin.js"
 
 echo "✓ Theme ready at wordpress-theme/cfi"
 du -sh "$THEME"

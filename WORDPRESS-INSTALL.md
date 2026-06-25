@@ -172,27 +172,26 @@ The theme adds **Field Media** in the WordPress admin (`Field Media` in the left
 
 1. Go to **Field Media → Add Media**
 2. Enter a short title (used for accessibility / alt text)
-3. Set **Featured Image** — this is the image shown in the gallery grid
-4. Under **Countries**, select one country (e.g. Zimbabwe)
-5. Under **Programs / Causes**, select one program (e.g. Crusades, Food Distribution)
-6. Leave **Media type** as **Image**
+3. Set **Media type** to **Image**
+4. Click **Upload / Select Image** and choose a file from your computer or Media Library
+5. Under **Countries**, select one country (e.g. Zimbabwe)
+6. Under **Programs / Causes**, select one program (e.g. Crusades, Food Distribution)
 7. Click **Publish**
 
 ### Add a video
 
 1. **Field Media → Add Media**
-2. Set **Featured Image** — poster frame shown in the grid (required)
-3. Choose **Country** and **Program / Cause**
-4. Set **Media type** to **Video**
-5. Click **Select / Upload Video** and choose an MP4 from the Media Library (or upload a new one)
+2. Set **Media type** to **Video**
+3. Click **Upload / Select Poster Image** — thumbnail shown in the gallery grid
+4. Click **Upload / Select Video** and choose an MP4
+5. Choose **Country** and **Program / Cause**
 6. **Publish**
 
 ### Tips
 
 - One country + one program per item keeps filters accurate
 - After publishing, open **Media Gallery** on the site — filters update immediately (no zip re-upload needed)
-- On first theme activation, existing bundled photos are imported automatically into Field Media
-- To hide an item, move it to **Trash** or switch to **Draft**
+- Updating to theme **1.3.1+** clears old demo Field Media items once so you can upload your own gallery from scratch
 
 ### Folder layout (developers / bulk imports)
 

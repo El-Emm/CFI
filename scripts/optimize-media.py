@@ -27,8 +27,8 @@ CATEGORIES = [
     "healthcare", "widow", "shelter",
 ]
 
-# All program filters shown in the gallery UI (includes dedicated imports).
-GALLERY_FILTER_CATEGORIES = CATEGORIES + ["building-houses"]
+# All program filters shown in the gallery UI.
+GALLERY_FILTER_CATEGORIES = CATEGORIES
 
 COUNTRY_LABELS = {
     "zimbabwe": "Zimbabwe",
@@ -133,7 +133,7 @@ def process_building_houses(gallery_items: list) -> list:
         src = BUILDING_HOUSE_DIR / name
         country = COUNTRIES[i % len(COUNTRIES)]
         slug = f"cfi-building-{slugify_filename(name)}"
-        category = "building-houses"
+        category = "shelter"
         thumb = OUT / "gallery" / country / category / "thumb" / f"{slug}.jpg"
         full = OUT / "gallery" / country / category / "full" / f"{slug}.jpg"
         save_variant(src, thumb, THUMB_W)
@@ -265,7 +265,7 @@ def main() -> None:
     data_dir.mkdir(parents=True, exist_ok=True)
     (data_dir / "gallery.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
 
-    building_count = sum(1 for item in gallery_items if item.get("category") == "building-houses")
+    building_count = sum(1 for item in gallery_items if item.get("category") == "shelter" and "cfi-building" in item.get("id", ""))
     print(f"Gallery images: {len(gallery_items)} ({building_count} building houses)")
     print(f"Videos: {len(video_items)}")
     print(f"Featured hero slides: {len(featured_out.get('hero', []))}")
