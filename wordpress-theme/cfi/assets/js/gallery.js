@@ -50,14 +50,6 @@
     }).length;
   }
 
-  function countryCounts() {
-    const counts = {};
-    countries.forEach((c) => {
-      counts[c.id] = countItems(c.id, activeCategory);
-    });
-    return counts;
-  }
-
   function categoryCounts() {
     const counts = {};
     categories.forEach((cat) => {
@@ -81,9 +73,7 @@
       parts.push(CATEGORY_LABELS[activeCategory] || activeCategory);
     }
 
-    const summary = parts.length
-      ? parts.join(' · ')
-      : 'All countries & programs';
+    const summary = parts.length ? parts.join(' · ') : 'All programs';
 
     meta.innerHTML = `
       <p class="cfi-gallery-meta__summary">
@@ -94,39 +84,6 @@
         ? '<button type="button" class="cfi-gallery-meta__clear" id="cfi-gallery-clear">Clear filters</button>'
         : ''}`;
     $('#cfi-gallery-clear')?.addEventListener('click', clearFilters);
-  }
-
-  function renderCountries() {
-    const grid = $('#cfi-countries-grid');
-    if (!grid) return;
-
-    const counts = countryCounts();
-    const totalAll = countItems('all', activeCategory);
-
-    grid.innerHTML = `
-      <button type="button" class="cfi-country-card${activeCountry === 'all' ? ' is-active' : ''}"
-        data-country="all" aria-pressed="${activeCountry === 'all'}">
-        <span class="cfi-country-card__name">All Countries</span>
-        <span class="cfi-country-card__count">${totalAll} media</span>
-      </button>
-      ${countries.map((c) => {
-        const count = counts[c.id] || 0;
-        const active = activeCountry === c.id;
-        return `
-        <button type="button" class="cfi-country-card${active ? ' is-active' : ''}${count === 0 ? ' is-empty' : ''}"
-          data-country="${c.id}" aria-pressed="${active}" ${count === 0 ? 'disabled' : ''}>
-          <span class="cfi-country-card__name">${c.label}</span>
-          <span class="cfi-country-card__count">${count} media</span>
-        </button>`;
-      }).join('')}`;
-
-    $$('.cfi-country-card', grid).forEach((btn) => {
-      btn.addEventListener('click', () => {
-        if (btn.disabled) return;
-        setCountryFilter(btn.dataset.country);
-        scrollToGrid();
-      });
-    });
   }
 
   function renderCategoryFilters() {
@@ -156,26 +113,12 @@
   }
 
   function refreshFilters() {
-    renderCountries();
     renderCategoryFilters();
     updateMetaBar();
   }
 
-  function setCountryFilter(id) {
-    activeCountry = id;
-    if (activeCategory !== 'all' && countItems(id, activeCategory) === 0) {
-      activeCategory = 'all';
-    }
-    syncUrl();
-    refreshFilters();
-    applyFilters();
-  }
-
   function setCategoryFilter(id) {
     activeCategory = id;
-    if (activeCountry !== 'all' && countItems(activeCountry, id) === 0) {
-      activeCountry = 'all';
-    }
     syncUrl();
     refreshFilters();
     applyFilters();
@@ -247,10 +190,6 @@
     const empty = $('#cfi-gallery-empty');
     if (empty) empty.hidden = visible > 0;
     updateMetaBar();
-  }
-
-  function scrollToGrid() {
-    $('#cfi-gallery-toolbar')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function readUrlFilters() {

@@ -173,6 +173,11 @@ function cfi_render_gallery_meta_box( $post ) {
 
 	$type     = get_post_meta( $post->ID, '_cfi_media_type', true ) ?: 'image';
 	$image_id = (int) get_post_meta( $post->ID, '_cfi_image_id', true );
+	$image_ids = $image_id ? array( $image_id ) : array();
+	$extra_ids = get_post_meta( $post->ID, '_cfi_extra_image_ids', true );
+	if ( is_array( $extra_ids ) && $extra_ids ) {
+		$image_ids = array_values( array_unique( array_merge( $image_ids, array_map( 'absint', $extra_ids ) ) ) );
+	}
 	$poster_id = (int) get_post_meta( $post->ID, '_cfi_poster_id', true );
 	$video_id = (int) get_post_meta( $post->ID, '_cfi_video_id', true );
 	$video_url = $video_id ? wp_get_attachment_url( $video_id ) : '';
@@ -187,17 +192,27 @@ function cfi_render_gallery_meta_box( $post ) {
 			</select>
 		</p>
 		<p class="description">
-			<?php esc_html_e( 'Select one Country and one Program in the sidebar, then upload your file below.', 'cfi' ); ?>
+			<?php esc_html_e( 'Select one Country and one Program in the sidebar. You can upload or select multiple images at once — each image becomes its own gallery item.', 'cfi' ); ?>
 		</p>
 
 		<div id="cfi-image-fields" class="cfi-field-media-panel" style="<?php echo 'image' === $type ? '' : 'display:none'; ?>">
-			<p><strong><?php esc_html_e( 'Gallery image', 'cfi' ); ?></strong></p>
-			<input type="hidden" name="cfi_image_id" data-cfi-image-id value="<?php echo esc_attr( (string) $image_id ); ?>">
+			<p><strong><?php esc_html_e( 'Gallery images', 'cfi' ); ?></strong></p>
+			<input type="hidden" name="cfi_image_ids" data-cfi-image-ids value="<?php echo esc_attr( implode( ',', array_map( 'absint', $image_ids ) ) ); ?>">
 			<p>
-				<button type="button" class="button button-primary" data-cfi-image-upload><?php esc_html_e( 'Upload / Select Image', 'cfi' ); ?></button>
-				<button type="button" class="button" data-cfi-image-remove style="<?php echo $image_id ? '' : 'display:none'; ?>"><?php esc_html_e( 'Remove', 'cfi' ); ?></button>
+				<button type="button" class="button button-primary" data-cfi-image-upload><?php esc_html_e( 'Upload / Select Images', 'cfi' ); ?></button>
+				<button type="button" class="button" data-cfi-image-remove style="<?php echo $image_ids ? '' : 'display:none'; ?>"><?php esc_html_e( 'Remove all', 'cfi' ); ?></button>
 			</p>
-			<div data-cfi-image-preview><?php echo cfi_gallery_admin_preview_html( $image_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
+			<div data-cfi-image-preview>
+				<?php if ( $image_ids ) : ?>
+					<div class="cfi-field-media-thumb-grid">
+						<?php foreach ( $image_ids as $id ) : ?>
+							<figure class="cfi-field-media-thumb">
+								<?php echo wp_get_attachment_image( $id, 'medium' ); ?>
+							</figure>
+						<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
+			</div>
 		</div>
 
 		<div id="cfi-video-fields" class="cfi-field-media-panel" style="<?php echo 'video' === $type ? '' : 'display:none'; ?>">
@@ -228,6 +243,144 @@ function cfi_render_gallery_meta_box( $post ) {
 }
 
 /**
+ * Parse image attachment IDs from the Field Media save request.
+ *
+ * @return int[]
+ */
+function cfi_parse_image_ids_from_request() {
+	if ( empty( $_POST['cfi_image_ids'] ) ) {
+		return array();
+	}
+
+	$raw = sanitize_text_field( wp_unslash( $_POST['cfi_image_ids'] ) );
+	$ids = array_map( 'absint', explode( ',', $raw ) );
+
+	return array_values( array_filter( array_unique( $ids ) ) );
+}
+
+/**
+ * Find a Field Media post that already uses an attachment.
+ *
+ * @param int $attachment_id Attachment ID.
+ * @param int $exclude_post_id Optional post ID to ignore.
+ */
+function cfi_find_field_media_by_image( $attachment_id, $exclude_post_id = 0 ) {
+	$posts = get_posts(
+		array(
+			'post_type'      => 'cfi_field_media',
+			'post_status'    => 'any',
+			'posts_per_page' => 1,
+			'fields'         => 'ids',
+			'post__not_in'   => $exclude_post_id ? array( $exclude_post_id ) : array(),
+			'meta_query'     => array(
+				array(
+					'key'   => '_cfi_image_id',
+					'value' => (int) $attachment_id,
+				),
+			),
+		)
+	);
+
+	return $posts ? (int) $posts[0] : 0;
+}
+
+/**
+ * Create a Field Media post for one gallery image.
+ *
+ * @param int    $attachment_id Attachment ID.
+ * @param string $status        Post status.
+ * @param string $title         Post title.
+ * @param string $country_slug  Country slug.
+ * @param string $program_slug  Program slug.
+ */
+function cfi_create_field_media_image_post( $attachment_id, $status, $title, $country_slug, $program_slug ) {
+	$existing = cfi_find_field_media_by_image( $attachment_id );
+	if ( $existing ) {
+		return $existing;
+	}
+
+	$attachment_title = get_the_title( $attachment_id );
+	$post_title         = $title;
+	if ( ! $post_title || 'Auto Draft' === $post_title ) {
+		$post_title = $attachment_title ? $attachment_title : __( 'Field gallery image', 'cfi' );
+	}
+
+	$post_id = wp_insert_post(
+		array(
+			'post_type'   => 'cfi_field_media',
+			'post_status' => $status,
+			'post_title'  => $post_title,
+		),
+		true
+	);
+
+	if ( is_wp_error( $post_id ) || ! $post_id ) {
+		return 0;
+	}
+
+	update_post_meta( $post_id, '_cfi_media_type', 'image' );
+	update_post_meta( $post_id, '_cfi_image_id', (int) $attachment_id );
+	set_post_thumbnail( $post_id, (int) $attachment_id );
+
+	if ( $country_slug ) {
+		wp_set_object_terms( $post_id, $country_slug, 'cfi_country', false );
+	}
+	if ( $program_slug ) {
+		wp_set_object_terms( $post_id, $program_slug, 'cfi_program', false );
+	}
+
+	return (int) $post_id;
+}
+
+/**
+ * Publish additional selected images as separate Field Media posts.
+ *
+ * @param int   $post_id   Primary post ID.
+ * @param int[] $image_ids All selected image IDs.
+ * @return int Number of additional posts created.
+ */
+function cfi_publish_additional_field_media_images( $post_id, $image_ids ) {
+	if ( count( $image_ids ) < 2 ) {
+		return 0;
+	}
+
+	$post = get_post( $post_id );
+	if ( ! $post ) {
+		return 0;
+	}
+
+	$countries = wp_get_post_terms( $post_id, 'cfi_country', array( 'fields' => 'slugs' ) );
+	$programs  = wp_get_post_terms( $post_id, 'cfi_program', array( 'fields' => 'slugs' ) );
+
+	if ( empty( $countries ) || empty( $programs ) || is_wp_error( $countries ) || is_wp_error( $programs ) ) {
+		update_post_meta( $post_id, '_cfi_extra_image_ids', array_slice( $image_ids, 1 ) );
+		return 0;
+	}
+
+	$created = 0;
+	foreach ( array_slice( $image_ids, 1 ) as $attachment_id ) {
+		$new_id = cfi_create_field_media_image_post(
+			$attachment_id,
+			$post->post_status,
+			$post->post_title,
+			$countries[0],
+			$programs[0]
+		);
+		if ( $new_id && $new_id !== $post_id ) {
+			++$created;
+		}
+	}
+
+	delete_post_meta( $post_id, '_cfi_extra_image_ids' );
+
+	if ( $created > 0 ) {
+		set_transient( 'cfi_field_media_bulk_' . get_current_user_id(), $created, 45 );
+	}
+
+	return $created;
+}
+
+/**
  * Save gallery meta.
  *
  * @param int $post_id Post ID.
@@ -252,40 +405,120 @@ function cfi_save_gallery_meta( $post_id ) {
 	}
 	update_post_meta( $post_id, '_cfi_media_type', $type );
 
-	$image_id  = isset( $_POST['cfi_image_id'] ) ? absint( $_POST['cfi_image_id'] ) : 0;
+	$image_ids = cfi_parse_image_ids_from_request();
 	$poster_id = isset( $_POST['cfi_poster_id'] ) ? absint( $_POST['cfi_poster_id'] ) : 0;
 	$video_id  = isset( $_POST['cfi_video_id'] ) ? absint( $_POST['cfi_video_id'] ) : 0;
 
-	if ( $image_id ) {
-		update_post_meta( $post_id, '_cfi_image_id', $image_id );
+	if ( 'image' === $type ) {
+		delete_post_meta( $post_id, '_cfi_poster_id' );
+		delete_post_meta( $post_id, '_cfi_video_id' );
+
+		if ( $image_ids ) {
+			update_post_meta( $post_id, '_cfi_image_id', $image_ids[0] );
+			set_post_thumbnail( $post_id, $image_ids[0] );
+		} else {
+			delete_post_meta( $post_id, '_cfi_image_id' );
+			delete_post_thumbnail( $post_id );
+		}
+
+		if ( in_array( get_post_status( $post_id ), array( 'publish', 'future' ), true ) && count( $image_ids ) > 1 ) {
+			cfi_publish_additional_field_media_images( $post_id, $image_ids );
+		} elseif ( count( $image_ids ) > 1 ) {
+			update_post_meta( $post_id, '_cfi_extra_image_ids', array_slice( $image_ids, 1 ) );
+		} else {
+			delete_post_meta( $post_id, '_cfi_extra_image_ids' );
+		}
 	} else {
 		delete_post_meta( $post_id, '_cfi_image_id' );
-	}
+		delete_post_meta( $post_id, '_cfi_extra_image_ids' );
 
-	if ( $poster_id ) {
-		update_post_meta( $post_id, '_cfi_poster_id', $poster_id );
-	} else {
-		delete_post_meta( $post_id, '_cfi_poster_id' );
-	}
+		if ( $poster_id ) {
+			update_post_meta( $post_id, '_cfi_poster_id', $poster_id );
+		} else {
+			delete_post_meta( $post_id, '_cfi_poster_id' );
+		}
 
-	if ( $video_id ) {
-		update_post_meta( $post_id, '_cfi_video_id', $video_id );
-	} else {
-		delete_post_meta( $post_id, '_cfi_video_id' );
+		if ( $video_id ) {
+			update_post_meta( $post_id, '_cfi_video_id', $video_id );
+		} else {
+			delete_post_meta( $post_id, '_cfi_video_id' );
+		}
+
+		$thumbnail_id = $poster_id;
+		if ( $thumbnail_id ) {
+			set_post_thumbnail( $post_id, $thumbnail_id );
+		} else {
+			delete_post_thumbnail( $post_id );
+		}
 	}
 
 	delete_post_meta( $post_id, '_cfi_media_thumb' );
 	delete_post_meta( $post_id, '_cfi_media_src' );
 	delete_post_meta( $post_id, '_cfi_gallery_id' );
-
-	$thumbnail_id = 'video' === $type ? $poster_id : $image_id;
-	if ( $thumbnail_id ) {
-		set_post_thumbnail( $post_id, $thumbnail_id );
-	} else {
-		delete_post_thumbnail( $post_id );
-	}
 }
 add_action( 'save_post_cfi_field_media', 'cfi_save_gallery_meta' );
+
+/**
+ * Publish queued extra images when a Field Media post goes live.
+ *
+ * @param string  $new_status New post status.
+ * @param string  $old_status Old post status.
+ * @param WP_Post $post       Post object.
+ */
+function cfi_publish_queued_field_media_images( $new_status, $old_status, $post ) {
+	if ( 'cfi_field_media' !== $post->post_type ) {
+		return;
+	}
+	if ( 'publish' !== $new_status || 'publish' === $old_status ) {
+		return;
+	}
+
+	$extra_ids = get_post_meta( $post->ID, '_cfi_extra_image_ids', true );
+	if ( ! is_array( $extra_ids ) || empty( $extra_ids ) ) {
+		return;
+	}
+
+	$primary_id = (int) get_post_meta( $post->ID, '_cfi_image_id', true );
+	$image_ids  = $primary_id ? array_merge( array( $primary_id ), array_map( 'absint', $extra_ids ) ) : array_map( 'absint', $extra_ids );
+	$image_ids  = array_values( array_filter( array_unique( $image_ids ) ) );
+
+	cfi_publish_additional_field_media_images( $post->ID, $image_ids );
+}
+add_action( 'transition_post_status', 'cfi_publish_queued_field_media_images', 10, 3 );
+
+/**
+ * Show admin notice after bulk image publish.
+ */
+function cfi_field_media_bulk_admin_notice() {
+	$user_id = get_current_user_id();
+	if ( ! $user_id ) {
+		return;
+	}
+
+	$created = (int) get_transient( 'cfi_field_media_bulk_' . $user_id );
+	if ( ! $created ) {
+		return;
+	}
+
+	delete_transient( 'cfi_field_media_bulk_' . $user_id );
+
+	printf(
+		'<div class="notice notice-success is-dismissible"><p>%s</p></div>',
+		esc_html(
+			sprintf(
+				/* translators: %d: number of additional gallery items created */
+				_n(
+					'%d additional gallery image was published.',
+					'%d additional gallery images were published.',
+					$created,
+					'cfi'
+				),
+				$created
+			)
+		)
+	);
+}
+add_action( 'admin_notices', 'cfi_field_media_bulk_admin_notice' );
 
 /**
  * Enqueue media scripts on Field Media edit screens.
@@ -315,8 +548,8 @@ function cfi_gallery_admin_assets( $hook ) {
 		'cfiFieldMedia',
 		array(
 			'i18n' => array(
-				'selectImage'  => __( 'Select gallery image', 'cfi' ),
-				'useImage'     => __( 'Use this image', 'cfi' ),
+				'selectImages' => __( 'Select gallery images', 'cfi' ),
+				'useImages'    => __( 'Add to gallery', 'cfi' ),
 				'selectPoster' => __( 'Select poster image', 'cfi' ),
 				'usePoster'    => __( 'Use this poster', 'cfi' ),
 				'selectVideo'  => __( 'Select video', 'cfi' ),
@@ -332,6 +565,10 @@ function cfi_gallery_admin_assets( $hook ) {
 	wp_add_inline_style(
 		'wp-admin',
 		'.cfi-field-media-box .cfi-field-media-panel{margin-top:1rem;padding-top:1rem;border-top:1px solid #dcdcde}'
+		. '.cfi-field-media-thumb-grid{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}'
+		. '.cfi-field-media-thumb{position:relative;margin:0}'
+		. '.cfi-field-media-thumb img{display:block;width:120px;height:120px;object-fit:cover;border-radius:8px;border:1px solid #dcdcde}'
+		. '.cfi-field-media-thumb__remove{position:absolute;top:4px;right:4px;width:22px;height:22px;padding:0;border:0;border-radius:50%;background:#d63638;color:#fff;font-size:16px;line-height:1;cursor:pointer}'
 	);
 }
 add_action( 'admin_enqueue_scripts', 'cfi_gallery_admin_assets' );

@@ -156,8 +156,13 @@
       storyEl.innerHTML = `
         <h3 class="cfi-map-story__country">${country.label}</h3>
         <p>${text}</p>
-        <a href="${galleryBase}?country=${key}" class="cfi-btn cfi-btn--primary" style="margin-top:1rem">View ${country.label} Gallery</a>
+        <a href="${galleryBase}?country=${key}" class="cfi-btn cfi-btn--primary" style="margin-top:1rem">View Gallery</a>
       `;
+    }
+
+    function goToCountryGallery(key) {
+      if (!key) return;
+      window.location.href = `${galleryBase}?country=${encodeURIComponent(key)}`;
     }
 
     function countryAtPoint(clientX, clientY) {
@@ -196,7 +201,7 @@
         const key = countryAtPoint(e.clientX, e.clientY);
         if (!key) return;
         e.preventDefault();
-        showStory(key);
+        goToCountryGallery(key);
       });
 
       wrap.addEventListener('touchend', (e) => {
@@ -205,13 +210,14 @@
         const key = countryAtPoint(touch.clientX, touch.clientY);
         if (!key) return;
         e.preventDefault();
-        showStory(key);
+        goToCountryGallery(key);
       }, { passive: false });
 
       wrap.addEventListener('mousemove', (e) => {
         const key = countryAtPoint(e.clientX, e.clientY);
         getMarkers().forEach((m) => m.classList.toggle('is-hover', markerKey(m) === key));
         wrap.style.cursor = key ? 'pointer' : 'default';
+        if (key) showStory(key);
       });
 
       wrap.addEventListener('mouseleave', () => {
@@ -224,21 +230,9 @@
         const marker = e.target.closest('[data-country]');
         if (!marker || !wrap.contains(marker)) return;
         e.preventDefault();
-        showStory(markerKey(marker));
+        goToCountryGallery(markerKey(marker));
       });
     }
-
-    $$('.cfi-map-legend a[data-country], .cfi-map-legend a[href*="country="]').forEach((link) => {
-      if (link.hasAttribute('data-legend-bound')) return;
-      link.setAttribute('data-legend-bound', 'true');
-      link.addEventListener('click', (e) => {
-        const key = link.getAttribute('data-country')
-          || (link.getAttribute('href') || '').match(/country=([^&]+)/)?.[1];
-        if (!key) return;
-        e.preventDefault();
-        showStory(key);
-      });
-    });
 
     if (!getMarkers().length) return;
 
